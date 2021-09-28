@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import Party from './Party.jsx';
 import Sessions from './Sessions.jsx';
+import Meal from './Meal.jsx';
+import MealChoice from './MealChoice.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -26,12 +28,27 @@ class App extends React.Component {
         'Session 2 - July 15',
         'Session 3 - July 18',
         'Tear Down - July 21',
+      ],
+      sessionsWithMeals: [
+        'Session 1',
+        'Session 2',
+        'Session 3',
+      ],
+      mealOptions: [
+        'Dinner & Breakfast',
+        'Dinner Only',
+      ],
+      foodPreferences: [
+        'Meat',
+        'Vegetarian',
+        'Vegan',
       ]
     };
   };
 
   render() {
     return (
+      // add a section showing who you are currently registering for
       <div>
         <div>Account {this.state.account}</div>
         <div>{this.state.camper}</div>
@@ -41,6 +58,12 @@ class App extends React.Component {
         <Party party={this.state.party}/>
         <button>next</button>
         <Sessions sessions={this.state.sessions}></Sessions>
+        <Meal/>
+        <MealChoice
+          sessions={this.state.sessionsWithMeals}
+          mealOptions={this.state.mealOptions}
+          foodPreferences={this.state.foodPreferences}
+        />
       </div>
     )
   }
