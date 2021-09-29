@@ -5,6 +5,7 @@ import Party from './Party.jsx';
 import Sessions from './Sessions.jsx';
 import Meal from './Meal.jsx';
 import MealChoice from './MealChoice.jsx';
+import EmergencyInfo from './EmergencyInfo.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -64,6 +65,7 @@ class App extends React.Component {
           mealOptions={this.state.mealOptions}
           foodPreferences={this.state.foodPreferences}
         />
+        <EmergencyInfo/>
       </div>
     )
   }
