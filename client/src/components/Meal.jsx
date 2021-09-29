@@ -7,11 +7,11 @@ const Meal = () => {
       <div>Do you want to purchase a meal plan at the kitchen?</div>
       <div>
         <button>x</button>
-        <div>Yes</div>
+        Yes
       </div>
       <div>
         <button>x</button>
-        <div>No</div>
+        No
       </div>
     </div>
   )
