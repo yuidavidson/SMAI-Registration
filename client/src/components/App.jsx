@@ -13,6 +13,7 @@ class App extends React.Component {
     super(props);
     // dummy data for testing
     this.state = {
+      step: 0,
       account: 'SMF034',
       camper: 'Joshua Freeman',
       party : [
@@ -46,29 +47,85 @@ class App extends React.Component {
         'Vegan',
       ]
     };
+    this.handleNextStep = this.handleNextStep.bind(this);
   };
 
+  handleNextStep() {
+    console.log('click!');
+    if (this.state.step >= 4) {
+      this.setState({step: 0});
+    } else {
+      this.setState((prevState,) => ({
+        step: prevState.step + 1
+      }));
+    }
+  }
+
   render() {
-    return (
-      // add a section showing who you are currently registering for
-      <div>
-        <Register account={
-          this.state.account}
-          camper={this.state.camper}
-          party={this.state.party}
+    // return (
+    //   // add a section showing who you are currently registering for
+    //   <div>
+    //     <Register account={
+    //       this.state.account}
+    //       camper={this.state.camper}
+    //       party={this.state.party}
+    //       />
+    //     <Sessions sessions={this.state.sessions}></Sessions>
+    //     <Meal/>
+    //     <MealChoice
+    //       sessions={this.state.sessionsWithMeals}
+    //       mealOptions={this.state.mealOptions}
+    //       foodPreferences={this.state.foodPreferences}
+    //     />
+    //     <EmergencyInfo/>
+    //     <button onClick={this.handleNextStep}>next</button>
+    //     <button>finish</button>
+    //   </div>
+    // )
+    if (this.state.step === 0) {
+      return (
+        <div>
+          <Register account={
+            this.state.account}
+            camper={this.state.camper}
+            party={this.state.party}
           />
-        <Sessions sessions={this.state.sessions}></Sessions>
-        <Meal/>
-        <MealChoice
-          sessions={this.state.sessionsWithMeals}
-          mealOptions={this.state.mealOptions}
-          foodPreferences={this.state.foodPreferences}
-        />
-        <EmergencyInfo/>
-        <button>next</button>
-        <button>finish</button>
-      </div>
-    )
+          <button onClick={this.handleNextStep}>next</button>
+        </div>
+      )
+    } else if (this.state.step === 1) {
+      return (
+        <div>
+          <Sessions sessions={this.state.sessions}></Sessions>
+          <button onClick={this.handleNextStep}>next</button>
+        </div>
+      )
+    } else if (this.state.step === 2) {
+      return (
+        <div>
+          <Meal/>
+          <button onClick={this.handleNextStep}>next</button>
+        </div>
+      )
+    } else if (this.state.step === 3) {
+      return (
+        <div>
+          <MealChoice
+            sessions={this.state.sessionsWithMeals}
+            mealOptions={this.state.mealOptions}
+            foodPreferences={this.state.foodPreferences}
+          />
+          <button onClick={this.handleNextStep}>next</button>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <EmergencyInfo/>
+          <button onClick={this.handleNextStep}>next</button>
+        </div>
+      )
+    }
   }
 };
 
