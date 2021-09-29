@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
-import Party from './Party.jsx';
+import Register from './Register.jsx';
+// import Party from './Party.jsx';
 import Sessions from './Sessions.jsx';
 import Meal from './Meal.jsx';
 import MealChoice from './MealChoice.jsx';
@@ -51,13 +52,11 @@ class App extends React.Component {
     return (
       // add a section showing who you are currently registering for
       <div>
-        <div>Account {this.state.account}</div>
-        <div>{this.state.camper}</div>
-        <div>Who will you register?</div>
-        <div>choose one</div>
-        {/* add edit button for each camper and also a marker to show it was finished */}
-        <Party party={this.state.party}/>
-        <button>next</button>
+        <Register account={
+          this.state.account}
+          camper={this.state.camper}
+          party={this.state.party}
+          />
         <Sessions sessions={this.state.sessions}></Sessions>
         <Meal/>
         <MealChoice
@@ -66,6 +65,8 @@ class App extends React.Component {
           foodPreferences={this.state.foodPreferences}
         />
         <EmergencyInfo/>
+        <button>next</button>
+        <button>finish</button>
       </div>
     )
   }
