@@ -23,6 +23,7 @@ class App extends React.Component {
         'Shelli Smart',
         'Cedar Dobson',
       ],
+      currentCamper: '',
       // Assumed that the title of each session and it's date will eventually be separate -> probably have to change to an object then
       sessions: [
         'Pre-pre camp - July 5',
@@ -47,11 +48,11 @@ class App extends React.Component {
         'Vegan',
       ]
     };
-    this.handleNextStep = this.handleNextStep.bind(this);
+    this.HandleNextStep = this.HandleNextStep.bind(this);
+    this.SetCurrentCamper = this.SetCurrentCamper.bind(this);
   };
 
-  handleNextStep() {
-    console.log('click!');
+  HandleNextStep() {
     if (this.state.step >= 4) {
       this.setState({step: 0});
     } else {
@@ -61,27 +62,12 @@ class App extends React.Component {
     }
   }
 
+  SetCurrentCamper(camper) {
+    console.log('set camper!');
+    this.setState({currentCamper: camper});
+  }
+
   render() {
-    // return (
-    //   // add a section showing who you are currently registering for
-    //   <div>
-    //     <Register account={
-    //       this.state.account}
-    //       camper={this.state.camper}
-    //       party={this.state.party}
-    //       />
-    //     <Sessions sessions={this.state.sessions}></Sessions>
-    //     <Meal/>
-    //     <MealChoice
-    //       sessions={this.state.sessionsWithMeals}
-    //       mealOptions={this.state.mealOptions}
-    //       foodPreferences={this.state.foodPreferences}
-    //     />
-    //     <EmergencyInfo/>
-    //     <button onClick={this.handleNextStep}>next</button>
-    //     <button>finish</button>
-    //   </div>
-    // )
     if (this.state.step === 0) {
       return (
         <div>
@@ -89,22 +75,23 @@ class App extends React.Component {
             this.state.account}
             camper={this.state.camper}
             party={this.state.party}
+            SetCurrentCamper={this.SetCurrentCamper}
           />
-          <button onClick={this.handleNextStep}>next</button>
+          <button onClick={this.HandleNextStep}>next</button>
         </div>
       )
     } else if (this.state.step === 1) {
       return (
         <div>
           <Sessions sessions={this.state.sessions}></Sessions>
-          <button onClick={this.handleNextStep}>next</button>
+          <button onClick={this.HandleNextStep}>next</button>
         </div>
       )
     } else if (this.state.step === 2) {
       return (
         <div>
           <Meal/>
-          <button onClick={this.handleNextStep}>next</button>
+          <button onClick={this.HandleNextStep}>next</button>
         </div>
       )
     } else if (this.state.step === 3) {
@@ -115,14 +102,14 @@ class App extends React.Component {
             mealOptions={this.state.mealOptions}
             foodPreferences={this.state.foodPreferences}
           />
-          <button onClick={this.handleNextStep}>next</button>
+          <button onClick={this.HandleNextStep}>next</button>
         </div>
       )
     } else {
       return (
         <div>
           <EmergencyInfo/>
-          <button onClick={this.handleNextStep}>next</button>
+          <button onClick={this.HandleNextStep}>next</button>
         </div>
       )
     }

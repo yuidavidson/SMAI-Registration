@@ -10,7 +10,10 @@ const Register = (props) => {
     <div>Who will you register?</div>
     <div>choose one</div>
     {/* add edit button for each camper and also a marker to show it was finished */}
-    <Party party={props.party}/>
+    <Party
+    party={props.party}
+    SetCurrentCamper={props.SetCurrentCamper}
+    />
   </div>
   )
 };
