@@ -1,3 +1,8 @@
+/* Components still needed:
+    Basic Personal Info - name, address, email, vehicle
+    Custom Pricing - amount and reason
+*/
+
 import React from 'react';
 import axios from 'axios';
 
@@ -63,9 +68,14 @@ class App extends React.Component {
   }
 
   SetCurrentCamper(camper) {
-    console.log('set camper!');
     this.setState({currentCamper: camper});
   }
+
+  /*
+
+  Potentiall Try to change later to conditionally render the different 'pages' but keep the current camper and next button
+
+  */
 
   render() {
     if (this.state.step === 0) {
@@ -83,6 +93,8 @@ class App extends React.Component {
     } else if (this.state.step === 1) {
       return (
         <div>
+          <div>Registering {this.state.currentCamper}</div>
+          <div>Please make your selection</div>
           <Sessions sessions={this.state.sessions}></Sessions>
           <button onClick={this.HandleNextStep}>next</button>
         </div>
@@ -90,6 +102,8 @@ class App extends React.Component {
     } else if (this.state.step === 2) {
       return (
         <div>
+          <div>Registering {this.state.currentCamper}</div>
+          <div>Please make your selection</div>
           <Meal/>
           <button onClick={this.HandleNextStep}>next</button>
         </div>
@@ -97,6 +111,8 @@ class App extends React.Component {
     } else if (this.state.step === 3) {
       return (
         <div>
+          <div>Registering {this.state.currentCamper}</div>
+          <div>Please make your selection</div>
           <MealChoice
             sessions={this.state.sessionsWithMeals}
             mealOptions={this.state.mealOptions}
@@ -108,6 +124,8 @@ class App extends React.Component {
     } else {
       return (
         <div>
+          <div>Registering {this.state.currentCamper}</div>
+          <div>Please make your selection</div>
           <EmergencyInfo/>
           <button onClick={this.HandleNextStep}>next</button>
         </div>
