@@ -5,7 +5,7 @@ const Party = (props) => {
   const partyList = party.map((partyMember) =>
     <div key={partyMember.toString()}>
       <button onClick={() => props.SetCurrentCamper(partyMember)}>x</button>
-      {partyMember}
+      {partyMember.camper}
       </div>
   );
   return (
