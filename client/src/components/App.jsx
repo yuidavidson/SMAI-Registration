@@ -1,4 +1,5 @@
-/* Components still needed:
+/*
+  Components still needed:
     Basic Personal Info - name, address, email, vehicle
     Custom Pricing - amount and reason
 */
@@ -21,12 +22,31 @@ class App extends React.Component {
       step: 0,
       account: 'SMF034',
       camper: 'Joshua Freeman',
-      party : [
-        'Joshua Freeman',
-        'Karen Freeman',
-        'David Konno',
-        'Shelli Smart',
-        'Cedar Dobson',
+      // The party structure might have to be changed depending on what the data coming in looks like
+
+      // party : [
+      //   'Joshua Freeman',
+      //   'Karen Freeman',
+      //   'David Konno',
+      //   'Shelli Smart',
+      //   'Cedar Dobson',
+      // ],
+      party: [
+        {
+          camper: 'Joshua Freeman',
+        },
+        {
+          camper: 'Karen Freeman',
+        },
+        {
+          camper: 'David Konno',
+        },
+        {
+          camper: 'Shelli Smart',
+        },
+        {
+          camper: 'Cedar Dobson',
+        },
       ],
       currentCamper: '',
       // Assumed that the title of each session and it's date will eventually be separate -> probably have to change to an object then
@@ -93,7 +113,7 @@ class App extends React.Component {
     } else if (this.state.step === 1) {
       return (
         <div>
-          <div>Registering {this.state.currentCamper}</div>
+          <div>Registering {this.state.currentCamper.camper}</div>
           <div>Please make your selection</div>
           <Sessions sessions={this.state.sessions}></Sessions>
           <button onClick={this.HandleNextStep}>next</button>
@@ -102,7 +122,7 @@ class App extends React.Component {
     } else if (this.state.step === 2) {
       return (
         <div>
-          <div>Registering {this.state.currentCamper}</div>
+          <div>Registering {this.state.currentCamper.camper}</div>
           <div>Please make your selection</div>
           <Meal/>
           <button onClick={this.HandleNextStep}>next</button>
@@ -111,7 +131,7 @@ class App extends React.Component {
     } else if (this.state.step === 3) {
       return (
         <div>
-          <div>Registering {this.state.currentCamper}</div>
+          <div>Registering {this.state.currentCamper.camper}</div>
           <div>Please make your selection</div>
           <MealChoice
             sessions={this.state.sessionsWithMeals}
@@ -124,7 +144,7 @@ class App extends React.Component {
     } else {
       return (
         <div>
-          <div>Registering {this.state.currentCamper}</div>
+          <div>Registering {this.state.currentCamper.camper}</div>
           <div>Please make your selection</div>
           <EmergencyInfo/>
           <button onClick={this.HandleNextStep}>next</button>
