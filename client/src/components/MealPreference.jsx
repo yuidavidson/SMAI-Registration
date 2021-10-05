@@ -3,7 +3,7 @@ import React from 'react';
 const MealPreference = (props) => {
   const mealOptions = props.mealOptions;
   const mealOptionList = mealOptions.map((mealOption) =>
-    <div>
+    <div key={mealOption.toString()}>
       <button>x</button>
       {mealOption}
     </div>
