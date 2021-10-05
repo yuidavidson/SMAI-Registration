@@ -3,7 +3,7 @@ import React from 'react';
 const Party = (props) => {
   const party = props.party;
   const partyList = party.map((partyMember) =>
-    <div key={partyMember.toString()}>
+    <div key={partyMember.camper.toString()}>
       <button onClick={() => props.SetCurrentCamper(partyMember)}>x</button>
       {partyMember.camper}
       </div>
