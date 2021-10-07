@@ -51,6 +51,9 @@ class App extends React.Component {
       currentCamper: {
         camper: '',
         sessions: [],
+        meal: false,
+        mealChoice: {},
+        medicalInformation: {},
       },
       // Assumed that the title of each session and it's date will eventually be separate -> probably have to change to an object then
       sessions: [
@@ -120,8 +123,10 @@ class App extends React.Component {
     this.setState({currentCamper: newData});
   }
 
-  SelectMeal() {
-
+  SelectMeal(bool) {
+    let newData = this.state.currentCamper;
+    newData.meal = bool;
+    this.setState({currentCamper: newData});
   }
 
   SelectMealChoice() {
@@ -172,7 +177,7 @@ class App extends React.Component {
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
           <div>Please make your selection</div>
-          <Meal/>
+          <Meal SelectMeal={this.SelectMeal}/>
           <button onClick={this.HandleNextStep}>next</button>
         </div>
       )
