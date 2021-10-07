@@ -5,8 +5,7 @@ const Sessions = (props) => {
   const sessions = props.sessions;
   const sessionList = sessions.map((session) =>
     <div key={session.toString()}>
-      {/* Add a key to the buttons -> fix so buttons are next to the sessions, which I might do in styles */}
-      <button>x</button>
+      <button onClick={() => props.SelectSessions(session)}>x</button>
       {session}
     </div>
   );

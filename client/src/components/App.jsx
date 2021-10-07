@@ -8,7 +8,6 @@ import React from 'react';
 import axios from 'axios';
 
 import Register from './Register.jsx';
-// import Party from './Party.jsx';
 import Sessions from './Sessions.jsx';
 import Meal from './Meal.jsx';
 import MealChoice from './MealChoice.jsx';
@@ -20,6 +19,7 @@ class App extends React.Component {
     // dummy data for testing
     this.state = {
       step: 0,
+      readyForNextStep: false,
       account: 'SMF034',
       camper: 'Joshua Freeman',
       // The party structure might have to be changed depending on what the data coming in looks like
@@ -48,7 +48,10 @@ class App extends React.Component {
           camper: 'Cedar Dobson',
         },
       ],
-      currentCamper: '',
+      currentCamper: {
+        camper: '',
+        sessions: [],
+      },
       // Assumed that the title of each session and it's date will eventually be separate -> probably have to change to an object then
       sessions: [
         'Pre-pre camp - July 5',
@@ -75,24 +78,66 @@ class App extends React.Component {
     };
     this.HandleNextStep = this.HandleNextStep.bind(this);
     this.SetCurrentCamper = this.SetCurrentCamper.bind(this);
+    this.SelectSessions = this.SelectSessions.bind(this);
+    this.SelectMeal = this.SelectMeal.bind(this);
+    this.SelectMealChoice = this.SelectMealChoice.bind(this);
+    this.SelectMealPreference = this.SelectMealPreference.bind(this);
+    this.UpdateMedicalInformation = this.UpdateMedicalInformation.bind(this);
   };
 
   HandleNextStep() {
-    if (this.state.step >= 4) {
+    if (!this.state.readyForNextStep) {
+      // EDIT: to show on page
+      console.log('please choose a camper to register');
+    } else if (this.state.step >= 4) {
       this.setState({step: 0});
+      // EDIT: set readyForNextStep to be false after other button functionalities are made
     } else {
       this.setState((prevState,) => ({
         step: prevState.step + 1
+        // EDIT: set readyForNextStep to be false after other button functionalities are made
       }));
     }
   }
 
-  SetCurrentCamper(camper) {
-    this.setState({currentCamper: camper});
+  // SetCurrentCamper(camper) {
+  //   this.setState({currentCamper: camper});
+  //   this.setState({readyForNextStep: true});
+  // }
+
+  SetCurrentCamper(partyMember) {
+    let newData = this.state.currentCamper;
+    newData.camper = partyMember.camper;
+    this.setState({currentCamper: newData});
+    this.setState({readyForNextStep: true});
+  }
+
+  // Allow session selections
+  // EDIT: keep in mind that the session name and start dates might change to be separate feilds -> also keep in mind if order of sessions matters, and deal with the same seesion being clicked twice
+  SelectSessions(session) {
+    let newData = this.state.currentCamper;
+    newData.sessions.push(session);
+    this.setState({currentCamper: newData});
+  }
+
+  SelectMeal() {
+
+  }
+
+  SelectMealChoice() {
+
+  }
+
+  SelectMealPreference() {
+
+  }
+
+  UpdateMedicalInformation() {
+
   }
 
   /*
-
+  EDIT:
   Potentiall Try to change later to conditionally render the different 'pages' but keep the current camper and next button
 
   */
@@ -101,8 +146,8 @@ class App extends React.Component {
     if (this.state.step === 0) {
       return (
         <div>
-          <Register account={
-            this.state.account}
+          <Register
+            account={this.state.account}
             camper={this.state.camper}
             party={this.state.party}
             SetCurrentCamper={this.SetCurrentCamper}
@@ -115,7 +160,10 @@ class App extends React.Component {
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
           <div>Please make your selection</div>
-          <Sessions sessions={this.state.sessions}></Sessions>
+          <Sessions
+          sessions={this.state.sessions}
+          SelectSessions={this.SelectSessions}
+          ></Sessions>
           <button onClick={this.HandleNextStep}>next</button>
         </div>
       )
