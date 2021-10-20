@@ -14,6 +14,8 @@ const Register = (props) => {
     party={props.party}
     SetCurrentCamper={props.SetCurrentCamper}
     />
+  <div>find other campers...</div>
+  <div>invite new camper</div>
   </div>
   )
 };

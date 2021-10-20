@@ -82,6 +82,7 @@ class App extends React.Component {
       ]
     };
     this.HandleNextStep = this.HandleNextStep.bind(this);
+    this.HandlePrevStep = this.HandlePrevStep = this.HandlePrevStep.bind(this);
     this.SetCurrentCamper = this.SetCurrentCamper.bind(this);
     this.SwitchToSessions = this.SwitchToSessions.bind(this);
     this.SwitchToMeal = this.SwitchToMeal.bind(this);
@@ -97,13 +98,26 @@ class App extends React.Component {
     if (!this.state.readyForNextStep) {
       // EDIT: to show on page
       console.log('please choose a camper to register');
-    } else if (this.state.step >= 4) {
+    } else if (this.state.step >= 5) {
       this.setState({step: 0});
       // EDIT: set readyForNextStep to be false after other button functionalities are made
     } else {
       this.setState((prevState,) => ({
         step: prevState.step + 1
         // EDIT: set readyForNextStep to be false after other button functionalities are made
+      }));
+    }
+  }
+
+  HandlePrevStep() {
+    if (!this.state.readyForNextStep) {
+      // EDIT: to show on page
+      console.log('please choose a camper to register');
+    } else if (this.state.step <= 0) {
+      this.setState({step: 5});
+    } else {
+      this.setState((prevState,) => ({
+        step: prevState.step - 1
       }));
     }
   }
@@ -174,6 +188,7 @@ class App extends React.Component {
           <button onClick={this.HandleNextStep}>next</button>
         </div>
       )
+      // Edit: might change this into -1 step, but might take the numbers out entirely
     } else if (this.state.step === 1) {
       return (
         <div>
@@ -194,6 +209,7 @@ class App extends React.Component {
           sessions={this.state.sessions}
           SelectSessions={this.SelectSessions}
           ></Sessions>
+          <button onClick={this.HandlePrevStep}>prev</button>
           <button onClick={this.HandleNextStep}>next</button>
         </div>
       )
@@ -203,6 +219,7 @@ class App extends React.Component {
           <div>Registering {this.state.currentCamper.camper}</div>
           <div>Please make your selection</div>
           <Meal SelectMeal={this.SelectMeal}/>
+          <button onClick={this.HandlePrevStep}>prev</button>
           <button onClick={this.HandleNextStep}>next</button>
         </div>
       )
@@ -216,6 +233,7 @@ class App extends React.Component {
             mealOptions={this.state.mealOptions}
             foodPreferences={this.state.foodPreferences}
           />
+          <button onClick={this.HandlePrevStep}>prev</button>
           <button onClick={this.HandleNextStep}>next</button>
         </div>
       )
@@ -225,6 +243,7 @@ class App extends React.Component {
           <div>Registering {this.state.currentCamper.camper}</div>
           <div>Please make your selection</div>
           <EmergencyInfo/>
+          <button onClick={this.HandlePrevStep}>prev</button>
           <button onClick={this.HandleNextStep}>next</button>
         </div>
       )
