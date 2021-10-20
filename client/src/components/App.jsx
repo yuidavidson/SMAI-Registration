@@ -7,6 +7,7 @@
 import React from 'react';
 import axios from 'axios';
 
+import TableOfContents from './TableOfContents.jsx';
 import Register from './Register.jsx';
 import Sessions from './Sessions.jsx';
 import Meal from './Meal.jsx';
@@ -18,6 +19,7 @@ class App extends React.Component {
     super(props);
     // dummy data for testing
     this.state = {
+      // EDIT: might be good to change the steps from numbers to strings/titles of each steps -> would be easier for future edits
       step: 0,
       readyForNextStep: false,
       account: 'SMF034',
@@ -81,6 +83,9 @@ class App extends React.Component {
     };
     this.HandleNextStep = this.HandleNextStep.bind(this);
     this.SetCurrentCamper = this.SetCurrentCamper.bind(this);
+    this.SwitchToSessions = this.SwitchToSessions.bind(this);
+    this.SwitchToMeal = this.SwitchToMeal.bind(this);
+    this.SwitchToMedicalInfo = this.SwitchToMedicalInfo.bind(this);
     this.SelectSessions = this.SelectSessions.bind(this);
     this.SelectMeal = this.SelectMeal.bind(this);
     this.SelectMealChoice = this.SelectMealChoice.bind(this);
@@ -103,16 +108,25 @@ class App extends React.Component {
     }
   }
 
-  // SetCurrentCamper(camper) {
-  //   this.setState({currentCamper: camper});
-  //   this.setState({readyForNextStep: true});
-  // }
-
   SetCurrentCamper(partyMember) {
     let newData = this.state.currentCamper;
     newData.camper = partyMember.camper;
     this.setState({currentCamper: newData});
     this.setState({readyForNextStep: true});
+  }
+
+  // Switches to Selected sections depending on TOC clicks
+
+  SwitchToSessions() {
+    this.setState({step: 2});
+  }
+
+  SwitchToMeal() {
+    this.setState({step: 3})
+  }
+
+  SwitchToMedicalInfo() {
+    this.setState({step: 5});
   }
 
   // Allow session selections
@@ -164,6 +178,17 @@ class App extends React.Component {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
+          <TableOfContents
+            SwitchToSessions={this.SwitchToSessions}
+            SwitchToMeal={this.SwitchToMeal}
+            SwitchToMedicalInfo={this.SwitchToMedicalInfo}
+        />
+        </div>
+      )
+    } else if (this.state.step === 2) {
+      return (
+        <div>
+          <div>Registering {this.state.currentCamper.camper}</div>
           <div>Please make your selection</div>
           <Sessions
           sessions={this.state.sessions}
@@ -172,7 +197,7 @@ class App extends React.Component {
           <button onClick={this.HandleNextStep}>next</button>
         </div>
       )
-    } else if (this.state.step === 2) {
+    } else if (this.state.step === 3) {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
@@ -181,7 +206,7 @@ class App extends React.Component {
           <button onClick={this.HandleNextStep}>next</button>
         </div>
       )
-    } else if (this.state.step === 3) {
+    } else if (this.state.step === 4) {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
@@ -194,7 +219,7 @@ class App extends React.Component {
           <button onClick={this.HandleNextStep}>next</button>
         </div>
       )
-    } else {
+    } else if (this.state.step === 5) {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
