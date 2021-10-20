@@ -1,10 +1,10 @@
-# 🚀 Welcome to your new awesome project!
+# SMAI Registration
 
 to run app
 
 ```
-npm start
 npm run build
+npm start
 ```
 
 or
@@ -13,5 +13,6 @@ or
 
 ```
 yarn build
+yarn stard
 ```
 
