@@ -1,6 +1,6 @@
 /*
   Components still needed:
-    Basic Personal Info - name, address, email, vehicle
+  Payment
     Custom Pricing - amount and reason
 */
 
@@ -28,8 +28,6 @@ class App extends React.Component {
       step: 'Register',
       readyForNextStep: false,
       openModal: '',
-      // openCamperInvite: false,
-      // openCamperSearch: false,
       account: 'SMF034',
       camper: 'Joshua Freeman',
       // The party structure might have to be changed depending on what the data coming in looks like
@@ -182,7 +180,8 @@ class App extends React.Component {
     let newData = this.state.currentCamper;
     newData.camper = partyMember.camper;
     this.setState({currentCamper: newData});
-    this.setState({readyForNextStep: true});
+    // this.setState({readyForNextStep: true});
+    this.setState({step: 'TableOfContents'});
   }
 
   // Switches to Selected sections depending on TOC clicks
@@ -271,7 +270,7 @@ class App extends React.Component {
             OpenCamperSearch={this.OpenCamperSearch}
             CloseCamperSearch={this.CloseCamperSearch}
           />
-          <button onClick={this.SwitchToTOC}>next</button>
+          {/* <button onClick={this.SwitchToTOC}>next</button> */}
         </div>
       )
       // Edit: might change this into -1 step, but might take the numbers out entirely
