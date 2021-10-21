@@ -20,7 +20,7 @@ class App extends React.Component {
     // dummy data for testing
     this.state = {
       // EDIT: might be good to change the steps from numbers to strings/titles of each steps -> would be easier for future edits
-      step: 0,
+      step: 'Register',
       readyForNextStep: false,
       account: 'SMF034',
       camper: 'Joshua Freeman',
@@ -83,8 +83,8 @@ class App extends React.Component {
     };
     this.HandleNextStep = this.HandleNextStep.bind(this);
     this.HandlePrevStep = this.HandlePrevStep = this.HandlePrevStep.bind(this);
-    this.ReturnToTOC = this.ReturnToTOC.bind(this);
-    this.ReturnToCamperSelection = this.ReturnToCamperSelection.bind(this);
+    this.SwitchToTOC = this.SwitchToTOC.bind(this);
+    this.SwitchToRegister = this.SwitchToRegister.bind(this);
     this.SetCurrentCamper = this.SetCurrentCamper.bind(this);
     this.SwitchToSessions = this.SwitchToSessions.bind(this);
     this.SwitchToMeal = this.SwitchToMeal.bind(this);
@@ -125,14 +125,14 @@ class App extends React.Component {
   }
 
   // Return from current component (ex. Personal Information) back to the table of contents
-  ReturnToTOC() {
+  SwitchToTOC() {
     // EDIT: add a warning if data was not saved
-    this.setState({step: 1});
+    this.setState({step: 'TableOfContents'});
   }
 
   // Return from TOC to camper selection
-  ReturnToCamperSelection() {
-    this.setState({step: 0});
+  SwitchToRegister() {
+    this.setState({step: 'Register'});
   }
 
   SetCurrentCamper(partyMember) {
@@ -145,15 +145,15 @@ class App extends React.Component {
   // Switches to Selected sections depending on TOC clicks
 
   SwitchToSessions() {
-    this.setState({step: 2});
+    this.setState({step: 'Sessions'});
   }
 
   SwitchToMeal() {
-    this.setState({step: 3})
+    this.setState({step: 'Meal'})
   }
 
   SwitchToMedicalInfo() {
-    this.setState({step: 5});
+    this.setState({step: 'EmergencyInfo'});
   }
 
   // Allow session selections
@@ -189,7 +189,7 @@ class App extends React.Component {
   */
 
   render() {
-    if (this.state.step === 0) {
+    if (this.state.step === 'Register') {
       return (
         <div>
           <Register
@@ -198,11 +198,11 @@ class App extends React.Component {
             party={this.state.party}
             SetCurrentCamper={this.SetCurrentCamper}
           />
-          <button onClick={this.HandleNextStep}>next</button>
+          <button onClick={this.SwitchToTOC}>next</button>
         </div>
       )
       // Edit: might change this into -1 step, but might take the numbers out entirely
-    } else if (this.state.step === 1) {
+    } else if (this.state.step === 'TableOfContents') {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
@@ -211,10 +211,10 @@ class App extends React.Component {
             SwitchToMeal={this.SwitchToMeal}
             SwitchToMedicalInfo={this.SwitchToMedicalInfo}
         />
-          <button onClick={this.ReturnToCamperSelection}>Back to All</button>
+          <button onClick={this.SwitchToRegister}>Back to All</button>
         </div>
       )
-    } else if (this.state.step === 2) {
+    } else if (this.state.step === 'Sessions') {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
@@ -223,23 +223,19 @@ class App extends React.Component {
           sessions={this.state.sessions}
           SelectSessions={this.SelectSessions}
           ></Sessions>
-          <button onClick={this.HandlePrevStep}>prev</button>
-          <button onClick={this.HandleNextStep}>next</button>
-        <button onClick={this.ReturnToTOC}>Return to Table of Contents</button>
+        <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
-    } else if (this.state.step === 3) {
+    } else if (this.state.step === 'Meal') {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
           <div>Please make your selection</div>
           <Meal SelectMeal={this.SelectMeal}/>
-          <button onClick={this.HandlePrevStep}>prev</button>
-          <button onClick={this.HandleNextStep}>next</button>
-        <button onClick={this.ReturnToTOC}>Return to Table of Contents</button>
+        <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
-    } else if (this.state.step === 4) {
+    } else if (this.state.step === 'MealChoice') {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
@@ -249,20 +245,16 @@ class App extends React.Component {
             mealOptions={this.state.mealOptions}
             foodPreferences={this.state.foodPreferences}
           />
-          <button onClick={this.HandlePrevStep}>prev</button>
-          <button onClick={this.HandleNextStep}>next</button>
-        <button onClick={this.ReturnToTOC}>Return to Table of Contents</button>
+        <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
-    } else if (this.state.step === 5) {
+    } else if (this.state.step === 'EmergencyInfo') {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
           <div>Please make your selection</div>
           <EmergencyInfo/>
-          <button onClick={this.HandlePrevStep}>prev</button>
-          <button onClick={this.HandleNextStep}>next</button>
-        <button onClick={this.ReturnToTOC}>Return to Table of Contents</button>
+        <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
     }
