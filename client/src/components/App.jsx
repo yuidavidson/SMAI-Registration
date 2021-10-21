@@ -83,6 +83,8 @@ class App extends React.Component {
     };
     this.HandleNextStep = this.HandleNextStep.bind(this);
     this.HandlePrevStep = this.HandlePrevStep = this.HandlePrevStep.bind(this);
+    this.ReturnToTOC = this.ReturnToTOC.bind(this);
+    this.ReturnToCamperSelection = this.ReturnToCamperSelection.bind(this);
     this.SetCurrentCamper = this.SetCurrentCamper.bind(this);
     this.SwitchToSessions = this.SwitchToSessions.bind(this);
     this.SwitchToMeal = this.SwitchToMeal.bind(this);
@@ -120,6 +122,17 @@ class App extends React.Component {
         step: prevState.step - 1
       }));
     }
+  }
+
+  // Return from current component (ex. Personal Information) back to the table of contents
+  ReturnToTOC() {
+    // EDIT: add a warning if data was not saved
+    this.setState({step: 1});
+  }
+
+  // Return from TOC to camper selection
+  ReturnToCamperSelection() {
+    this.setState({step: 0});
   }
 
   SetCurrentCamper(partyMember) {
@@ -198,6 +211,7 @@ class App extends React.Component {
             SwitchToMeal={this.SwitchToMeal}
             SwitchToMedicalInfo={this.SwitchToMedicalInfo}
         />
+          <button onClick={this.ReturnToCamperSelection}>Back to All</button>
         </div>
       )
     } else if (this.state.step === 2) {
@@ -211,6 +225,7 @@ class App extends React.Component {
           ></Sessions>
           <button onClick={this.HandlePrevStep}>prev</button>
           <button onClick={this.HandleNextStep}>next</button>
+        <button onClick={this.ReturnToTOC}>Return to Table of Contents</button>
         </div>
       )
     } else if (this.state.step === 3) {
@@ -221,6 +236,7 @@ class App extends React.Component {
           <Meal SelectMeal={this.SelectMeal}/>
           <button onClick={this.HandlePrevStep}>prev</button>
           <button onClick={this.HandleNextStep}>next</button>
+        <button onClick={this.ReturnToTOC}>Return to Table of Contents</button>
         </div>
       )
     } else if (this.state.step === 4) {
@@ -235,6 +251,7 @@ class App extends React.Component {
           />
           <button onClick={this.HandlePrevStep}>prev</button>
           <button onClick={this.HandleNextStep}>next</button>
+        <button onClick={this.ReturnToTOC}>Return to Table of Contents</button>
         </div>
       )
     } else if (this.state.step === 5) {
@@ -245,6 +262,7 @@ class App extends React.Component {
           <EmergencyInfo/>
           <button onClick={this.HandlePrevStep}>prev</button>
           <button onClick={this.HandleNextStep}>next</button>
+        <button onClick={this.ReturnToTOC}>Return to Table of Contents</button>
         </div>
       )
     }
