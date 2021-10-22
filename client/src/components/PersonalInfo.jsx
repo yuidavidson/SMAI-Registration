@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class PersonalInfo extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class PersonalInfo extends React.Component {
     };
     this.EditPersonalInfo = this.EditPersonalInfo.bind(this);
     this.HandleChange = this.HandleChange.bind(this);
+    this.SavePersonalInfo = this.SavePersonalInfo.bind(this);
   }
 
   EditPersonalInfo() {
@@ -19,11 +21,31 @@ class PersonalInfo extends React.Component {
   HandleChange(e) {
     let editedCamper = this.state.currentCamper;
     editedCamper.personal[e.target.name] = e.target.value;
-    this.setState({currentCamper: editedCamper});
-    this.setState({change: true});
+    this.setState({currentCamper: editedCamper, change: true});
   }
 
-
+  SavePersonalInfo() {
+    if (!this.state.change) {
+      console.log('no changes detected to save!');
+    } else {
+      axios({
+        method: 'UPDATE',
+        url: 'https://smai.us/api/save-value',
+        params: {
+          // probably using this.state.currentCamper.personal
+        },
+      })
+      .then((response)  => {
+        console.log('Saved');
+        // console.log(response);
+        this.setState({change: false});
+      })
+      .catch((error) => {
+        console.log('Sorry, something went wrong')
+        console.log(error);
+      })
+    }
+  }
 
   render() {
     if (!this.state.step) {
@@ -47,7 +69,7 @@ class PersonalInfo extends React.Component {
           <input type='text' name='foodPreference' value={this.state.currentCamper.personal.foodPreference} onChange={this.HandleChange}></input>
           <div>Neighborhood</div>
           <input type='text' name='neighborhood' value={this.state.currentCamper.personal.neighborhood} onChange={this.HandleChange}></input>
-          <button>Save</button>
+          <button onClick={this.SavePersonalInfo}>Save</button>
         </div>
       )
     }

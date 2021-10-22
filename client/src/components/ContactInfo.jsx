@@ -5,6 +5,7 @@ class ContactInfo extends React.Component {
     super(props);
     this.state = {
       step: '',
+      change: false,
       currentCamper: props.currentCamper
     };
     this.EditContactInfo = this.EditContactInfo.bind(this);
@@ -18,7 +19,7 @@ class ContactInfo extends React.Component {
   HandleChange(e) {
     let editedCamper = this.state.currentCamper;
     editedCamper.contact[e.target.name] = e.target.value;
-    this.setState({currentCamper: editedCamper});
+    this.setState({currentCamper: editedCamper, change: true});
   }
 
   render() {
@@ -31,7 +32,7 @@ class ContactInfo extends React.Component {
         </div>
       )
     } else if (this.state.step === 'Contact') {
-      return(
+      return (
         <div>
           <div>Address</div>
           <input type='text' name='address' value={this.state.currentCamper.contact.address} onChange={this.HandleChange}></input>
