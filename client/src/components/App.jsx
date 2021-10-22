@@ -57,6 +57,22 @@ class App extends React.Component {
         },
       ],
       currentCamper: {
+        personal: {
+          firstName: 'Joshua',
+          lastName: 'Freeman',
+          bday: 'April 1st',
+          foodPreference: 'Oxygen',
+          neighborhood: 'I honestly still don\'t know the neighborhoods',
+          address: 'tired of making things up',
+          city: 'somewhere',
+          region: 'CA',
+          zip: 76849,
+          country: 'united states of shitty people',
+          phone1: 7849873,
+          phone2: 9732746,
+          email1: 'who@yahoo.com',
+          email2: 'me@hotmail.com',
+        },
         camper: '',
         sessions: [],
         meal: false,
@@ -87,18 +103,14 @@ class App extends React.Component {
         'Vegan',
       ]
     };
-    this.HandleNextStep = this.HandleNextStep.bind(this);
-    this.HandlePrevStep = this.HandlePrevStep = this.HandlePrevStep.bind(this);
-    this.SwitchToTOC = this.SwitchToTOC.bind(this);
-    this.SwitchToRegister = this.SwitchToRegister.bind(this);
-
-    this.SetCurrentCamper = this.SetCurrentCamper.bind(this);
 
     this.OpenCamperInvite = this.OpenCamperInvite.bind(this);
     this.CloseCamperInvite = this. CloseCamperInvite.bind(this);
     this.OpenCamperSearch = this.OpenCamperSearch.bind(this);
     this.CloseCamperSearch = this.CloseCamperSearch.bind(this);
 
+    this.SwitchToTOC = this.SwitchToTOC.bind(this);
+    this.SwitchToRegister = this.SwitchToRegister.bind(this);
     this.SwitchToSessions = this.SwitchToSessions.bind(this);
     this.SwitchToMeal = this.SwitchToMeal.bind(this);
     this.SwitchToMedicalInfo = this.SwitchToMedicalInfo.bind(this);
@@ -110,42 +122,13 @@ class App extends React.Component {
     this.SwitchToNeighborhood = this.SwitchToNeighborhood.bind(this);
     this.SwitchToCrew = this.SwitchToCrew.bind(this);
 
+    this.SetCurrentCamper = this.SetCurrentCamper.bind(this);
     this.SelectSessions = this.SelectSessions.bind(this);
     this.SelectMeal = this.SelectMeal.bind(this);
     this.SelectMealChoice = this.SelectMealChoice.bind(this);
     this.SelectMealPreference = this.SelectMealPreference.bind(this);
     this.UpdateMedicalInformation = this.UpdateMedicalInformation.bind(this);
   };
-
-  // Both HandleNextStep and HandlePrevStep to be removed if found not necessary
-
-  HandleNextStep() {
-    if (!this.state.readyForNextStep) {
-      // EDIT: to show on page
-      console.log('please choose a camper to register');
-    } else if (this.state.step >= 5) {
-      this.setState({step: 0});
-      // EDIT: set readyForNextStep to be false after other button functionalities are made
-    } else {
-      this.setState((prevState,) => ({
-        step: prevState.step + 1
-        // EDIT: set readyForNextStep to be false after other button functionalities are made
-      }));
-    }
-  }
-
-  HandlePrevStep() {
-    if (!this.state.readyForNextStep) {
-      // EDIT: to show on page
-      console.log('please choose a camper to register');
-    } else if (this.state.step <= 0) {
-      this.setState({step: 5});
-    } else {
-      this.setState((prevState,) => ({
-        step: prevState.step - 1
-      }));
-    }
-  }
 
   // these functions are for opening and closing modals
 
@@ -174,14 +157,6 @@ class App extends React.Component {
   // Return from TOC to camper selection
   SwitchToRegister() {
     this.setState({step: 'Register'});
-  }
-
-  SetCurrentCamper(partyMember) {
-    let newData = this.state.currentCamper;
-    newData.camper = partyMember.camper;
-    this.setState({currentCamper: newData});
-    // this.setState({readyForNextStep: true});
-    this.setState({step: 'TableOfContents'});
   }
 
   // Switches to Selected sections depending on TOC clicks
@@ -221,6 +196,14 @@ class App extends React.Component {
 
   SwitchToCrew() {
     this.setState({step: 'Crew'});
+  }
+
+  SetCurrentCamper(partyMember) {
+    let newData = this.state.currentCamper;
+    newData.camper = partyMember.camper;
+    this.setState({currentCamper: newData});
+    // this.setState({readyForNextStep: true});
+    this.setState({step: 'TableOfContents'});
   }
 
   // Allow session selections
@@ -270,10 +253,8 @@ class App extends React.Component {
             OpenCamperSearch={this.OpenCamperSearch}
             CloseCamperSearch={this.CloseCamperSearch}
           />
-          {/* <button onClick={this.SwitchToTOC}>next</button> */}
         </div>
       )
-      // Edit: might change this into -1 step, but might take the numbers out entirely
     } else if (this.state.step === 'TableOfContents') {
       return (
         <div>
@@ -339,7 +320,7 @@ class App extends React.Component {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
-          <PersonalInfo/>
+          <PersonalInfo currentCamper={this.state.currentCamper}/>
           <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
