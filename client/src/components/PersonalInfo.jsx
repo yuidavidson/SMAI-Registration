@@ -8,16 +8,11 @@ class PersonalInfo extends React.Component {
       currentCamper: props.currentCamper
     };
     this.editPersonalInfo = this.editPersonalInfo.bind(this);
-    this.editContactInfo = this.editContactInfo.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   editPersonalInfo() {
     this.setState({step: 'Personal'});
-  }
-
-  editContactInfo() {
-    this.setState({step: 'Contact'});
   }
 
   handleChange(e) {
@@ -48,32 +43,6 @@ class PersonalInfo extends React.Component {
           <input type='text' name='foodPreference' value={this.state.currentCamper.personal.foodPreference} onChange={this.handleChange}></input>
           <div>Neighborhood</div>
           <input type='text' name='neighborhood' value={this.state.currentCamper.personal.neighborhood} onChange={this.handleChange}></input>
-          <button>Save</button>
-          <button onClick={this.editContactInfo}>Next</button>
-        </div>
-      )
-    } else if (this.state.step === 'Contact') {
-      return(
-        <div>
-          <div>Address</div>
-          <input type='text' name='address' value={this.state.currentCamper.personal.address} onChange={this.handleChange}></input>
-          <div>City</div>
-          <input type='text' name='city' value={this.state.currentCamper.personal.city} onChange={this.handleChange}></input>
-          <div>State</div>
-          <input type='text' name='region' value={this.state.currentCamper.personal.region} onChange={this.handleChange}></input>
-          <div>Zip</div>
-          <input type='text' name='zip' value={this.state.currentCamper.personal.zip} onChange={this.handleChange}></input>
-          <div>Country</div>
-          <input type='text' name='country' value={this.state.currentCamper.personal.country} onChange={this.handleChange}></input>
-          <div>Phone Number 1</div>
-          <input type='text' name='phone1' value={this.state.currentCamper.personal.phone1} onChange={this.handleChange}></input>
-          <div>Phone Number 2</div>
-          <input type='text' name='phone2' value={this.state.currentCamper.personal.phone2} onChange={this.handleChange}></input>
-          <div>Email 1</div>
-          <input type='text' name='email1' value={this.state.currentCamper.personal.email1} onChange={this.handleChange}></input>
-          <div>Email 2</div>
-          <input type='text' name='email2' value={this.state.currentCamper.personal.email2} onChange={this.handleChange}></input>
-          <button onClick={this.editPersonalInfo}>Previous</button>
           <button>Save</button>
         </div>
       )

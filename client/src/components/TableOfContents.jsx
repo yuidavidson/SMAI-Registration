@@ -4,7 +4,8 @@ const TableOfContents = (props) => {
   return (
     <div>
       <div>Registeration Table of Contents</div>
-      <div onClick={() => props.SwitchToPersonalInfo()}>Personal/Contact</div>
+      <div onClick={() => props.SwitchToPersonalInfo()}>Personal Information</div>
+      <div onClick={() => props.SwitchToContactInfo()}>Contact Information</div>
       <div onClick={() => props.SwitchToVehicle()}>Vehicles</div>
       {/* will have to add camping onClick if it is inculded */}
       <div>Camping</div>
