@@ -14,6 +14,7 @@ import Meal from './Meal.jsx';
 import MealChoice from './MealChoice.jsx';
 import EmergencyInfo from './EmergencyInfo.jsx';
 import PersonalInfo from './PersonalInfo.jsx';
+import ContactInfo from './ContactInfo.jsx';
 import Vehicle from './Vehicle.jsx';
 // import Camping from './Camping.jsx';
 import EmergencyContact from './EmergencyContact.jsx';
@@ -62,7 +63,9 @@ class App extends React.Component {
           lastName: 'Freeman',
           bday: 'April 1st',
           foodPreference: 'Oxygen',
-          neighborhood: 'I honestly still don\'t know the neighborhoods',
+          neighborhood: 'I honestly still don\'t know the neighborhoods'
+        },
+        contact: {
           address: 'tired of making things up',
           city: 'somewhere',
           region: 'CA',
@@ -71,7 +74,7 @@ class App extends React.Component {
           phone1: 7849873,
           phone2: 9732746,
           email1: 'who@yahoo.com',
-          email2: 'me@hotmail.com',
+          email2: 'me@hotmail.com'
         },
         camper: '',
         sessions: [],
@@ -115,6 +118,7 @@ class App extends React.Component {
     this.SwitchToMeal = this.SwitchToMeal.bind(this);
     this.SwitchToMedicalInfo = this.SwitchToMedicalInfo.bind(this);
     this.SwitchToPersonalInfo = this.SwitchToPersonalInfo.bind(this);
+    this.SwitchToContactInfo = this.SwitchToContactInfo.bind(this);
     this.SwitchToVehicle = this.SwitchToVehicle.bind(this);
     // might remove this bind for camping
     this.SwitchToCamping = this.SwitchToCamping.bind(this);
@@ -175,6 +179,10 @@ class App extends React.Component {
 
   SwitchToPersonalInfo() {
     this.setState({step: 'PersonalInfo'});
+  }
+
+  SwitchToContactInfo() {
+    this.setState({step: 'ContactInfo'});
   }
 
   SwitchToVehicle() {
@@ -264,6 +272,7 @@ class App extends React.Component {
             SwitchToMeal={this.SwitchToMeal}
             SwitchToMedicalInfo={this.SwitchToMedicalInfo}
             SwitchToPersonalInfo={this.SwitchToPersonalInfo}
+            SwitchToContactInfo={this.SwitchToContactInfo}
             SwitchToVehicle={this.SwitchToVehicle}
             // Potentially removing or editing camping
             SwitchToCamping={this.SwitchToCamping}
@@ -321,6 +330,14 @@ class App extends React.Component {
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
           <PersonalInfo currentCamper={this.state.currentCamper}/>
+          <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
+        </div>
+      )
+    } else if (this.state.step === 'ContactInfo') {
+      return (
+        <div>
+          <div>Registering {this.state.currentCamper.camper}</div>
+          <ContactInfo currentCamper={this.state.currentCamper}/>
           <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
