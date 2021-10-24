@@ -49,16 +49,16 @@ class Vehicle extends React.Component {
     }
   }
 
-// Function for if a user tries to return to TOC without saving, to give a warning
-// EDIT: change to switch to be on screen with a yes or no to return to TOC
+  // Function for if a user tries to return to TOC without saving, to give a warning
+  // EDIT: change to switch to be on screen with a yes or no to return to TOC
 
-HandleSwitchToTOC() {
-  if (this.state.change) {
-    console.log('You have unsaved changes. Are you sure you want to continue?');
-  } else {
-    this.state.SwitchToTOC();
+  HandleSwitchToTOC() {
+    if (this.state.change) {
+      console.log('You have unsaved changes. Are you sure you want to continue?');
+    } else {
+      this.state.SwitchToTOC();
+    }
   }
-}
 
   render () {
     if (!this.state.step) {
