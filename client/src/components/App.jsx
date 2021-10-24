@@ -58,12 +58,13 @@ class App extends React.Component {
         },
       ],
       currentCamper: {
+        camper: '',
         personal: {
           firstName: 'Joshua',
           lastName: 'Freeman',
           bday: 'April 1st',
           foodPreference: 'Oxygen',
-          neighborhood: 'I honestly still don\'t know the neighborhoods'
+          neighborhood: 'I honestly still don\'t know the neighborhoods',
         },
         contact: {
           address: 'tired of making things up',
@@ -74,9 +75,16 @@ class App extends React.Component {
           phone1: 7849873,
           phone2: 9732746,
           email1: 'who@yahoo.com',
-          email2: 'me@hotmail.com'
+          email2: 'me@hotmail.com',
         },
-        camper: '',
+        vehicle: {
+          vehicle1Model: 'Tundra',
+          vehicle1Plate: '83K8Z3J',
+          vehicle1State: 'CA',
+          vehicle2Model: 'Trail Blazer',
+          vehicle2Plate: '6E9K2JH3',
+          vehicle2State: 'WA',
+        },
         sessions: [],
         meal: false,
         mealChoice: {},
@@ -337,7 +345,7 @@ class App extends React.Component {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
-          <ContactInfo currentCamper={this.state.currentCamper}/>
+          <ContactInfo currentCamper={this.state.currentCamper} SwitchToTOC={this.SwitchToTOC}/>
           <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
@@ -345,7 +353,7 @@ class App extends React.Component {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
-          <Vehicle/>
+          <Vehicle currentCamper={this.state.currentCamper} SwitchToTOC={this.SwitchToTOC}/>
           <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
