@@ -8,7 +8,7 @@ class PersonalInfo extends React.Component {
       step: '',
       change: false,
       currentCamper: props.currentCamper,
-      SwitchToTOC: props.SwitchToTOC
+      SwitchToTOC: props.SwitchToTOC,
     };
     this.EditPersonalInfo = this.EditPersonalInfo.bind(this);
     this.HandleChange = this.HandleChange.bind(this);
@@ -28,7 +28,7 @@ class PersonalInfo extends React.Component {
 
   SavePersonalInfo() {
     if (!this.state.change) {
-      console.log('no changes detected to save!');
+      console.log('no changes detected to be saved!');
     } else {
       axios({
         method: 'POST',
@@ -43,7 +43,7 @@ class PersonalInfo extends React.Component {
         this.setState({change: false});
       })
       .catch((error) => {
-        console.log('Sorry, something went wrong')
+        console.log('Sorry, something went wrong');
         console.log(error);
       })
     }
