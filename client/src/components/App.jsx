@@ -329,8 +329,8 @@ class App extends React.Component {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
-          <PersonalInfo currentCamper={this.state.currentCamper}/>
-          <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
+          <PersonalInfo currentCamper={this.state.currentCamper} SwitchToTOC={this.SwitchToTOC}/>
+          {/* <button onClick={this.SwitchToTOC}>Return to Table of Contents</button> */}
         </div>
       )
     } else if (this.state.step === 'ContactInfo') {

@@ -7,11 +7,13 @@ class PersonalInfo extends React.Component {
     this.state = {
       step: '',
       change: false,
-      currentCamper: props.currentCamper
+      currentCamper: props.currentCamper,
+      SwitchToTOC: props.SwitchToTOC
     };
     this.EditPersonalInfo = this.EditPersonalInfo.bind(this);
     this.HandleChange = this.HandleChange.bind(this);
     this.SavePersonalInfo = this.SavePersonalInfo.bind(this);
+    this.HandleSwitchToTOC = this.HandleSwitchToTOC.bind(this);
   }
 
   EditPersonalInfo() {
@@ -29,7 +31,7 @@ class PersonalInfo extends React.Component {
       console.log('no changes detected to save!');
     } else {
       axios({
-        method: 'UPDATE',
+        method: 'POST',
         url: 'https://smai.us/api/save-value',
         params: {
           // probably using this.state.currentCamper.personal
@@ -47,6 +49,17 @@ class PersonalInfo extends React.Component {
     }
   }
 
+// Function for if a user tries to return to TOC without saving, to give a warning
+// EDIT: change to switch to be on screen with a yes or no to return to TOC
+
+  HandleSwitchToTOC() {
+    if (this.state.change) {
+      console.log('You have unsaved changes. Are you sure you want to continue?');
+    } else {
+      this.state.SwitchToTOC();
+    }
+  }
+
   render() {
     if (!this.state.step) {
       return (
@@ -54,6 +67,7 @@ class PersonalInfo extends React.Component {
           <div>Personal Information</div>
           <div>Last updated: A long time ago</div>
           <button onClick={this.EditPersonalInfo}>Update Information</button>
+          <button onClick={this.HandleSwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
     } else if (this.state.step === 'Personal') {
@@ -70,6 +84,7 @@ class PersonalInfo extends React.Component {
           <div>Neighborhood</div>
           <input type='text' name='neighborhood' value={this.state.currentCamper.personal.neighborhood} onChange={this.HandleChange}></input>
           <button onClick={this.SavePersonalInfo}>Save</button>
+          <button onClick={this.HandleSwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
     }
