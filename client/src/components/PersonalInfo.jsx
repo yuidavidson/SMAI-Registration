@@ -7,7 +7,7 @@ class PersonalInfo extends React.Component {
     this.state = {
       step: '',
       change: false,
-      currentCamper: props.currentCamper,
+      personal: props.personal,
       SwitchToTOC: props.SwitchToTOC,
     };
     this.EditPersonalInfo = this.EditPersonalInfo.bind(this);
@@ -21,9 +21,9 @@ class PersonalInfo extends React.Component {
   }
 
   HandleChange(e) {
-    let editedCamper = this.state.currentCamper;
-    editedCamper.personal[e.target.name] = e.target.value;
-    this.setState({currentCamper: editedCamper, change: true});
+    let editedCamper = this.state.personal;
+    editedCamper[e.target.name] = e.target.value;
+    this.setState({personal: editedCamper, change: true});
   }
 
   SavePersonalInfo() {
@@ -34,7 +34,7 @@ class PersonalInfo extends React.Component {
         method: 'POST',
         url: 'https://smai.us/api/save-value',
         params: {
-          // probably using this.state.currentCamper.personal
+          // probably using this.state.personal
         },
       })
       .then((response)  => {
@@ -74,15 +74,15 @@ class PersonalInfo extends React.Component {
       return (
         <div>
           <div>First Name</div>
-          <input type='text' name='firstName' value={this.state.currentCamper.personal.firstName} onChange={this.HandleChange}></input>
+          <input type='text' name='firstName' value={this.state.personal.firstName} onChange={this.HandleChange}></input>
           <div>Last Name</div>
-          <input type='text' name='lastName' value={this.state.currentCamper.personal.lastName} onChange={this.HandleChange}></input>
+          <input type='text' name='lastName' value={this.state.personal.lastName} onChange={this.HandleChange}></input>
           <div>Birthday</div>
-          <input type='text' name='bday'value={this.state.currentCamper.personal.bday} onChange={this.HandleChange}></input>
+          <input type='text' name='bday'value={this.state.personal.bday} onChange={this.HandleChange}></input>
           <div>Food Preference</div>
-          <input type='text' name='foodPreference' value={this.state.currentCamper.personal.foodPreference} onChange={this.HandleChange}></input>
+          <input type='text' name='foodPreference' value={this.state.personal.foodPreference} onChange={this.HandleChange}></input>
           <div>Neighborhood</div>
-          <input type='text' name='neighborhood' value={this.state.currentCamper.personal.neighborhood} onChange={this.HandleChange}></input>
+          <input type='text' name='neighborhood' value={this.state.personal.neighborhood} onChange={this.HandleChange}></input>
           <button onClick={this.SavePersonalInfo}>Save</button>
           <button onClick={this.HandleSwitchToTOC}>Return to Table of Contents</button>
         </div>

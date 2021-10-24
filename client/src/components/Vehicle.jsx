@@ -1,23 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 
-// const Vehicle = (props) => {
-//   return(
-//     <div>
-//       <div>Vehicle Information</div>
-//       <div>Last updated: A long time ago</div>
-//       <button>Update Information</button>
-//     </div>
-//   )
-// }
-
 class Vehicle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       step: '',
       change: false,
-      currentCamper: props.currentCamper,
+      vehicle: props.vehicle,
       SwitchToTOC: props.SwitchToTOC,
     };
     this.EditVehicleInfo = this.EditVehicleInfo.bind(this);
@@ -31,9 +21,9 @@ class Vehicle extends React.Component {
   }
 
   HandleChange(e) {
-    let editedCamper = this.state.currentCamper;
-    editedCamper.vehicle[e.target.name] = e.target.value;
-    this.setState({currentCamper: editedCamper, change: true});
+    let editedCamper = this.state.vehicle;
+    editedCamper[e.target.name] = e.target.value;
+    this.setState({vehicle: editedCamper, change: true});
   }
 
   SaveVehicleInfo() {
@@ -44,7 +34,7 @@ class Vehicle extends React.Component {
         method: 'POST',
         url: 'https://smai.us/api/save-value',
         params: {
-          // probably using this.state.currentCamper.vehcile
+          // probably using this.state.vehcile
         },
       })
       .then((response) => {
@@ -84,17 +74,17 @@ HandleSwitchToTOC() {
       return (
         <div>
           <div>Vehicle 1 Model</div>
-          <input type='text' name='vehicle1Model' value={this.state.currentCamper.vehicle.vehicle1Model} onChange={this.HandleChange}></input>
+          <input type='text' name='vehicle1Model' value={this.state.vehicle.vehicle1Model} onChange={this.HandleChange}></input>
           <div>Vehicle 1 Plate</div>
-          <input type='text' name='vehicle1Plate' value={this.state.currentCamper.vehicle.vehicle1Plate} onChange={this.HandleChange}></input>
+          <input type='text' name='vehicle1Plate' value={this.state.vehicle.vehicle1Plate} onChange={this.HandleChange}></input>
           <div>Vehicle 1 State</div>
-          <input type='text' name='vehicle1State' value={this.state.currentCamper.vehicle.vehicle1State} onChange={this.HandleChange}></input>
+          <input type='text' name='vehicle1State' value={this.state.vehicle.vehicle1State} onChange={this.HandleChange}></input>
           <div>Vehicle 2 Model</div>
-          <input type='text' name='vehicle2Model' value={this.state.currentCamper.vehicle.vehicle2Model} onChange={this.HandleChange}></input>
+          <input type='text' name='vehicle2Model' value={this.state.vehicle.vehicle2Model} onChange={this.HandleChange}></input>
           <div>Vehicle 2 Plate</div>
-          <input type='text' name='vehicle2Plate' value={this.state.currentCamper.vehicle.vehicle2Plate} onChange={this.HandleChange}></input>
+          <input type='text' name='vehicle2Plate' value={this.state.vehicle.vehicle2Plate} onChange={this.HandleChange}></input>
           <div>Vehicle 2 State</div>
-          <input type='text' name='vehicle2State' value={this.state.currentCamper.vehicle.vehicle2State} onChange={this.HandleChange}></input>
+          <input type='text' name='vehicle2State' value={this.state.vehicle.vehicle2State} onChange={this.HandleChange}></input>
           <button onClick={this.SaveVehicleInfo}>Save</button>
           <button onClick={this.HandleSwitchToTOC}>Return to Table of Contents</button>
         </div>
