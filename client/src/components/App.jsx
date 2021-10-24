@@ -70,10 +70,10 @@ class App extends React.Component {
           address: 'tired of making things up',
           city: 'somewhere',
           region: 'CA',
-          zip: 76849,
+          zip: '76849',
           country: 'united states of shitty people',
-          phone1: 7849873,
-          phone2: 9732746,
+          phone1: '7849873',
+          phone2: '9732746',
           email1: 'who@yahoo.com',
           email2: 'me@hotmail.com',
         },
@@ -84,6 +84,18 @@ class App extends React.Component {
           vehicle2Model: 'Trail Blazer',
           vehicle2Plate: '6E9K2JH3',
           vehicle2State: 'WA',
+        },
+        emergencyContact: {
+          contact1FirstName: 'Dad',
+          contact1LastName: 'Dadson',
+          contact1Relationship: 'Dad',
+          contact1Phone: '8475927',
+          contact1Location: 'Home',
+          contact2FirstName: 'Bro',
+          contact2LastName: 'Dadson',
+          contact2Relationship: 'Bro',
+          contact2Phone: '8469932',
+          contact2Location: 'Haven',
         },
         sessions: [],
         meal: false,
@@ -337,24 +349,21 @@ class App extends React.Component {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
-          <PersonalInfo currentCamper={this.state.currentCamper} SwitchToTOC={this.SwitchToTOC}/>
-          {/* <button onClick={this.SwitchToTOC}>Return to Table of Contents</button> */}
+          <PersonalInfo personal={this.state.currentCamper.personal} SwitchToTOC={this.SwitchToTOC}/>
         </div>
       )
     } else if (this.state.step === 'ContactInfo') {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
-          <ContactInfo currentCamper={this.state.currentCamper} SwitchToTOC={this.SwitchToTOC}/>
-          <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
+          <ContactInfo contact={this.state.currentCamper.contact} SwitchToTOC={this.SwitchToTOC}/>
         </div>
       )
     } else if (this.state.step === 'Vehicle') {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
-          <Vehicle currentCamper={this.state.currentCamper} SwitchToTOC={this.SwitchToTOC}/>
-          <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
+          <Vehicle vehicle={this.state.currentCamper.vehicle} SwitchToTOC={this.SwitchToTOC}/>
         </div>
       )
     }
@@ -372,8 +381,8 @@ class App extends React.Component {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
-          <EmergencyContact/>
-          <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
+          <EmergencyContact emergencyContact={this.state.currentCamper.emergencyContact} SwitchToTOC={this.SwitchToTOC}/>
+          {/* <button onClick={this.SwitchToTOC}>Return to Table of Contents</button> */}
         </div>
       )
     } else if (this.state.step === 'Neighborhood') {
