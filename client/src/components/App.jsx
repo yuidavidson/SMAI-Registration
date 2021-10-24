@@ -97,6 +97,9 @@ class App extends React.Component {
           contact2Phone: '8469932',
           contact2Location: 'Haven',
         },
+        medicalInformation: {
+
+        }
         sessions: [],
         meal: false,
         mealChoice: {},
