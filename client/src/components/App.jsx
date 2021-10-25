@@ -9,17 +9,16 @@ import axios from 'axios';
 
 import TableOfContents from './TableOfContents.jsx';
 import Register from './Register.jsx';
-import Sessions from './Sessions.jsx';
-import Meal from './Meal.jsx';
-import MealChoice from './MealChoice.jsx';
-import EmergencyInfo from './EmergencyInfo.jsx';
 import PersonalInfo from './PersonalInfo.jsx';
 import ContactInfo from './ContactInfo.jsx';
 import Vehicle from './Vehicle.jsx';
-// import Camping from './Camping.jsx';
 import EmergencyContact from './EmergencyContact.jsx';
+import MedicalInfo from './MedicalInfo.jsx';
 import Neighborhood from './Neighborhood.jsx';
+import Sessions from './Sessions.jsx';
 import Crew from './Crew.jsx';
+import Meal from './Meal.jsx';
+import MealChoice from './MealChoice.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -98,12 +97,19 @@ class App extends React.Component {
           contact2Location: 'Haven',
         },
         medicalInformation: {
-
-        }
+          medicalCondition: 'Always mad',
+          allergy: 'nuts',
+          asthma: false,
+          plan: 'I\'m planing',
+          doctor: 'DR. Fwoop',
+          hospital: 'somewhere',
+          specialNeeds: 'cuddles',
+          lastUpdated: 'I can\'t remember',
+        },
+        neighborhood: 'Balkan Camp',
         sessions: [],
         meal: false,
         mealChoice: {},
-        medicalInformation: {},
       },
       // Assumed that the title of each session and it's date will eventually be separate -> probably have to change to an object then
       sessions: [
@@ -139,22 +145,17 @@ class App extends React.Component {
     this.SwitchToRegister = this.SwitchToRegister.bind(this);
     this.SwitchToSessions = this.SwitchToSessions.bind(this);
     this.SwitchToMeal = this.SwitchToMeal.bind(this);
-    this.SwitchToMedicalInfo = this.SwitchToMedicalInfo.bind(this);
     this.SwitchToPersonalInfo = this.SwitchToPersonalInfo.bind(this);
     this.SwitchToContactInfo = this.SwitchToContactInfo.bind(this);
     this.SwitchToVehicle = this.SwitchToVehicle.bind(this);
-    // might remove this bind for camping
-    this.SwitchToCamping = this.SwitchToCamping.bind(this);
     this.SwitchToEmergencyContacts = this.SwitchToEmergencyContacts.bind(this);
+    this.SwitchToMedicalInfo = this.SwitchToMedicalInfo.bind(this);
     this.SwitchToNeighborhood = this.SwitchToNeighborhood.bind(this);
     this.SwitchToCrew = this.SwitchToCrew.bind(this);
 
     this.SetCurrentCamper = this.SetCurrentCamper.bind(this);
     this.SelectSessions = this.SelectSessions.bind(this);
     this.SelectMeal = this.SelectMeal.bind(this);
-    this.SelectMealChoice = this.SelectMealChoice.bind(this);
-    this.SelectMealPreference = this.SelectMealPreference.bind(this);
-    this.UpdateMedicalInformation = this.UpdateMedicalInformation.bind(this);
   };
 
   // these functions are for opening and closing modals
@@ -175,7 +176,11 @@ class App extends React.Component {
     this.setState({openModal: ''})
   }
 
+  // EDIT: create CloseModal to be used for both modals
+
   // Return from current component (ex. Personal Information) back to the table of contents
+
+  // Edit: create a function that can be used for all the switch components functions
   SwitchToTOC() {
     // EDIT: add a warning if data was not saved
     this.setState({step: 'TableOfContents'});
@@ -196,10 +201,6 @@ class App extends React.Component {
     this.setState({step: 'Meal'})
   }
 
-  SwitchToMedicalInfo() {
-    this.setState({step: 'EmergencyInfo'});
-  }
-
   SwitchToPersonalInfo() {
     this.setState({step: 'PersonalInfo'});
   }
@@ -212,13 +213,12 @@ class App extends React.Component {
     this.setState({step: 'Vehicle'});
   }
 
-  //still not sure what this component should contain and might be edited and removed
-  SwitchToCamping() {
-    this.setState({step: 'Camping'});
-  }
-
   SwitchToEmergencyContacts() {
     this.setState({step: 'EmergencyContact'});
+  }
+
+  SwitchToMedicalInfo() {
+    this.setState({step: 'MedicalInfo'});
   }
 
   SwitchToNeighborhood() {
@@ -251,24 +251,6 @@ class App extends React.Component {
     this.setState({currentCamper: newData});
   }
 
-  SelectMealChoice() {
-
-  }
-
-  SelectMealPreference() {
-
-  }
-
-  UpdateMedicalInformation() {
-
-  }
-
-  /*
-  EDIT:
-  Potentiall Try to change later to conditionally render the different 'pages' but keep the current camper and next button
-
-  */
-
   render() {
     if (this.state.step === 'Register') {
       return (
@@ -293,13 +275,11 @@ class App extends React.Component {
           <TableOfContents
             SwitchToSessions={this.SwitchToSessions}
             SwitchToMeal={this.SwitchToMeal}
-            SwitchToMedicalInfo={this.SwitchToMedicalInfo}
             SwitchToPersonalInfo={this.SwitchToPersonalInfo}
             SwitchToContactInfo={this.SwitchToContactInfo}
             SwitchToVehicle={this.SwitchToVehicle}
-            // Potentially removing or editing camping
-            SwitchToCamping={this.SwitchToCamping}
             SwitchToEmergencyContacts={this.SwitchToEmergencyContacts}
+            SwitchToMedicalInfo={this.SwitchToMedicalInfo}
             SwitchToNeighborhood={this.SwitchToNeighborhood}
             SwitchToCrew={this.SwitchToCrew}
         />
@@ -340,14 +320,6 @@ class App extends React.Component {
         <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
-    } else if (this.state.step === 'EmergencyInfo') {
-      return (
-        <div>
-          <div>Registering {this.state.currentCamper.camper}</div>
-          <EmergencyInfo/>
-        <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
-        </div>
-      )
     } else if (this.state.step === 'PersonalInfo') {
       return (
         <div>
@@ -370,30 +342,25 @@ class App extends React.Component {
         </div>
       )
     }
-    // Camping component which we still do not know what it contains
-    // else if (this.state.step === 'Camping') {
-    //   return (
-    //     <div>
-    //       <div>Registering {this.state.currentCamper.camper}</div>
-    //       <Camping/>
-    //       <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
-    //     </div>
-    //   )
-    // }
     else if (this.state.step === 'EmergencyContact') {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
           <EmergencyContact emergencyContact={this.state.currentCamper.emergencyContact} SwitchToTOC={this.SwitchToTOC}/>
-          {/* <button onClick={this.SwitchToTOC}>Return to Table of Contents</button> */}
+        </div>
+      )
+    } else if (this.state.step === 'MedicalInfo') {
+      return (
+        <div>
+          <div>Registering {this.state.currentCamper.camper}</div>
+          <MedicalInfo medicalInformation={this.state.currentCamper.medicalInformation} SwitchToTOC={this.SwitchToTOC}/>
         </div>
       )
     } else if (this.state.step === 'Neighborhood') {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
-          <Neighborhood/>
-          <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
+          <Neighborhood neighborhood={this.state.currentCamper.neighborhood} SwitchToTOC={this.SwitchToTOC}/>
         </div>
       )
     } else if (this.state.step === 'Crew') {
