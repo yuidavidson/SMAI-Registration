@@ -1,0 +1,31 @@
+{
+  "id": 123,
+  "campId": 2021,
+  "camperId": 203,
+  "neighborhoodId": 12,
+  "status": 1,
+  "notes": "blah",
+  "sessionReg": [
+    {
+      "id": null,
+      "sessionId": null,
+      "mealId":null,
+      "foodPreference":null,
+      "crewId":null
+    },
+    {
+      "id": 456,
+      "sessionId": 10,
+      "mealId": 20,
+      "foodPreference":"veg",
+      "crewId":1
+    },
+    {
+      "id": 456,
+      "sessionId": 10,
+      "mealId":20,
+      "foodPreference":"veg",
+      "crewId":1
+    }
+  ]
+}
