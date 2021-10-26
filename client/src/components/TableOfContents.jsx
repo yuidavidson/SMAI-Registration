@@ -10,9 +10,7 @@ const TableOfContents = (props) => {
       <div onClick={() => props.SwitchToEmergencyContacts()}>Emergency Contact</div>
       <div onClick={() => props.SwitchToMedicalInfo()}>Medical Info</div>
       <div onClick={() => props.SwitchToNeighborhood()}>Neighborhood</div>
-      <div onClick={() => props.SwitchToSessions()}>Sessions</div>
-      <div onClick={() => props.SwitchToCrew()}>Crew</div>
-      <div onClick={() => props.SwitchToMeal()}>Meals</div>
+      <div onClick={() => props.SwitchToSessions()}>Sessions, Crew, and Meals</div>
     </div>
 
   )
