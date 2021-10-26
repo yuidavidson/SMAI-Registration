@@ -8,7 +8,7 @@ class EmergencyContact extends React.Component {
         step: '',
         change: false,
         emergencyContact: props.emergencyContact,
-        SwitchToTOC: props.SwitchToTOC,
+        switchStep: props.switchStep,
       };
     this.EditEmergencyContact = this.EditEmergencyContact.bind(this);
     this.HandleChange = this.HandleChange.bind(this);
@@ -56,7 +56,7 @@ class EmergencyContact extends React.Component {
     if (this.state.change) {
       console.log('You have unsaved changes. Are you sure you want to continue?');
     } else {
-      this.state.SwitchToTOC();
+      this.state.switchStep('toc');
     }
   }
 

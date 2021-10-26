@@ -8,7 +8,7 @@ class ContactInfo extends React.Component {
       step: '',
       change: false,
       contact: props.contact,
-      SwitchToTOC: props.SwitchToTOC,
+      switchStep: props.switchStep,
     };
     this.EditContactInfo = this.EditContactInfo.bind(this);
     this.HandleChange = this.HandleChange.bind(this);
@@ -56,7 +56,7 @@ class ContactInfo extends React.Component {
     if (this.state.change) {
       console.log('You have unsaved changes. Are you sure you want to continue?');
     } else {
-      this.state.SwitchToTOC();
+      this.state.switchStep('toc');
     }
   }
 
