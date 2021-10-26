@@ -107,9 +107,15 @@ class App extends React.Component {
           lastUpdated: 'I can\'t remember',
         },
         neighborhood: 'Balkan Camp',
-        sessions: [],
-        meal: false,
-        mealChoice: {},
+        sessions: [
+          {
+            id: null,
+            sessionId: null,
+            mealId: null,
+            foodPreference: null,
+            crewId: null,
+          }
+        ],
       },
       // Assumed that the title of each session and it's date will eventually be separate -> probably have to change to an object then
       sessions: [
@@ -286,18 +292,6 @@ class App extends React.Component {
           <button onClick={this.SwitchToRegister}>Back to All</button>
         </div>
       )
-    } else if (this.state.step === 'Sessions') {
-      return (
-        <div>
-          <div>Registering {this.state.currentCamper.camper}</div>
-          <div>Please make your selection</div>
-          <Sessions
-          sessions={this.state.sessions}
-          SelectSessions={this.SelectSessions}
-          ></Sessions>
-        <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
-        </div>
-      )
     } else if (this.state.step === 'Meal') {
       return (
         <div>
@@ -369,6 +363,13 @@ class App extends React.Component {
           <div>Registering {this.state.currentCamper.camper}</div>
           <Crew/>
           <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
+        </div>
+      )
+    } else if (this.state.step === 'Sessions') {
+      return (
+        <div>
+          <div>Registering {this.state.currentCamper.camper}</div>
+          <Sessions sessions={this.state.currentCamper.sessions} SwitchToTOC={this.SwitchToTOC}></Sessions>
         </div>
       )
     }
