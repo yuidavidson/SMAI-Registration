@@ -150,14 +150,12 @@ class App extends React.Component {
     this.SwitchToTOC = this.SwitchToTOC.bind(this);
     this.SwitchToRegister = this.SwitchToRegister.bind(this);
     this.SwitchToSessions = this.SwitchToSessions.bind(this);
-    this.SwitchToMeal = this.SwitchToMeal.bind(this);
     this.SwitchToPersonalInfo = this.SwitchToPersonalInfo.bind(this);
     this.SwitchToContactInfo = this.SwitchToContactInfo.bind(this);
     this.SwitchToVehicle = this.SwitchToVehicle.bind(this);
     this.SwitchToEmergencyContacts = this.SwitchToEmergencyContacts.bind(this);
     this.SwitchToMedicalInfo = this.SwitchToMedicalInfo.bind(this);
     this.SwitchToNeighborhood = this.SwitchToNeighborhood.bind(this);
-    this.SwitchToCrew = this.SwitchToCrew.bind(this);
 
     this.SetCurrentCamper = this.SetCurrentCamper.bind(this);
     this.SelectSessions = this.SelectSessions.bind(this);
@@ -203,10 +201,6 @@ class App extends React.Component {
     this.setState({step: 'Sessions'});
   }
 
-  SwitchToMeal() {
-    this.setState({step: 'Meal'})
-  }
-
   SwitchToPersonalInfo() {
     this.setState({step: 'PersonalInfo'});
   }
@@ -229,10 +223,6 @@ class App extends React.Component {
 
   SwitchToNeighborhood() {
     this.setState({step: 'Neighborhood'});
-  }
-
-  SwitchToCrew() {
-    this.setState({step: 'Crew'});
   }
 
   SetCurrentCamper(partyMember) {
@@ -292,28 +282,6 @@ class App extends React.Component {
           <button onClick={this.SwitchToRegister}>Back to All</button>
         </div>
       )
-    } else if (this.state.step === 'Meal') {
-      return (
-        <div>
-          <div>Registering {this.state.currentCamper.camper}</div>
-          <div>Please make your selection</div>
-          <Meal SelectMeal={this.SelectMeal}/>
-        <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
-        </div>
-      )
-    } else if (this.state.step === 'MealChoice') {
-      return (
-        <div>
-          <div>Registering {this.state.currentCamper.camper}</div>
-          <div>Please make your selection</div>
-          <MealChoice
-            sessions={this.state.sessionsWithMeals}
-            mealOptions={this.state.mealOptions}
-            foodPreferences={this.state.foodPreferences}
-          />
-        <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
-        </div>
-      )
     } else if (this.state.step === 'PersonalInfo') {
       return (
         <div>
@@ -355,14 +323,6 @@ class App extends React.Component {
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
           <Neighborhood neighborhood={this.state.currentCamper.neighborhood} SwitchToTOC={this.SwitchToTOC}/>
-        </div>
-      )
-    } else if (this.state.step === 'Crew') {
-      return (
-        <div>
-          <div>Registering {this.state.currentCamper.camper}</div>
-          <Crew/>
-          <button onClick={this.SwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
     } else if (this.state.step === 'Sessions') {
