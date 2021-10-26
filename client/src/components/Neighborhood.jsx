@@ -10,7 +10,7 @@ class Neighborhood extends React.Component {
       value: '',
       change: false,
       neighborhood: props.neighborhood,
-      SwitchToTOC: props.SwitchToTOC,
+      switchStep: props.switchStep,
     }
     this.EditNeighborhood = this.EditNeighborhood.bind(this);
     // this.HandleChange = this.HandleChange.bind(this);
@@ -73,7 +73,7 @@ class Neighborhood extends React.Component {
     if (this.state.change) {
       console.log('You have unsaved changes. Are you sure you want to continue?');
     } else {
-      this.state.SwitchToTOC();
+      this.state.switchStep('toc');
     }
   }
 

@@ -19,9 +19,9 @@ class Sessions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 'sessions',
+      step: '',
       change: false,
-      SwitchToTOC: props.SwitchToTOC,
+      switchStep: props.switchStep,
       crewInvitation: {
         crewInvitationReceived: false,
         crewId: null,
@@ -86,12 +86,12 @@ class Sessions extends React.Component {
     if (this.state.change) {
       console.log('You have unsaved changes. Are you sure you want to continue?');
     } else {
-      this.setState({ step: 'sessions'});
+      this.setState({ step: ''});
     }
   }
 
   render() {
-    if (this.state.step === 'sessions') {
+    if (this.state.step === '') {
       return (
         <div>
           {/* EDIT: to add more specific session details and send to state on click */}
@@ -101,7 +101,7 @@ class Sessions extends React.Component {
           <div><button name='session2' onClick={this.EditSessionInfo}>X</button>Session 2</div>
           <div><button name='session3' onClick={this.EditSessionInfo}>X</button>Session 3</div>
           <div><button name='tearDown' onClick={this.EditSessionInfo}>X</button>Tear Down</div>
-          <button onClick={this.state.SwitchToTOC}>Return To Table Of Contents</button>
+          <button onClick={() => this.state.switchStep('toc')}>Return To Table Of Contents</button>
         </div>
       )
     } else {

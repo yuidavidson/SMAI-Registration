@@ -8,7 +8,7 @@ class Vehicle extends React.Component {
       step: '',
       change: false,
       vehicle: props.vehicle,
-      SwitchToTOC: props.SwitchToTOC,
+      switchStep: props.switchStep,
     };
     this.EditVehicleInfo = this.EditVehicleInfo.bind(this);
     this.HandleChange = this.HandleChange.bind(this);
@@ -56,7 +56,7 @@ class Vehicle extends React.Component {
     if (this.state.change) {
       console.log('You have unsaved changes. Are you sure you want to continue?');
     } else {
-      this.state.SwitchToTOC();
+      this.state.switchStep('toc');
     }
   }
 
