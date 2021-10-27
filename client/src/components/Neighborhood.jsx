@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { DropDown, Option } from './DropDownMenu.jsx';
+import { StyledButton } from './Styles.jsx';
 
 class Neighborhood extends React.Component {
   constructor(props) {
@@ -83,8 +84,8 @@ class Neighborhood extends React.Component {
         <div>
           <div>Neighborhood</div>
           <div>Last updated: A long time ago</div>
-          <button onClick={this.editNeighborhood}>Update Information</button>
-          <button onClick={this.handleSwitchToTOC}>Return to Table of Contents</button>
+          <StyledButton onClick={this.editNeighborhood}>Update Information</StyledButton>
+          <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
         </div>
       )
     } else if (this.state.step === 'Neighborhood') {
@@ -110,8 +111,8 @@ class Neighborhood extends React.Component {
             <Option value="Other" />
             <Option value="Don't know yet" />
           </DropDown>
-          <button onClick={this.saveNeighborhood}>Save</button>
-          <button onClick={this.handleSwitchToTOC}>Return to Table of Contents</button>
+          <StyledButton onClick={this.saveNeighborhood}>Save</StyledButton>
+          <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
         </div>
       )
     }

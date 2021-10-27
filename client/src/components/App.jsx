@@ -16,6 +16,7 @@ import EmergencyContact from './EmergencyContact.jsx';
 import MedicalInfo from './MedicalInfo.jsx';
 import Neighborhood from './Neighborhood.jsx';
 import Sessions from './Sessions.jsx';
+import { StyledButton } from './Styles.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -130,7 +131,7 @@ class App extends React.Component {
 
     this.switchStep = this.switchStep.bind(this);
 
-    this.SetCurrentCamper = this.SetCurrentCamper.bind(this);
+    this.setCurrentCamper = this.setCurrentCamper.bind(this);
   };
 
   openModal(modalType) {
@@ -146,7 +147,7 @@ class App extends React.Component {
     this.setState({step: step});
   }
 
-  SetCurrentCamper(partyMember) {
+  setCurrentCamper(partyMember) {
     let newData = this.state.currentCamper;
     newData.camper = partyMember.camper;
     this.setState({currentCamper: newData});
@@ -162,7 +163,7 @@ class App extends React.Component {
             camper={this.state.camper}
             party={this.state.party}
             modalState={this.state.modalState}
-            SetCurrentCamper={this.SetCurrentCamper}
+            setCurrentCamper={this.setCurrentCamper}
             openModal={this.openModal}
             closeModal={this.closeModal}
           />
@@ -175,9 +176,8 @@ class App extends React.Component {
           <TableOfContents
             switchStep={this.switchStep}
           />
-          <button
-          onClick={() => this.switchStep('register')}
-          >Back to All</button>
+          <StyledButton
+          onClick={() => this.switchStep('register')}>Back to All</StyledButton>
         </div>
       )
     } else if (this.state.step === 'personal') {
