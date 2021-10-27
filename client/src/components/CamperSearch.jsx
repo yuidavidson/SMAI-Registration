@@ -1,13 +1,13 @@
 import React from 'react';
 
 const CamperSearch = (props) => {
-  if (props.openModal !== 'camperSearch') {
+  if (props.modalState !== 'camperSearch') {
     return null;
   }
 
   return (
     <div>
-      <button onClick={() => props.CloseCamperSearch()}>X</button>
+      <button onClick={() => props.closeModal()}>X</button>
       <div>Find Campers...</div>
       <div>Type in Name</div>
       <input></input>

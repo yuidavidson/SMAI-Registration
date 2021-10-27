@@ -16,14 +16,14 @@ const Register = (props) => {
     party={props.party}
     SetCurrentCamper={props.SetCurrentCamper}
     />
-    <div onClick={() => props.OpenCamperSearch()}>find other campers...</div>
-    <div onClick={() => props.OpenCamperInvite()}>invite new camper</div>
+    <div onClick={() => props.openModal('camperSearch')}>find other campers...</div>
+    <div onClick={() => props.openModal('camperInvite')}>invite new camper</div>
     <CamperSearch
-    openModal={props.openModal}
-    CloseCamperSearch={props.CloseCamperSearch}/>
+    modalState={props.modalState}
+    closeModal={props.closeModal}/>
     <CamperInvite
-    openModal={props.openModal}
-    CloseCamperInvite={props.CloseCamperInvite}/>
+    modalState={props.modalState}
+    closeModal={props.closeModal}/>
   </div>
   )
 };
