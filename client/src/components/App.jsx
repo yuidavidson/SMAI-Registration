@@ -35,7 +35,7 @@ class App extends React.Component {
       },
       step: 'register',
       readyForNextStep: false,
-      openModal: '',
+      modalState: '',
       account: 'SMF034',
       camper: 'Joshua Freeman',
       // The party structure might have to be changed depending on what the data coming in looks like
@@ -150,10 +150,8 @@ class App extends React.Component {
       ]
     };
 
-    this.OpenCamperInvite = this.OpenCamperInvite.bind(this);
-    this.CloseCamperInvite = this. CloseCamperInvite.bind(this);
-    this.OpenCamperSearch = this.OpenCamperSearch.bind(this);
-    this.CloseCamperSearch = this.CloseCamperSearch.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
 
     this.switchStep = this.switchStep.bind(this);
 
@@ -162,20 +160,12 @@ class App extends React.Component {
 
   // these functions are for opening and closing modals
 
-  OpenCamperInvite() {
-    this.setState({openModal: 'camperInvite'})
+  openModal(modalType) {
+    this.setState({modalState: modalType})
   }
 
-  CloseCamperInvite() {
-    this.setState({openModal: ''})
-  }
-
-  OpenCamperSearch() {
-    this.setState({openModal: 'camperSearch'})
-  }
-
-  CloseCamperSearch() {
-    this.setState({openModal: ''})
+  closeModal() {
+    this.setState({ modalState: ''});
   }
 
   // EDIT: create CloseModal to be used for both modals
@@ -202,12 +192,10 @@ class App extends React.Component {
             account={this.state.account}
             camper={this.state.camper}
             party={this.state.party}
-            openModal={this.state.openModal}
+            modalState={this.state.modalState}
             SetCurrentCamper={this.SetCurrentCamper}
-            OpenCamperInvite={this.OpenCamperInvite}
-            CloseCamperInvite={this.CloseCamperInvite}
-            OpenCamperSearch={this.OpenCamperSearch}
-            CloseCamperSearch={this.CloseCamperSearch}
+            openModal={this.openModal}
+            closeModal={this.closeModal}
           />
         </div>
       )
