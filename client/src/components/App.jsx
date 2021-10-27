@@ -7,8 +7,8 @@
 import React from 'react';
 import axios from 'axios';
 
-import TableOfContents from './TableOfContents.jsx';
 import Register from './Register.jsx';
+import TableOfContents from './TableOfContents.jsx';
 import PersonalInfo from './PersonalInfo.jsx';
 import ContactInfo from './ContactInfo.jsx';
 import Vehicle from './Vehicle.jsx';
@@ -22,17 +22,6 @@ class App extends React.Component {
     super(props);
     // dummy data for testing included
     this.state = {
-      allSteps: {
-        toc: 'toc',
-        register: 'register',
-        sessions: 'sessions',
-        personal: 'personal',
-        contact: 'contact',
-        vehicle: 'vehicle',
-        emergency: 'emergency',
-        medical: 'medical',
-        neighborhood: 'neighborhood',
-      },
       step: 'register',
       readyForNextStep: false,
       modalState: '',
@@ -125,29 +114,15 @@ class App extends React.Component {
           }
         ],
       },
-      // Assumed that the title of each session and it's date will eventually be separate -> probably have to change to an object then
-      sessions: [
-        'Pre-pre camp - July 5',
-        'Set Up - July 8',
-        'Session 1 - July 12',
-        'Session 2 - July 15',
-        'Session 3 - July 18',
-        'Tear Down - July 21',
-      ],
-      sessionsWithMeals: [
-        'Session 1',
-        'Session 2',
-        'Session 3',
-      ],
-      mealOptions: [
-        'Dinner & Breakfast',
-        'Dinner Only',
-      ],
-      foodPreferences: [
-        'Meat',
-        'Vegetarian',
-        'Vegan',
-      ]
+      // Assumed that the title of each session and it's date will eventually be separate -> probably have to change to an object. Currently not in use
+      // sessions: [
+      //   'Pre-pre camp - July 5',
+      //   'Set Up - July 8',
+      //   'Session 1 - July 12',
+      //   'Session 2 - July 15',
+      //   'Session 3 - July 18',
+      //   'Tear Down - July 21',
+      // ],
     };
 
     this.openModal = this.openModal.bind(this);
@@ -158,8 +133,6 @@ class App extends React.Component {
     this.SetCurrentCamper = this.SetCurrentCamper.bind(this);
   };
 
-  // these functions are for opening and closing modals
-
   openModal(modalType) {
     this.setState({modalState: modalType})
   }
@@ -168,10 +141,7 @@ class App extends React.Component {
     this.setState({ modalState: ''});
   }
 
-  // EDIT: create CloseModal to be used for both modals
-
   // function for switching components
-
   switchStep(step) {
     this.setState({step: step});
   }
@@ -180,7 +150,6 @@ class App extends React.Component {
     let newData = this.state.currentCamper;
     newData.camper = partyMember.camper;
     this.setState({currentCamper: newData});
-    // this.setState({readyForNextStep: true});
     this.setState({step: 'toc'});
   }
 
@@ -205,29 +174,42 @@ class App extends React.Component {
           <div>Registering {this.state.currentCamper.camper}</div>
           <TableOfContents
             switchStep={this.switchStep}
-        />
-          <button onClick={() => this.switchStep('register')}>Back to All</button>
+          />
+          <button
+          onClick={() => this.switchStep('register')}
+          >Back to All</button>
         </div>
       )
     } else if (this.state.step === 'personal') {
       return (
         <div>
-          <div>Registering {this.state.currentCamper.camper}</div>
-          <PersonalInfo personal={this.state.currentCamper.personal} switchStep={this.switchStep}/>
+          <div>Registering
+            {this.state.currentCamper.camper}
+          </div>
+          <PersonalInfo
+            personal={this.state.currentCamper.personal}
+            switchStep={this.switchStep}
+          />
         </div>
       )
     } else if (this.state.step === 'contact') {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
-          <ContactInfo contact={this.state.currentCamper.contact} switchStep={this.switchStep}/>
+          <ContactInfo
+            contact={this.state.currentCamper.contact}
+            switchStep={this.switchStep}
+          />
         </div>
       )
     } else if (this.state.step === 'vehicle') {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
-          <Vehicle vehicle={this.state.currentCamper.vehicle} switchStep={this.switchStep}/>
+          <Vehicle
+            vehicle={this.state.currentCamper.vehicle}
+            switchStep={this.switchStep}
+          />
         </div>
       )
     }
@@ -235,28 +217,40 @@ class App extends React.Component {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
-          <EmergencyContact emergencyContact={this.state.currentCamper.emergencyContact} switchStep={this.switchStep}/>
+          <EmergencyContact
+            emergencyContact={this.state.currentCamper.emergencyContact}
+            switchStep={this.switchStep}
+          />
         </div>
       )
     } else if (this.state.step === 'medical') {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
-          <MedicalInfo medicalInformation={this.state.currentCamper.medicalInformation} switchStep={this.switchStep}/>
+          <MedicalInfo
+            medicalInformation={this.state.currentCamper.medicalInformation}
+            switchStep={this.switchStep}
+          />
         </div>
       )
     } else if (this.state.step === 'neighborhood') {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
-          <Neighborhood neighborhood={this.state.currentCamper.neighborhood} switchStep={this.switchStep}/>
+          <Neighborhood
+            neighborhood={this.state.currentCamper.neighborhood}
+            switchStep={this.switchStep}
+          />
         </div>
       )
     } else if (this.state.step === 'sessions') {
       return (
         <div>
           <div>Registering {this.state.currentCamper.camper}</div>
-          <Sessions sessions={this.state.currentCamper.sessions} switchStep={this.switchStep}></Sessions>
+          <Sessions
+            sessions={this.state.currentCamper.sessions}
+            switchStep={this.switchStep}
+          />
         </div>
       )
     }
