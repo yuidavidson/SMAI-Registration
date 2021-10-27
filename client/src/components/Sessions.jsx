@@ -40,26 +40,26 @@ class Sessions extends React.Component {
         crewName: '',
       },
     }
-    this.EditSessionInfo = this.EditSessionInfo.bind(this);
-    this.HandleChange = this.HandleChange.bind(this);
-    this.SaveSession = this.SaveSession.bind(this);
-    this.ReturnToSessions = this.ReturnToSessions.bind(this);
+    this.editSessionInfo = this.editSessionInfo.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.saveSession = this.saveSession.bind(this);
+    this.returnToSessions = this.returnToSessions.bind(this);
   }
 
-  EditSessionInfo(e) {
+  editSessionInfo(e) {
     // EDIT: not working as wanted => e.target does not contain the name. There is also a problem with when it is clicked, that the item that is rendered after is also being clicked
     this.setState({ step: e.target.name });
   }
 
   // EDIT: to hanle not only the meal type but also crew OR create another function for crew selection
-  HandleChange(e) {
+  handleChange(e) {
     let editedSession = this.state.session;
     editedSession.mealId = parseInt(e.target.id);
     editedSession.mealName = e.target.name;
     this.setState({ session: editedSession, change: true })
   }
 
-  SaveSession() {
+  saveSession() {
     if (!this.state.change) {
       console.log('no changes detected to be saved!');
     } else {
@@ -82,7 +82,7 @@ class Sessions extends React.Component {
     }
   }
 
-  ReturnToSessions() {
+  returnToSessions() {
     if (this.state.change) {
       console.log('You have unsaved changes. Are you sure you want to continue?');
     } else {
@@ -95,12 +95,12 @@ class Sessions extends React.Component {
       return (
         <div>
           {/* EDIT: to add more specific session details and send to state on click */}
-          <div><button name='pre-setup' onClick={this.EditSessionInfo}>X</button>Pre-setup</div>
-          <div><button name='setup' onClick={this.EditSessionInfo}>X</button>Setup</div>
-          <div><button name='session1' onClick={this.EditSessionInfo}>X</button>Session 1</div>
-          <div><button name='session2' onClick={this.EditSessionInfo}>X</button>Session 2</div>
-          <div><button name='session3' onClick={this.EditSessionInfo}>X</button>Session 3</div>
-          <div><button name='tearDown' onClick={this.EditSessionInfo}>X</button>Tear Down</div>
+          <div><button name='pre-setup' onClick={this.editSessionInfo}>X</button>Pre-setup</div>
+          <div><button name='setup' onClick={this.editSessionInfo}>X</button>Setup</div>
+          <div><button name='session1' onClick={this.editSessionInfo}>X</button>Session 1</div>
+          <div><button name='session2' onClick={this.editSessionInfo}>X</button>Session 2</div>
+          <div><button name='session3' onClick={this.editSessionInfo}>X</button>Session 3</div>
+          <div><button name='tearDown' onClick={this.editSessionInfo}>X</button>Tear Down</div>
           <button onClick={() => this.state.switchStep('toc')}>Return To Table Of Contents</button>
         </div>
       )
@@ -110,18 +110,18 @@ class Sessions extends React.Component {
           <div>Crew</div>
           {/* NOTE: the crew invitation seems still up-in the air and might be a longer term problem to tackle */}
           <div>Kitchen (invited by Trevor)</div>
-          <button onClick={this.HandleChange}>accept</button>
-          <button onClick={this.HandleChange}>decline</button>
+          <button onClick={this.handleChange}>accept</button>
+          <button onClick={this.handleChange}>decline</button>
           <div>Meal</div>
           <div>Kitchen</div>
           {/* EDIT: add name and potentially id (might end up removing id because it might get confusing) to other meal options after more info on backend side is recieved*/}
-          <div><button id='1' name='breakfast' onClick={this.HandleChange}>X</button>Breakfast ($11)</div>
-          <div><button onClick={this.HandleChange}>X</button>Dinner ($23)</div>
-          <div><button onClick={this.HandleChange}>X</button>Breakfast and Dinner ($44)</div>
+          <div><button id='1' name='breakfast' onClick={this.handleChange}>X</button>Breakfast ($11)</div>
+          <div><button onClick={this.handleChange}>X</button>Dinner ($23)</div>
+          <div><button onClick={this.handleChange}>X</button>Breakfast and Dinner ($44)</div>
           <div>Cantina</div>
-          <div><button onClick={this.HandleChange}>X</button>Lunch ($15)</div>
-          <button onClick={this.SaveSession}>Save</button>
-          <button onClick={this.ReturnToSessions}>Return to Sessions</button>
+          <div><button onClick={this.handleChange}>X</button>Lunch ($15)</div>
+          <button onClick={this.saveSession}>Save</button>
+          <button onClick={this.returnToSessions}>Return to Sessions</button>
         </div>
       )
     }

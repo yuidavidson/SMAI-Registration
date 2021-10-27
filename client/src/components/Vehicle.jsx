@@ -10,23 +10,23 @@ class Vehicle extends React.Component {
       vehicle: props.vehicle,
       switchStep: props.switchStep,
     };
-    this.EditVehicleInfo = this.EditVehicleInfo.bind(this);
-    this.HandleChange = this.HandleChange.bind(this);
-    this.SaveVehicleInfo = this.SaveVehicleInfo.bind(this);
-    this.HandleSwitchToTOC = this.HandleSwitchToTOC.bind(this);
+    this.editVehicleInfo = this.editVehicleInfo.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.saveVehicleInfo = this.saveVehicleInfo.bind(this);
+    this.handleSwitchToTOC = this.handleSwitchToTOC.bind(this);
   }
 
-  EditVehicleInfo () {
+  editVehicleInfo () {
     this.setState({step: 'Vehicle'});
   }
 
-  HandleChange(e) {
+  handleChange(e) {
     let editedCamper = this.state.vehicle;
     editedCamper[e.target.name] = e.target.value;
     this.setState({vehicle: editedCamper, change: true});
   }
 
-  SaveVehicleInfo() {
+  saveVehicleInfo() {
     if (!this.state.change) {
       console.log('no changes detect to be saved!');
     } else {
@@ -52,7 +52,7 @@ class Vehicle extends React.Component {
   // Function for if a user tries to return to TOC without saving, to give a warning
   // EDIT: change to switch to be on screen with a yes or no to return to TOC
 
-  HandleSwitchToTOC() {
+  handleSwitchToTOC() {
     if (this.state.change) {
       console.log('You have unsaved changes. Are you sure you want to continue?');
     } else {
@@ -66,27 +66,27 @@ class Vehicle extends React.Component {
         <div>
           <div>Vehicle Information</div>
           <div>Last updated: A long time ago</div>
-          <button onClick={this.EditVehicleInfo}>Update Information</button>
-          <button onClick={this.HandleSwitchToTOC}>Return to Table of Contents</button>
+          <button onClick={this.editVehicleInfo}>Update Information</button>
+          <button onClick={this.handleSwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
     } else if (this.state.step === 'Vehicle') {
       return (
         <div>
           <div>Vehicle 1 Model</div>
-          <input type='text' name='vehicle1Model' value={this.state.vehicle.vehicle1Model} onChange={this.HandleChange}></input>
+          <input type='text' name='vehicle1Model' value={this.state.vehicle.vehicle1Model} onChange={this.handleChange}/>
           <div>Vehicle 1 Plate</div>
-          <input type='text' name='vehicle1Plate' value={this.state.vehicle.vehicle1Plate} onChange={this.HandleChange}></input>
+          <input type='text' name='vehicle1Plate' value={this.state.vehicle.vehicle1Plate} onChange={this.handleChange}/>
           <div>Vehicle 1 State</div>
-          <input type='text' name='vehicle1State' value={this.state.vehicle.vehicle1State} onChange={this.HandleChange}></input>
+          <input type='text' name='vehicle1State' value={this.state.vehicle.vehicle1State} onChange={this.handleChange}/>
           <div>Vehicle 2 Model</div>
-          <input type='text' name='vehicle2Model' value={this.state.vehicle.vehicle2Model} onChange={this.HandleChange}></input>
+          <input type='text' name='vehicle2Model' value={this.state.vehicle.vehicle2Model} onChange={this.handleChange}/>
           <div>Vehicle 2 Plate</div>
-          <input type='text' name='vehicle2Plate' value={this.state.vehicle.vehicle2Plate} onChange={this.HandleChange}></input>
+          <input type='text' name='vehicle2Plate' value={this.state.vehicle.vehicle2Plate} onChange={this.handleChange}/>
           <div>Vehicle 2 State</div>
-          <input type='text' name='vehicle2State' value={this.state.vehicle.vehicle2State} onChange={this.HandleChange}></input>
-          <button onClick={this.SaveVehicleInfo}>Save</button>
-          <button onClick={this.HandleSwitchToTOC}>Return to Table of Contents</button>
+          <input type='text' name='vehicle2State' value={this.state.vehicle.vehicle2State} onChange={this.handleChange}/>
+          <button onClick={this.saveVehicleInfo}>Save</button>
+          <button onClick={this.handleSwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
     }

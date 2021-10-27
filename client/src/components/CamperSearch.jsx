@@ -7,10 +7,12 @@ const CamperSearch = (props) => {
 
   return (
     <div>
-      <button onClick={() => props.closeModal()}>X</button>
+      <button
+        onClick={() => props.closeModal()}
+      >X</button>
       <div>Find Campers...</div>
       <div>Type in Name</div>
-      <input></input>
+      <input/>
     </div>
   )
 }
