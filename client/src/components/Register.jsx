@@ -3,7 +3,6 @@ import Party from './Party.jsx';
 import CamperInvite from './CamperInvite.jsx';
 import CamperSearch from './CamperSearch.jsx';
 
-// don't like the name of this component -> discuss what to re-name it
 const Register = (props) => {
   return (
   <div>
@@ -14,16 +13,22 @@ const Register = (props) => {
     {/* add edit button for each camper and also a marker to show it was finished */}
     <Party
     party={props.party}
-    SetCurrentCamper={props.SetCurrentCamper}
+    setCurrentCamper={props.setCurrentCamper}
     />
-    <div onClick={() => props.openModal('camperSearch')}>find other campers...</div>
-    <div onClick={() => props.openModal('camperInvite')}>invite new camper</div>
+    <div
+      onClick={() => props.openModal('camperSearch')}
+    >find other campers...</div>
+    <div
+      onClick={() => props.openModal('camperInvite')}
+    >invite new camper</div>
     <CamperSearch
-    modalState={props.modalState}
-    closeModal={props.closeModal}/>
+      modalState={props.modalState}
+      closeModal={props.closeModal}
+    />
     <CamperInvite
-    modalState={props.modalState}
-    closeModal={props.closeModal}/>
+      modalState={props.modalState}
+      closeModal={props.closeModal}
+    />
   </div>
   )
 };

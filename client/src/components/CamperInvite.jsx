@@ -7,7 +7,9 @@ const CamperInvite = (props) => {
 
   return (
     <div>
-      <button onClick={() => props.closeModal()}>X</button>
+      <button
+        onClick={() => props.closeModal()}
+      >X</button>
       <div>Talk to Josh</div>
       <div>Instruction on how to contact Josh</div>
     </div>

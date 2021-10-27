@@ -10,23 +10,23 @@ class MedicalInfo extends React.Component {
       medicalInformation: props.medicalInformation,
       switchStep: props.switchStep,
     };
-    this.EditMedicalInfo = this.EditMedicalInfo.bind(this);
-    this.HandleChange = this.HandleChange.bind(this);
-    this.SaveMedicalInfo = this.SaveMedicalInfo.bind(this);
-    this.HandleSwitchToTOC = this.HandleSwitchToTOC.bind(this);
+    this.editMedicalInfo = this.editMedicalInfo.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.saveMedicalInfo = this.saveMedicalInfo.bind(this);
+    this.handleSwitchToTOC = this.handleSwitchToTOC.bind(this);
   }
 
-  EditMedicalInfo () {
+  editMedicalInfo () {
     this.setState({step: 'MedicalInfo'});
   }
 
-  HandleChange(e) {
+  handleChange(e) {
     let editedCamper = this.state.medicalInformation;
     editedCamper[e.target.name] = e.target.value;
     this.setState({medicalInfoformation: editedCamper, change: true});
   }
 
-  SaveMedicalInfo() {
+  saveMedicalInfo() {
     if (!this.state.change) {
       console.log('no changes detect to be saved!');
     } else {
@@ -52,7 +52,7 @@ class MedicalInfo extends React.Component {
   // Function for if a user tries to return to TOC without saving, to give a warning
   // EDIT: change to switch to be on screen with a yes or no to return to TOC
 
-  HandleSwitchToTOC() {
+  handleSwitchToTOC() {
     if (this.state.change) {
       console.log('You have unsaved changes. Are you sure you want to continue?');
     } else {
@@ -66,28 +66,28 @@ class MedicalInfo extends React.Component {
         <div>
           <div>Emergency Information</div>
           <div>Last updated 3.16.18</div>
-          <button onClick={this.EditMedicalInfo}>Update Information</button>
-          <button onClick={this.HandleSwitchToTOC}>Return to Table of Contents</button>
+          <button onClick={this.editMedicalInfo}>Update Information</button>
+          <button onClick={this.handleSwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
     } else if (this.state.step === 'MedicalInfo') {
       return (
         <div>
           <div>Medical Conditions</div>
-          <input type='text' name='medicalCondition' value={this.state.medicalInformation.medicalCondition} onChange={this.HandleChange}></input>
+          <input type='text' name='medicalCondition' value={this.state.medicalInformation.medicalCondition} onChange={this.handleChange}/>
           <div>Allergies</div>
-          <input type='text' name='allergy' value={this.state.medicalInformation.allergy} onChange={this.HandleChange}></input>
+          <input type='text' name='allergy' value={this.state.medicalInformation.allergy} onChange={this.handleChange}/>
           <div>Asthma</div>
           <div>Plan</div>
-          <input type='text' name='plan' value={this.state.medicalInformation.plan} onChange={this.HandleChange}></input>
+          <input type='text' name='plan' value={this.state.medicalInformation.plan} onChange={this.handleChange}/>
           <div>Doctor</div>
-          <input type='text' name='doctor' value={this.state.medicalInformation.doctor} onChange={this.HandleChange}></input>
+          <input type='text' name='doctor' value={this.state.medicalInformation.doctor} onChange={this.handleChange}/>
           <div>Hospital</div>
-          <input type='text' name='hospital' value={this.state.medicalInformation.hospital} onChange={this.HandleChange}></input>
+          <input type='text' name='hospital' value={this.state.medicalInformation.hospital} onChange={this.handleChange}/>
           <div>Special Needs</div>
-          <input type='text' name='specialNeeds' value={this.state.medicalInformation.specialNeeds} onChange={this.HandleChange}></input>
-          <button onClick={this.SaveMedicalInfo}>Save</button>
-          <button onClick={this.HandleSwitchToTOC}>Return to Table of Contents</button>
+          <input type='text' name='specialNeeds' value={this.state.medicalInformation.specialNeeds} onChange={this.handleChange}/>
+          <button onClick={this.saveMedicalInfo}>Save</button>
+          <button onClick={this.handleSwitchToTOC}>Return to Table of Contents</button>
         </div>
 
       )

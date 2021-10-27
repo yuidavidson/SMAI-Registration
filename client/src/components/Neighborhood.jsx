@@ -12,15 +12,15 @@ class Neighborhood extends React.Component {
       neighborhood: props.neighborhood,
       switchStep: props.switchStep,
     }
-    this.EditNeighborhood = this.EditNeighborhood.bind(this);
+    this.editNeighborhood = this.editNeighborhood.bind(this);
     // this.HandleChange = this.HandleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.SaveNeighborhood = this.SaveNeighborhood.bind(this);
-    this.HandleSwitchToTOC = this.HandleSwitchToTOC.bind(this);
+    this.saveNeighborhood = this.saveNeighborhood.bind(this);
+    this.handleSwitchToTOC = this.handleSwitchToTOC.bind(this);
   }
 
-  EditNeighborhood () {
+  editNeighborhood () {
     this.setState({ step: 'Neighborhood' });
   }
 
@@ -42,7 +42,7 @@ class Neighborhood extends React.Component {
   }
 
 
-  SaveNeighborhood() {
+  saveNeighborhood() {
     // The or with this.state.neighborhood may be overkill and may be removed later, but it's there to be safe
     if (!this.state.change || this.state.neighborhood === 'Choose a Neighborhood') {
       console.log('no changes detect to be saved!');
@@ -69,7 +69,7 @@ class Neighborhood extends React.Component {
   // Function for if a user tries to return to TOC without saving, to give a warning
   // EDIT: change to switch to be on screen with a yes or no to return to TOC
 
-  HandleSwitchToTOC() {
+  handleSwitchToTOC() {
     if (this.state.change) {
       console.log('You have unsaved changes. Are you sure you want to continue?');
     } else {
@@ -83,8 +83,8 @@ class Neighborhood extends React.Component {
         <div>
           <div>Neighborhood</div>
           <div>Last updated: A long time ago</div>
-          <button onClick={this.EditNeighborhood}>Update Information</button>
-          <button onClick={this.HandleSwitchToTOC}>Return to Table of Contents</button>
+          <button onClick={this.editNeighborhood}>Update Information</button>
+          <button onClick={this.handleSwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
     } else if (this.state.step === 'Neighborhood') {
@@ -110,8 +110,8 @@ class Neighborhood extends React.Component {
             <Option value="Other" />
             <Option value="Don't know yet" />
           </DropDown>
-          <button onClick={this.SaveNeighborhood}>Save</button>
-          <button onClick={this.HandleSwitchToTOC}>Return to Table of Contents</button>
+          <button onClick={this.saveNeighborhood}>Save</button>
+          <button onClick={this.handleSwitchToTOC}>Return to Table of Contents</button>
         </div>
       )
     }
