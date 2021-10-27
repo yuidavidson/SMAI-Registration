@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 /*
 ========== DropDown Styles ==========
@@ -54,4 +54,48 @@ export const StyledButton = styled.button`
     color: #ffffff;
     transition: 0.5s;
   }
+`;
+
+/*
+========== Modal Styles ==========
+*/
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+export const StyledModal = styled.div`
+  width: 220px;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 20;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  margin: 10px;
+  border: solid 2px black;
+  border-radius: 10px;
+  padding: 10px;
+  background: white;
+`;
+
+export const Overlay = styled.div`
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0000003a;
+  animation: ${fadeIn} 1s;
 `;
