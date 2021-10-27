@@ -27,13 +27,31 @@ export const StyledLabel = styled.label`
   margin-bottom: 1rem;
 `;
 
-// Similarly not being used, but even more likely that this will be handy later
-export const StyledButton = styled.input`
-  max-width: 50%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  border: solid 2px blue;
-  padding: 0.5rem;
-  border-radius: 1rem;
+/*
+========== Button Styles ==========
+*/
+
+
+// add transition for color change on hover and click
+export const StyledButton = styled.button`
+  // max-width: 50%;
+  // height: 100%;
+  // display: flex;
+  // justify-content: center;
+  border: solid 2px #99a39c;
+  padding: 7px;
+  border-radius: 10px;
+  background: #91cfa1;
+
+  &:hover {
+    background: #53c976;
+    border-color: #868787;
+    transition: 0.5s;
+  }
+  &:active {
+    background: #2491d1;
+    border-color: #2b2b2b;
+    color: #ffffff;
+    transition: 0.5s;
+  }
 `;

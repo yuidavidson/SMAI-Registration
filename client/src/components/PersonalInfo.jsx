@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import { StyledButton } from './Styles.jsx';
+
 class PersonalInfo extends React.Component {
   constructor(props) {
     super(props);
@@ -66,8 +68,8 @@ class PersonalInfo extends React.Component {
         <div>
           <div>Personal Information</div>
           <div>Last updated: A long time ago</div>
-          <button onClick={this.EditPersonalInfo}>Update Information</button>
-          <button onClick={this.HandleSwitchToTOC}>Return to Table of Contents</button>
+          <StyledButton onClick={this.EditPersonalInfo}>Update Information</StyledButton>
+          <StyledButton onClick={this.HandleSwitchToTOC}>Return to Table of Contents</StyledButton>
         </div>
       )
     } else if (this.state.step === 'Personal') {
@@ -83,8 +85,8 @@ class PersonalInfo extends React.Component {
           <input type='text' name='foodPreference' value={this.state.personal.foodPreference} onChange={this.HandleChange}/>
           <div>Neighborhood</div>
           <input type='text' name='neighborhood' value={this.state.personal.neighborhood} onChange={this.HandleChange}/>
-          <button onClick={this.SavePersonalInfo}>Save</button>
-          <button onClick={this.HandleSwitchToTOC}>Return to Table of Contents</button>
+          <StyledButton onClick={this.SavePersonalInfo}>Save</StyledButton>
+          <StyledButton onClick={this.HandleSwitchToTOC}>Return to Table of Contents</StyledButton>
         </div>
       )
     }

@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import { StyledButton } from './Styles.jsx';
+
 class MedicalInfo extends React.Component {
   constructor(props) {
     super(props);
@@ -66,8 +68,8 @@ class MedicalInfo extends React.Component {
         <div>
           <div>Emergency Information</div>
           <div>Last updated 3.16.18</div>
-          <button onClick={this.editMedicalInfo}>Update Information</button>
-          <button onClick={this.handleSwitchToTOC}>Return to Table of Contents</button>
+          <StyledButton onClick={this.editMedicalInfo}>Update Information</StyledButton>
+          <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
         </div>
       )
     } else if (this.state.step === 'MedicalInfo') {
@@ -86,8 +88,8 @@ class MedicalInfo extends React.Component {
           <input type='text' name='hospital' value={this.state.medicalInformation.hospital} onChange={this.handleChange}/>
           <div>Special Needs</div>
           <input type='text' name='specialNeeds' value={this.state.medicalInformation.specialNeeds} onChange={this.handleChange}/>
-          <button onClick={this.saveMedicalInfo}>Save</button>
-          <button onClick={this.handleSwitchToTOC}>Return to Table of Contents</button>
+          <StyledButton onClick={this.saveMedicalInfo}>Save</StyledButton>
+          <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
         </div>
 
       )

@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 
+
+import { StyledButton } from './Styles.jsx';
+
 class Vehicle extends React.Component {
   constructor(props) {
     super(props);
@@ -66,8 +69,8 @@ class Vehicle extends React.Component {
         <div>
           <div>Vehicle Information</div>
           <div>Last updated: A long time ago</div>
-          <button onClick={this.editVehicleInfo}>Update Information</button>
-          <button onClick={this.handleSwitchToTOC}>Return to Table of Contents</button>
+          <StyledButton onClick={this.editVehicleInfo}>Update Information</StyledButton>
+          <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
         </div>
       )
     } else if (this.state.step === 'Vehicle') {
@@ -85,8 +88,8 @@ class Vehicle extends React.Component {
           <input type='text' name='vehicle2Plate' value={this.state.vehicle.vehicle2Plate} onChange={this.handleChange}/>
           <div>Vehicle 2 State</div>
           <input type='text' name='vehicle2State' value={this.state.vehicle.vehicle2State} onChange={this.handleChange}/>
-          <button onClick={this.saveVehicleInfo}>Save</button>
-          <button onClick={this.handleSwitchToTOC}>Return to Table of Contents</button>
+          <StyledButton onClick={this.saveVehicleInfo}>Save</StyledButton>
+          <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
         </div>
       )
     }

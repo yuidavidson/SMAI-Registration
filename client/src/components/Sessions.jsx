@@ -1,19 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-// eventually make it so the sessions aren't hard coded
-// const Sessions = (props) => {
-//   const sessions = props.sessions;
-//   const sessionList = sessions.map((session) =>
-//     <div key={session.toString()}>
-//       <button onClick={() => props.SelectSessions(session)}>x</button>
-//       {session}
-//     </div>
-//   );
-//   return (
-//     <div>{sessionList}</div>
-//   )
-// };
+import { StyledButton } from './Styles.jsx';
 
 class Sessions extends React.Component {
   constructor(props) {
@@ -101,7 +89,7 @@ class Sessions extends React.Component {
           <div><button name='session2' onClick={this.editSessionInfo}>X</button>Session 2</div>
           <div><button name='session3' onClick={this.editSessionInfo}>X</button>Session 3</div>
           <div><button name='tearDown' onClick={this.editSessionInfo}>X</button>Tear Down</div>
-          <button onClick={() => this.state.switchStep('toc')}>Return To Table Of Contents</button>
+          <StyledButton onClick={() => this.state.switchStep('toc')}>Return To Table Of Contents</StyledButton>
         </div>
       )
     } else {
@@ -120,8 +108,8 @@ class Sessions extends React.Component {
           <div><button onClick={this.handleChange}>X</button>Breakfast and Dinner ($44)</div>
           <div>Cantina</div>
           <div><button onClick={this.handleChange}>X</button>Lunch ($15)</div>
-          <button onClick={this.saveSession}>Save</button>
-          <button onClick={this.returnToSessions}>Return to Sessions</button>
+          <StyledButton onClick={this.saveSession}>Save</StyledButton>
+          <StyledButton onClick={this.returnToSessions}>Return to Sessions</StyledButton>
         </div>
       )
     }
