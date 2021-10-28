@@ -56,6 +56,19 @@ export const StyledButton = styled.button`
   }
 `;
 
+export const StyledSmallButton = styled.button`
+  width: 15px;
+  height: 15px;
+  border: solid 1px black;
+  border-radius: 10px;
+  background:${(props) => props.isOn ? 'cyan' : 'white'};
+`;
+
+
+// background:${(props) => props.smallButtonBool ? 'cyan': 'white'};
+
+// width: ${(props) => props.haveRecipe ? '100%' : '0'};
+
 /*
 ========== Modal Styles ==========
 */

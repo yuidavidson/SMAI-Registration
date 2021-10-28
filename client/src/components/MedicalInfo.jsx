@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
-import { StyledButton } from './Styles.jsx';
+import BoolSwitch from './BoolSwitch.jsx';
+import { StyledButton, } from './Styles.jsx';
 
 class MedicalInfo extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class MedicalInfo extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.saveMedicalInfo = this.saveMedicalInfo.bind(this);
     this.handleSwitchToTOC = this.handleSwitchToTOC.bind(this);
+    this.onUpdate = this.onUpdate.bind(this);
   }
 
   editMedicalInfo () {
@@ -62,6 +64,13 @@ class MedicalInfo extends React.Component {
     }
   }
 
+  onUpdate(value) {
+    let newData = this.state.medicalInformation;
+    newData.asthma = value;
+    this.setState({medicalInformation: newData, change: true});
+    console.log(this.state.medicalInformation.asthma);
+  }
+
   render() {
     if(!this.state.step) {
       return (
@@ -80,6 +89,7 @@ class MedicalInfo extends React.Component {
           <div>Allergies</div>
           <input type='text' name='allergy' value={this.state.medicalInformation.allergy} onChange={this.handleChange}/>
           <div>Asthma</div>
+          <BoolSwitch isOn={this.state.medicalInformation.asthma} onUpdate={this.onUpdate}></BoolSwitch>
           <div>Plan</div>
           <input type='text' name='plan' value={this.state.medicalInformation.plan} onChange={this.handleChange}/>
           <div>Doctor</div>
