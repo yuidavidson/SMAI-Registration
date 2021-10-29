@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { StyledButton } from './Styles.jsx';
+import { BodyWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
 
 class Sessions extends React.Component {
   constructor(props) {
@@ -81,7 +81,7 @@ class Sessions extends React.Component {
   render() {
     if (this.state.step === '') {
       return (
-        <div>
+        <BodyWrapper>
           {/* EDIT: to add more specific session details and send to state on click */}
           <div><button name='pre-setup' onClick={this.editSessionInfo}>X</button>Pre-setup</div>
           <div><button name='setup' onClick={this.editSessionInfo}>X</button>Setup</div>
@@ -89,12 +89,14 @@ class Sessions extends React.Component {
           <div><button name='session2' onClick={this.editSessionInfo}>X</button>Session 2</div>
           <div><button name='session3' onClick={this.editSessionInfo}>X</button>Session 3</div>
           <div><button name='tearDown' onClick={this.editSessionInfo}>X</button>Tear Down</div>
-          <StyledButton onClick={() => this.state.switchStep('toc')}>Return To Table Of Contents</StyledButton>
-        </div>
+          <ButtonWrapper>
+            <StyledButton onClick={() => this.state.switchStep('toc')}>Return To Table Of Contents</StyledButton>
+          </ButtonWrapper>
+        </BodyWrapper>
       )
     } else {
       return (
-        <div>
+        <BodyWrapper>
           <div>Crew</div>
           {/* NOTE: the crew invitation seems still up-in the air and might be a longer term problem to tackle */}
           <div>Kitchen (invited by Trevor)</div>
@@ -108,9 +110,11 @@ class Sessions extends React.Component {
           <div><button onClick={this.handleChange}>X</button>Breakfast and Dinner ($44)</div>
           <div>Cantina</div>
           <div><button onClick={this.handleChange}>X</button>Lunch ($15)</div>
-          <StyledButton onClick={this.saveSession}>Save</StyledButton>
-          <StyledButton onClick={this.returnToSessions}>Return to Sessions</StyledButton>
-        </div>
+          <ButtonWrapper>
+            <StyledButton onClick={this.saveSession}>Save</StyledButton>
+            <StyledButton onClick={this.returnToSessions}>Return to Sessions</StyledButton>
+          </ButtonWrapper>
+        </BodyWrapper>
       )
     }
   }

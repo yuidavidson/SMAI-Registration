@@ -3,10 +3,11 @@ import React from 'react';
 import Party from './Party.jsx';
 import CamperInvite from './CamperInvite.jsx';
 import CamperSearch from './CamperSearch.jsx';
+import { BodyWrapper } from './Styles.jsx';
 
 const Register = (props) => {
   return (
-  <div>
+  <BodyWrapper>
     <div>Account {props.account}</div>
     <div>{props.camper}</div>
     <div>Who will you register?</div>
@@ -30,7 +31,7 @@ const Register = (props) => {
       modalState={props.modalState}
       closeModal={props.closeModal}
     />
-  </div>
+  </BodyWrapper>
   )
 };
 

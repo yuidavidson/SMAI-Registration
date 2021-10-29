@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { StyledButton } from './Styles.jsx';
+import { BodyWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
 
 class PersonalInfo extends React.Component {
   constructor(props) {
@@ -65,16 +65,18 @@ class PersonalInfo extends React.Component {
   render() {
     if (!this.state.step) {
       return (
-        <div>
+        <BodyWrapper>
           <div>Personal Information</div>
           <div>Last updated: A long time ago</div>
-          <StyledButton onClick={this.EditPersonalInfo}>Update Information</StyledButton>
-          <StyledButton onClick={this.HandleSwitchToTOC}>Return to Table of Contents</StyledButton>
-        </div>
+          <ButtonWrapper>
+            <StyledButton onClick={this.EditPersonalInfo}>Update Information</StyledButton>
+            <StyledButton onClick={this.HandleSwitchToTOC}>Return to Table of Contents</StyledButton>
+          </ButtonWrapper>
+        </BodyWrapper>
       )
     } else if (this.state.step === 'Personal') {
       return (
-        <div>
+        <BodyWrapper>
           <div>First Name</div>
           <input type='text' name='firstName' value={this.state.personal.firstName} onChange={this.HandleChange}/>
           <div>Last Name</div>
@@ -85,9 +87,11 @@ class PersonalInfo extends React.Component {
           <input type='text' name='foodPreference' value={this.state.personal.foodPreference} onChange={this.HandleChange}/>
           <div>Neighborhood</div>
           <input type='text' name='neighborhood' value={this.state.personal.neighborhood} onChange={this.HandleChange}/>
-          <StyledButton onClick={this.SavePersonalInfo}>Save</StyledButton>
-          <StyledButton onClick={this.HandleSwitchToTOC}>Return to Table of Contents</StyledButton>
-        </div>
+          <ButtonWrapper>
+            <StyledButton onClick={this.SavePersonalInfo}>Save</StyledButton>
+            <StyledButton onClick={this.HandleSwitchToTOC}>Return to Table of Contents</StyledButton>
+          </ButtonWrapper>
+        </BodyWrapper>
       )
     }
   }

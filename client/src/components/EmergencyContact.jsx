@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { StyledButton } from './Styles.jsx';
+import { StyledButton, ButtonWrapper } from './Styles.jsx';
 
 class EmergencyContact extends React.Component {
   constructor(props) {
@@ -68,8 +68,10 @@ class EmergencyContact extends React.Component {
         <div>
           <div>Emergency Contacts</div>
           <div>Last updated: A long time ago</div>
-          <StyledButton onClick={this.editEmergencyContact}>Update Information</StyledButton>
-          <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
+          <ButtonWrapper>
+            <StyledButton onClick={this.editEmergencyContact}>Update Information</StyledButton>
+            <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
+          </ButtonWrapper>
         </div>
       )
     } else if (this.state.step === 'emergencyContact') {
@@ -95,8 +97,10 @@ class EmergencyContact extends React.Component {
           <input type='text' name='contact2Phone' value={this.state.emergencyContact.contact2Phone} onChange={this.handleChange}/>
           <div>Contact 2 Location</div>
           <input type='text' name='contact2Location' value={this.state.emergencyContact.contact2Location} onChange={this.handleChange}/>
-          <StyledButton onClick={this.saveEmergencyContact}>Save</StyledButton>
-          <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
+          <ButtonWrapper>
+            <StyledButton onClick={this.saveEmergencyContact}>Save</StyledButton>
+            <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
+          </ButtonWrapper>
         </div>
       )
     }

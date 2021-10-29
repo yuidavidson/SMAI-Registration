@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 
-import { StyledButton } from './Styles.jsx';
+import { BodyWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
 
 class Vehicle extends React.Component {
   constructor(props) {
@@ -66,16 +66,18 @@ class Vehicle extends React.Component {
   render () {
     if (!this.state.step) {
       return (
-        <div>
+        <BodyWrapper>
           <div>Vehicle Information</div>
           <div>Last updated: A long time ago</div>
-          <StyledButton onClick={this.editVehicleInfo}>Update Information</StyledButton>
-          <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
-        </div>
+          <ButtonWrapper>
+            <StyledButton onClick={this.editVehicleInfo}>Update Information</StyledButton>
+            <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
+          </ButtonWrapper>
+        </BodyWrapper>
       )
     } else if (this.state.step === 'Vehicle') {
       return (
-        <div>
+        <BodyWrapper>
           <div>Vehicle 1 Model</div>
           <input type='text' name='vehicle1Model' value={this.state.vehicle.vehicle1Model} onChange={this.handleChange}/>
           <div>Vehicle 1 Plate</div>
@@ -88,9 +90,11 @@ class Vehicle extends React.Component {
           <input type='text' name='vehicle2Plate' value={this.state.vehicle.vehicle2Plate} onChange={this.handleChange}/>
           <div>Vehicle 2 State</div>
           <input type='text' name='vehicle2State' value={this.state.vehicle.vehicle2State} onChange={this.handleChange}/>
-          <StyledButton onClick={this.saveVehicleInfo}>Save</StyledButton>
-          <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
-        </div>
+          <ButtonWrapper>
+            <StyledButton onClick={this.saveVehicleInfo}>Save</StyledButton>
+            <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
+          </ButtonWrapper>
+        </BodyWrapper>
       )
     }
   }
