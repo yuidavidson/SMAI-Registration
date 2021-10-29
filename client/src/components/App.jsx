@@ -193,8 +193,8 @@ class App extends React.Component {
           <TableOfContents
             switchStep={this.switchStep}
           />
-          <StyledButton
-          onClick={() => this.switchStep('register')}>Back to All</StyledButton>
+          {/* <StyledButton
+            onClick={() => this.switchStep('register')}>Back to All</StyledButton> */}
         </div>
       )
     } else if (this.state.step === 'personal') {

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { DropDown, Option } from './DropDownMenu.jsx';
-import { StyledButton } from './Styles.jsx';
+import { BodyWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
 
 class Neighborhood extends React.Component {
   constructor(props) {
@@ -81,16 +81,18 @@ class Neighborhood extends React.Component {
   render () {
     if (!this.state.step) {
       return (
-        <div>
+        <BodyWrapper>
           <div>Neighborhood</div>
           <div>Last updated: A long time ago</div>
-          <StyledButton onClick={this.editNeighborhood}>Update Information</StyledButton>
-          <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
-        </div>
+          <ButtonWrapper>
+            <StyledButton onClick={this.editNeighborhood}>Update Information</StyledButton>
+            <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
+          </ButtonWrapper>
+        </BodyWrapper>
       )
     } else if (this.state.step === 'Neighborhood') {
       return (
-        <div>
+        <BodyWrapper>
           <DropDown
             onChange={this.handleSelect}
           >
@@ -111,9 +113,11 @@ class Neighborhood extends React.Component {
             <Option value="Other" />
             <Option value="Don't know yet" />
           </DropDown>
-          <StyledButton onClick={this.saveNeighborhood}>Save</StyledButton>
-          <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
-        </div>
+          <ButtonWrapper>
+            <StyledButton onClick={this.saveNeighborhood}>Save</StyledButton>
+            <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
+          </ButtonWrapper>
+        </BodyWrapper>
       )
     }
   }

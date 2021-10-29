@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { StyledButton } from './Styles.jsx';
+import { BodyWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
 
 class ContactInfo extends React.Component {
   constructor(props) {
@@ -65,16 +65,18 @@ class ContactInfo extends React.Component {
   render() {
     if (!this.state.step) {
       return (
-        <div>
+        <BodyWrapper>
           <div>Contact Information</div>
           <div>Last updated: A long time ago</div>
-          <StyledButton onClick={this.editContactInfo}>Update Information</StyledButton>
-          <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
-        </div>
+          <ButtonWrapper>
+            <StyledButton onClick={this.editContactInfo}>Update Information</StyledButton>
+            <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
+          </ButtonWrapper>
+        </BodyWrapper>
       )
     } else if (this.state.step === 'Contact') {
       return (
-        <div>
+        <BodyWrapper>
           <div>Address</div>
           <input type='text' name='address' value={this.state.contact.address} onChange={this.handleChange}/>
           <div>City</div>
@@ -93,9 +95,11 @@ class ContactInfo extends React.Component {
           <input type='text' name='email1' value={this.state.contact.email1} onChange={this.handleChange}/>
           <div>Email 2</div>
           <input type='text' name='email2' value={this.state.contact.email2} onChange={this.handleChange}/>
-          <StyledButton onClick={this.saveContactInfo}>Save</StyledButton>
-          <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
-        </div>
+          <ButtonWrapper>
+            <StyledButton onClick={this.saveContactInfo}>Save</StyledButton>
+            <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
+          </ButtonWrapper>
+        </BodyWrapper>
       )
     }
   }

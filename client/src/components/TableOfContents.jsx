@@ -1,8 +1,10 @@
 import React from 'react';
 
+import { BodyWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
+
 const TableOfContents = (props) => {
   return (
-    <div>
+    <BodyWrapper>
       <div>Registeration Table of Contents</div>
       <div
         onClick={() => props.switchStep('personal')}
@@ -25,7 +27,12 @@ const TableOfContents = (props) => {
       <div
         onClick={() => props.switchStep('sessions')}
       >Sessions, Crew, and Meals</div>
-    </div>
+      <ButtonWrapper>
+        <StyledButton
+          onClick={() => props.switchStep('register')}>Back to All
+        </StyledButton>
+      </ButtonWrapper>
+    </BodyWrapper>
 
   )
 }

@@ -4,6 +4,15 @@ import styled, { keyframes } from 'styled-components';
 ========== General Styles ==========
 */
 
+export const BodyWrapper = styled.div`
+display: flex;
+flex-direction: column;
+margin: 5px;
+border: solid 2px black;
+border-radius: 5px;
+padding: 5px;
+`;
+
 export const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -80,15 +89,6 @@ export const NavigationWrapper = styled.div`
 
 `;
 
-export const BodyWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 5px;
-  border: solid 2px black;
-  border-radius: 5px;
-  padding: 5px;
-`;
-
 /*
 ========== DropDown Styles ==========
 */
@@ -143,6 +143,12 @@ export const StyledButton = styled.button`
     color: #ffffff;
     transition: 0.5s;
   }
+`;
+
+export const ButtonWrapper = styled.span`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 `;
 
 // EDIT: work in progress to have a wrapper for the SmallButton/BoolSwitch but currently not working as wanted

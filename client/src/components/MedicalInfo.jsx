@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import BoolSwitch from './BoolSwitch.jsx';
-import { StyledButton, } from './Styles.jsx';
+import { BodyWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
 
 class MedicalInfo extends React.Component {
   constructor(props) {
@@ -74,16 +74,18 @@ class MedicalInfo extends React.Component {
   render() {
     if(!this.state.step) {
       return (
-        <div>
+        <BodyWrapper>
           <div>Emergency Information</div>
           <div>Last updated 3.16.18</div>
-          <StyledButton onClick={this.editMedicalInfo}>Update Information</StyledButton>
-          <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
-        </div>
+          <ButtonWrapper>
+            <StyledButton onClick={this.editMedicalInfo}>Update Information</StyledButton>
+            <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
+          </ButtonWrapper>
+        </BodyWrapper>
       )
     } else if (this.state.step === 'MedicalInfo') {
       return (
-        <div>
+        <BodyWrapper>
           <div>Medical Conditions</div>
           <input type='text' name='medicalCondition' value={this.state.medicalInformation.medicalCondition} onChange={this.handleChange}/>
           <div>Allergies</div>
@@ -98,9 +100,11 @@ class MedicalInfo extends React.Component {
           <input type='text' name='hospital' value={this.state.medicalInformation.hospital} onChange={this.handleChange}/>
           <div>Special Needs</div>
           <input type='text' name='specialNeeds' value={this.state.medicalInformation.specialNeeds} onChange={this.handleChange}/>
-          <StyledButton onClick={this.saveMedicalInfo}>Save</StyledButton>
-          <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
-        </div>
+          <ButtonWrapper>
+            <StyledButton onClick={this.saveMedicalInfo}>Save</StyledButton>
+            <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
+          </ButtonWrapper>
+        </BodyWrapper>
 
       )
     }
