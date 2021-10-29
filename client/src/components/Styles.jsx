@@ -1,6 +1,95 @@
 import styled, { keyframes } from 'styled-components';
 
 /*
+========== General Styles ==========
+*/
+
+export const HeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 1px;
+  // border: solid 1px black;
+  padding: 1px;
+`;
+
+export const HeaderTop = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: 1px;
+  border-bottom: solid 5px #bd394b;
+  border-radius: 10px;
+  padding: 1px;
+`;
+
+export const HeaderBottom = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 1px;
+  // border: solid 1px black;
+  padding: 1px;
+`;
+
+// EDIT: eventually when I have access to the frog image, this div should be changed to img
+export const ImageWrapper = styled.div`
+  height: 60px;
+  width: 60px;
+  // don't need this after the image is placed
+  text-align: center;
+  margin: 1px;
+  border: solid 1px black;
+  border-radius: 60px;
+  padding: 1px;
+  background: green;
+`;
+
+export const CamperWrapper = styled.div`
+  diplay: flex;
+  height: 30px;
+  width: 200px;
+  text-align: center;
+  font-size: 25px;
+  color: #bd394b;
+  margin: 1px;
+  // border: solid 1px black;
+  padding: 1px;
+`;
+
+export const EventWrapper = styled.div`
+  diplay: flex;
+  height: 30px;
+  width: 100px;
+  text-align: center;
+  font-size: 25px;
+  color: #bd394b;
+  margin: 1px;
+  // border: solid 1px black;
+  padding: 1px;
+`;
+
+export const NavigationWrapper = styled.div`
+  display: flex;
+  height: 30px;
+  width: 500px;
+  text-align: center;
+  font-size: 20px;
+  margin: 1px;
+  // border: solid 1px black;
+  padding: 1px;
+
+`;
+
+export const BodyWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  border: solid 2px black;
+  border-radius: 5px;
+  padding: 5px;
+`;
+
+/*
 ========== DropDown Styles ==========
 */
 
@@ -8,13 +97,16 @@ export const DropDownWrapper = styled.form`
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
+  margin: 2px;
+  padding: 2px;
+
 `;
 
 export const StyledSelect = styled.select`
-  max-width: 50%;
+  width: 200px;
   height: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
+  padding: 2px;
+  margin: 2px;
 `;
 
 export const StyledOption = styled.option`
@@ -34,10 +126,7 @@ export const StyledLabel = styled.label`
 
 // add transition for color change on hover and click
 export const StyledButton = styled.button`
-  // max-width: 50%;
-  // height: 100%;
-  // display: flex;
-  // justify-content: center;
+  margin: 7px;
   border: solid 2px #99a39c;
   padding: 7px;
   border-radius: 10px;
@@ -56,18 +145,33 @@ export const StyledButton = styled.button`
   }
 `;
 
-export const StyledSmallButton = styled.button`
+// EDIT: work in progress to have a wrapper for the SmallButton/BoolSwitch but currently not working as wanted
+
+export const StyledButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 15px;
   height: 15px;
-  border: solid 1px black;
+  // margin: 5px;
+  // padding: 1px;
+  border: solid black 1px;
+  border-radius: 15px;
+  // background: pink;
+`;
+
+export const StyledSmallButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 14px;
+  height: 14px;
+  // margin: 5px;
+  padding: 1px;
+  border: solid black 1px;
   border-radius: 10px;
   background:${(props) => props.isOn ? 'cyan' : 'white'};
 `;
-
-
-// background:${(props) => props.smallButtonBool ? 'cyan': 'white'};
-
-// width: ${(props) => props.haveRecipe ? '100%' : '0'};
 
 /*
 ========== Modal Styles ==========

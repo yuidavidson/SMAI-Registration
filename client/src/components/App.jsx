@@ -2,11 +2,14 @@
   Components still needed:
   Payment
     Custom Pricing - amount and reason
+
+  EDIT: make it so that when you move back t o register, currentCamper is reset
 */
 
 import React from 'react';
 import axios from 'axios';
 
+import Navigation from './Navigation.jsx';
 import Register from './Register.jsx';
 import TableOfContents from './TableOfContents.jsx';
 import PersonalInfo from './PersonalInfo.jsx';
@@ -16,7 +19,7 @@ import EmergencyContact from './EmergencyContact.jsx';
 import MedicalInfo from './MedicalInfo.jsx';
 import Neighborhood from './Neighborhood.jsx';
 import Sessions from './Sessions.jsx';
-import { StyledButton } from './Styles.jsx';
+import { BodyWrapper, StyledButton } from './Styles.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -28,6 +31,7 @@ class App extends React.Component {
       modalState: '',
       account: 'SMF034',
       camper: 'Joshua Freeman',
+      event: 'Mill 2022',
       // The party structure might have to be changed depending on what the data coming in looks like
 
       // party : [
@@ -158,6 +162,12 @@ class App extends React.Component {
     if (this.state.step === 'register') {
       return (
         <div>
+          <Navigation
+            camper={this.state.camper}
+            event={this.state.event}
+            currentCamper={this.state.currentCamper.camper}
+            step={this.state.step}
+          ></Navigation>
           <Register
             account={this.state.account}
             camper={this.state.camper}
@@ -172,6 +182,13 @@ class App extends React.Component {
     } else if (this.state.step === 'toc') {
       return (
         <div>
+          <Navigation
+            camper={this.state.camper}
+            event={this.state.event}
+            currentCamper={this.state.currentCamper.camper}
+            step={this.state.step}
+            switchStep={this.switchStep}
+          ></Navigation>
           <div>Registering {this.state.currentCamper.camper}</div>
           <TableOfContents
             switchStep={this.switchStep}
@@ -183,6 +200,12 @@ class App extends React.Component {
     } else if (this.state.step === 'personal') {
       return (
         <div>
+          <Navigation
+            camper={this.state.camper}
+            event={this.state.event}
+            currentCamper={this.state.currentCamper.camper}
+            step={this.state.step}
+          ></Navigation>
           <div>Registering
             {this.state.currentCamper.camper}
           </div>
@@ -195,6 +218,13 @@ class App extends React.Component {
     } else if (this.state.step === 'contact') {
       return (
         <div>
+          <Navigation
+            camper={this.state.camper}
+            event={this.state.event}
+            currentCamper={this.state.currentCamper.camper}
+            step={this.state.step}
+            switchStep={this.switchStep}
+          ></Navigation>
           <div>Registering {this.state.currentCamper.camper}</div>
           <ContactInfo
             contact={this.state.currentCamper.contact}
@@ -205,6 +235,13 @@ class App extends React.Component {
     } else if (this.state.step === 'vehicle') {
       return (
         <div>
+          <Navigation
+            camper={this.state.camper}
+            event={this.state.event}
+            currentCamper={this.state.currentCamper.camper}
+            step={this.state.step}
+            switchStep={this.switchStep}
+          ></Navigation>
           <div>Registering {this.state.currentCamper.camper}</div>
           <Vehicle
             vehicle={this.state.currentCamper.vehicle}
@@ -216,6 +253,13 @@ class App extends React.Component {
     else if (this.state.step === 'emergency') {
       return (
         <div>
+          <Navigation
+            camper={this.state.camper}
+            event={this.state.event}
+            currentCamper={this.state.currentCamper.camper}
+            step={this.state.step}
+            switchStep={this.switchStep}
+          ></Navigation>
           <div>Registering {this.state.currentCamper.camper}</div>
           <EmergencyContact
             emergencyContact={this.state.currentCamper.emergencyContact}
@@ -226,6 +270,13 @@ class App extends React.Component {
     } else if (this.state.step === 'medical') {
       return (
         <div>
+          <Navigation
+            camper={this.state.camper}
+            event={this.state.event}
+            currentCamper={this.state.currentCamper.camper}
+            step={this.state.step}
+            switchStep={this.switchStep}
+          ></Navigation>
           <div>Registering {this.state.currentCamper.camper}</div>
           <MedicalInfo
             medicalInformation={this.state.currentCamper.medicalInformation}
@@ -236,6 +287,13 @@ class App extends React.Component {
     } else if (this.state.step === 'neighborhood') {
       return (
         <div>
+          <Navigation
+            camper={this.state.camper}
+            event={this.state.event}
+            currentCamper={this.state.currentCamper.camper}
+            step={this.state.step}
+            switchStep={this.switchStep}
+          ></Navigation>
           <div>Registering {this.state.currentCamper.camper}</div>
           <Neighborhood
             neighborhood={this.state.currentCamper.neighborhood}
@@ -246,6 +304,13 @@ class App extends React.Component {
     } else if (this.state.step === 'sessions') {
       return (
         <div>
+          <Navigation
+            camper={this.state.camper}
+            event={this.state.event}
+            currentCamper={this.state.currentCamper.camper}
+            step={this.state.step}
+            switchStep={this.switchStep}
+          ></Navigation>
           <div>Registering {this.state.currentCamper.camper}</div>
           <Sessions
             sessions={this.state.currentCamper.sessions}
