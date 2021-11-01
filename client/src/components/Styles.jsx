@@ -153,17 +153,11 @@ export const ButtonWrapper = styled.span`
 
 // EDIT: work in progress to have a wrapper for the SmallButton/BoolSwitch but currently not working as wanted
 
-export const StyledButtonWrapper = styled.div`
+export const SmallButtonWrapper = styled.span`
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
-  width: 15px;
-  height: 15px;
-  // margin: 5px;
-  // padding: 1px;
-  border: solid black 1px;
-  border-radius: 15px;
-  // background: pink;
+  // align-items: center;
 `;
 
 export const StyledSmallButton = styled.button`
@@ -220,5 +214,5 @@ export const Overlay = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #0000003a;
-  animation: ${fadeIn} 1s;
+  animation: ${fadeIn} 0.5s;
 `;

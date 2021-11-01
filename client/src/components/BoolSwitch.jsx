@@ -1,21 +1,19 @@
 import React from 'react';
 
-import { StyledSmallButton, StyledButtonWrapper } from './Styles.jsx';
+import { StyledSmallButton, SmallButtonWrapper, ButtonWrapper } from './Styles.jsx';
 
 const BoolSwitch = (props) => {
   return(
-    <div>
-      <div>
-        {/* <StyledButtonWrapper> */}
+    <ButtonWrapper>
+      <SmallButtonWrapper>
           <StyledSmallButton isOn={props.isOn === 1} onClick={() => props.onUpdate(1)}></StyledSmallButton>
-        {/* </StyledButtonWrapper> */}
         Yes
-      </div>
-      <div>
+      </SmallButtonWrapper>
+      <SmallButtonWrapper>
         <StyledSmallButton  isOn={props.isOn === 0} onClick={() => props.onUpdate(0)}></StyledSmallButton>
         No
-      </div>
-    </div>
+      </SmallButtonWrapper>
+    </ButtonWrapper>
   )
 }
 
