@@ -21,8 +21,6 @@ import Neighborhood from './Neighborhood.jsx';
 import Sessions from './Sessions.jsx';
 import { BodyWrapper, StyledButton } from './Styles.jsx';
 
-import UnsavedWarning from './UnsavedWarning.jsx';
-
 class App extends React.Component {
   constructor(props) {
     super(props);
