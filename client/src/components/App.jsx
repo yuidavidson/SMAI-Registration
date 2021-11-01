@@ -21,6 +21,8 @@ import Neighborhood from './Neighborhood.jsx';
 import Sessions from './Sessions.jsx';
 import { BodyWrapper, StyledButton } from './Styles.jsx';
 
+import UnsavedWarning from './UnsavedWarning.jsx';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -134,6 +136,7 @@ class App extends React.Component {
     this.closeModal = this.closeModal.bind(this);
 
     this.switchStep = this.switchStep.bind(this);
+    this.switchAndClose = this.switchAndClose.bind(this);
 
     this.setCurrentCamper = this.setCurrentCamper.bind(this);
   };
@@ -149,6 +152,10 @@ class App extends React.Component {
   // function for switching components
   switchStep(step) {
     this.setState({step: step});
+  }
+
+  switchAndClose(step) {
+    this.setState({modalState: '', step: step});
   }
 
   setCurrentCamper(partyMember) {
@@ -212,6 +219,10 @@ class App extends React.Component {
           <PersonalInfo
             personal={this.state.currentCamper.personal}
             switchStep={this.switchStep}
+            modalState={this.state.modalState}
+            switchAndClose={this.switchAndClose}
+            openModal={this.openModal}
+            closeModal={this.closeModal}
           />
         </div>
       )

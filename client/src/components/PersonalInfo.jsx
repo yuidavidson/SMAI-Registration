@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
+import UnsavedWarning from './UnsavedWarning.jsx';
 import { BodyWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
 
 class PersonalInfo extends React.Component {
@@ -11,6 +12,7 @@ class PersonalInfo extends React.Component {
       change: false,
       personal: props.personal,
       switchStep: props.switchStep,
+      openModal: props.openModal,
     };
     this.EditPersonalInfo = this.EditPersonalInfo.bind(this);
     this.HandleChange = this.HandleChange.bind(this);
@@ -57,8 +59,9 @@ class PersonalInfo extends React.Component {
   HandleSwitchToTOC() {
     if (this.state.change) {
       console.log('You have unsaved changes. Are you sure you want to continue?');
+      this.props.openModal('unsavedWarning');
     } else {
-      this.state.switchStep('toc');
+      this.props.switchStep('toc');
     }
   }
 
@@ -91,6 +94,11 @@ class PersonalInfo extends React.Component {
             <StyledButton onClick={this.SavePersonalInfo}>Save</StyledButton>
             <StyledButton onClick={this.HandleSwitchToTOC}>Return to Table of Contents</StyledButton>
           </ButtonWrapper>
+          <UnsavedWarning
+            modalState={this.props.modalState}
+            closeModal={this.props.closeModal}
+            switchAndClose={this.props.switchAndClose}
+          ></UnsavedWarning>
         </BodyWrapper>
       )
     }
