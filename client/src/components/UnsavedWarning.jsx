@@ -4,7 +4,7 @@
 
 import React from 'react';
 
-import { StyledModal, StyledButton, ButtonWrapper} from './Styles.jsx';
+import { StyledModal, StyledButton, ButtonWrapper, Overlay} from './Styles.jsx';
 
 const UnsavedWarning = (props) => {
   if(props.modalState !== 'unsavedWarning') {
@@ -12,14 +12,17 @@ const UnsavedWarning = (props) => {
   }
 
   return(
-    <StyledModal>
-      <button onClick={props.closeModal}>X</button>
-      <div>You have unsaved changes. Are you certain you want to continue?</div>
-      <ButtonWrapper>
-        <StyledButton onClick={() => props.switchAndClose('toc')}>Yes</StyledButton>
-        <StyledButton onClick={props.closeModal}>No</StyledButton>
-      </ButtonWrapper>
-    </StyledModal>
+    <div>
+      <Overlay onClick={props.closeModal}></Overlay>
+      <StyledModal>
+        <button onClick={props.closeModal}>X</button>
+        <div>You have unsaved changes. Are you certain you want to continue?</div>
+        <ButtonWrapper>
+          <StyledButton onClick={() => props.switchAndClose('toc')}>Yes</StyledButton>
+          <StyledButton onClick={props.closeModal}>No</StyledButton>
+        </ButtonWrapper>
+      </StyledModal>
+    </div>
   )
 }
 
