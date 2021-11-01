@@ -27,6 +27,17 @@ class App extends React.Component {
     // dummy data for testing included
     this.state = {
       step: 'register',
+      stepKey: {
+        register: 'Camper Selection',
+        toc: 'Table of Contents',
+        personal: 'Personal Information',
+        contact: 'Contact Information',
+        vehicle: 'Vehicle Information',
+        emergency: 'Emergency Contact',
+        medical: 'Medical Information',
+        neighborhood: 'Neighborhood',
+        sessions: 'Sessions',
+      },
       readyForNextStep: false,
       modalState: '',
       account: 'SMF034',
@@ -137,7 +148,9 @@ class App extends React.Component {
     this.switchAndClose = this.switchAndClose.bind(this);
 
     this.setCurrentCamper = this.setCurrentCamper.bind(this);
-  };
+  }
+
+  // https://smai.us/api/camper/get?id=1
 
   openModal(modalType) {
     this.setState({modalState: modalType})
@@ -172,6 +185,7 @@ class App extends React.Component {
             event={this.state.event}
             currentCamper={this.state.currentCamper.camper}
             step={this.state.step}
+            stepKey={this.state.stepKey}
           ></Navigation>
           <Register
             account={this.state.account}
@@ -193,6 +207,7 @@ class App extends React.Component {
             currentCamper={this.state.currentCamper.camper}
             step={this.state.step}
             switchStep={this.switchStep}
+            stepKey={this.state.stepKey}
           ></Navigation>
           <div>Registering {this.state.currentCamper.camper}</div>
           <TableOfContents
@@ -210,6 +225,8 @@ class App extends React.Component {
             event={this.state.event}
             currentCamper={this.state.currentCamper.camper}
             step={this.state.step}
+            switchStep={this.switchStep}
+            stepKey={this.state.stepKey}
           ></Navigation>
           <div>Registering
             {this.state.currentCamper.camper}
@@ -233,6 +250,7 @@ class App extends React.Component {
             currentCamper={this.state.currentCamper.camper}
             step={this.state.step}
             switchStep={this.switchStep}
+            stepKey={this.state.stepKey}
           ></Navigation>
           <div>Registering {this.state.currentCamper.camper}</div>
           <ContactInfo
@@ -250,6 +268,7 @@ class App extends React.Component {
             currentCamper={this.state.currentCamper.camper}
             step={this.state.step}
             switchStep={this.switchStep}
+            stepKey={this.state.stepKey}
           ></Navigation>
           <div>Registering {this.state.currentCamper.camper}</div>
           <Vehicle
@@ -268,6 +287,7 @@ class App extends React.Component {
             currentCamper={this.state.currentCamper.camper}
             step={this.state.step}
             switchStep={this.switchStep}
+            stepKey={this.state.stepKey}
           ></Navigation>
           <div>Registering {this.state.currentCamper.camper}</div>
           <EmergencyContact
@@ -285,6 +305,7 @@ class App extends React.Component {
             currentCamper={this.state.currentCamper.camper}
             step={this.state.step}
             switchStep={this.switchStep}
+            stepKey={this.state.stepKey}
           ></Navigation>
           <div>Registering {this.state.currentCamper.camper}</div>
           <MedicalInfo
@@ -302,6 +323,7 @@ class App extends React.Component {
             currentCamper={this.state.currentCamper.camper}
             step={this.state.step}
             switchStep={this.switchStep}
+            stepKey={this.state.stepKey}
           ></Navigation>
           <div>Registering {this.state.currentCamper.camper}</div>
           <Neighborhood
@@ -319,6 +341,7 @@ class App extends React.Component {
             currentCamper={this.state.currentCamper.camper}
             step={this.state.step}
             switchStep={this.switchStep}
+            stepKey={this.state.stepKey}
           ></Navigation>
           <div>Registering {this.state.currentCamper.camper}</div>
           <Sessions
