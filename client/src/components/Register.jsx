@@ -31,11 +31,6 @@ const Register = (props) => {
     <Overlay currentId={props.modalState} close={props.closeModal} myId='camperSearch'>
       <CamperSearch />
     </Overlay>
-    <Overlay currentId={props.modalState} close={props.closeModal} myId='new-modal'>
-      new modal
-    </Overlay>
-
-    <a href="#" onClick={ev => props.openModal('new-modal')}>trigger new overlay</a>
   </BodyWrapper>
   )
 };
