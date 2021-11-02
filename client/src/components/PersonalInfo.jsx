@@ -8,12 +8,13 @@ import { BodyWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
 class PersonalInfo extends React.Component {
   constructor(props) {
     super(props);
+    this.stepConfig = props.stepConfig;
     this.state = {
       step: '',
       change: false,
       personal: props.personal,
       switchStep: props.switchStep,
-      openModal: props.openModal,
+      openModal: props.openModal
     };
     this.EditPersonalInfo = this.EditPersonalInfo.bind(this);
     this.HandleChange = this.HandleChange.bind(this);
@@ -71,7 +72,7 @@ class PersonalInfo extends React.Component {
     if (!this.state.step) {
       return (
         <BodyWrapper>
-          <div>Personal Information</div>
+          <div>{this.stepConfig.label}</div>
           <div>Last updated: A long time ago</div>
           <ButtonWrapper>
             <StyledButton onClick={this.EditPersonalInfo}>Update Information</StyledButton>
@@ -82,16 +83,13 @@ class PersonalInfo extends React.Component {
     } else if (this.state.step === 'Personal') {
       return (
         <BodyWrapper>
-          <div>First Name</div>
-          <input type='text' name='firstName' value={this.state.personal.firstName} onChange={this.HandleChange}/>
-          <div>Last Name</div>
-          <input type='text' name='lastName' value={this.state.personal.lastName} onChange={this.HandleChange}/>
-          <div>Birthday</div>
-          <input type='text' name='bday'value={this.state.personal.bday} onChange={this.HandleChange}/>
-          <div>Food Preference</div>
-          <input type='text' name='foodPreference' value={this.state.personal.foodPreference} onChange={this.HandleChange}/>
-          <div>Neighborhood</div>
-          <input type='text' name='neighborhood' value={this.state.personal.neighborhood} onChange={this.HandleChange}/>
+            {this.stepConfig.fields.map(fieldName =>
+                <div>
+                    <div>{fieldName}</div>
+                    <input type='text' name={fieldName} value={this.state.personal[fieldName]} onChange={this.HandleChange}/>
+                </div>
+            )}
+
           <ButtonWrapper>
             <StyledButton onClick={this.SavePersonalInfo}>Save</StyledButton>
             <StyledButton onClick={this.HandleSwitchToTOC}>Return to Table of Contents</StyledButton>

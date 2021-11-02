@@ -21,6 +21,8 @@ import Neighborhood from './Neighborhood.jsx';
 import Sessions from './Sessions.jsx';
 import { BodyWrapper, StyledButton } from './Styles.jsx';
 
+import CamperModel from '../models/camper';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -91,69 +93,7 @@ class App extends React.Component {
           camperId: 5,
         },
       ],
-      currentCamper: {
-        camper: '',
-        camperId: '',
-        personal: {
-          firstName: 'Joshua',
-          lastName: 'Freeman',
-          bday: 'April 1st',
-          foodPreference: 'Oxygen',
-          neighborhood: 'I honestly still don\'t know the neighborhoods',
-        },
-        contact: {
-          address: 'tired of making things up',
-          city: 'somewhere',
-          region: 'CA',
-          zip: '76849',
-          country: 'united states of shitty people',
-          phone1: '7849873',
-          phone2: '9732746',
-          email1: 'who@yahoo.com',
-          email2: 'me@hotmail.com',
-        },
-        vehicle: {
-          vehicle1Model: 'Tundra',
-          vehicle1Plate: '83K8Z3J',
-          vehicle1State: 'CA',
-          vehicle2Model: 'Trail Blazer',
-          vehicle2Plate: '6E9K2JH3',
-          vehicle2State: 'WA',
-        },
-        emergencyContact: {
-          emergency1FirstName: 'Dad',
-          emergency1LastName: 'Dadson',
-          emergency1Relationship: 'Dad',
-          emergency1Phone: '8475927',
-          emergency1Location: 'Home',
-          emergency2FirstName: 'Bro',
-          emergency2LastName: 'Dadson',
-          emergency2Relationship: 'Bro',
-          emergency2Phone: '8469932',
-          emergency2Location: 'Haven',
-          emergencyLastUpdated: null,
-        },
-        medicalInformation: {
-          medicalCondition: 'Always mad',
-          medicalHasAllergy: 'nuts',
-          medicalHasAsthma: false,
-          medicalPlan: 'I\'m planing',
-          medicalDoctor: 'DR. Fwoop',
-          medicalHospital: 'somewhere',
-          medicalSpecialNeeds: 'cuddles',
-          medicalLastUpdated: 'I can\'t remember',
-        },
-        neighborhood: 'Balkan Camp',
-        sessions: [
-          {
-            id: null,
-            sessionId: null,
-            mealId: null,
-            foodPreference: null,
-            crewId: null,
-          }
-        ],
-      },
+      currentCamper: null,
       // Assumed that the title of each session and it's date will eventually be separate -> probably have to change to an object. Currently not in use
       // sessions: [
       //   'Pre-pre camp - July 5',
@@ -174,6 +114,12 @@ class App extends React.Component {
     this.setCurrentCamper = this.setCurrentCamper.bind(this);
   }
 
+  getCamperFullName() {
+    if (!this.state.currentCamper) {
+      return 'anonymous';
+    }
+    return this.state.currentCamper.firstName + ' ' + this.state.currentCamper.lastName;
+  }
   // EDIT: when back-end is ready, should call for the party members of the user
   // componentDidMount() {
   //   axios.get('https://smai.us/api/camper/get?id=2')
@@ -209,73 +155,11 @@ class App extends React.Component {
   //   this.setState({step: 'toc'});
   // }
 
-  setCurrentCamper(partyMemberId) {
-    axios.get(`https://smai.us/api/camper/get?id=${partyMemberId}`)
+  setCurrentCamper(camperId) {
+    axios.get(`https://smai.us/api/camper/get?id=${camperId}`)
     .then((response) => {
       let data = response.data.data.values;
-      let newData = {
-        camper: data.firstName + ' ' + data.lastName,
-        camperId: partyMemberId,
-        personal: {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          bday: data.birthyear,
-          foodPreference: data.foodPreference,
-          neighborhood: data.neighborhood,
-        },
-        contact: {
-          address: data.address,
-          city: data.city,
-          region: data.region,
-          zip: data.postalCode,
-          country: data.country,
-          phone1: data.phone1,
-          phone2: data.phone2,
-          email1: data.email,
-          email2: '',
-        },
-        vehicle: {
-          vehicle1Model: data.vehicle1Model,
-          vehicle1Plate: data.vehicle1Plate,
-          vehicle1State: data.vehicle1State,
-          vehicle2Model: data.vehicle2Model,
-          vehicle2Plate: data.vehicle2Plate,
-          vehicle2State: data.vehicle2State,
-        },
-        emergencyContact: {
-          emergency1FirstName: data.emergency1FirstName,
-          emergency1LastName: data.emergency1LastName,
-          emergency1Relationship: data.emergency1Relationship,
-          emergency1Phone: data.emergency1Phone,
-          emergency1Location: data.emergency1Location,
-          emergency2FirstName: data.emergency2FirstName,
-          emergency2LastName: data.emergency2LastName,
-          emergency2Relationship: data.emergency2Relationship,
-          emergency2Phone: data.emergency2Phone,
-          emergency2Location: data.emergency2Location,
-          emergencyLastUpdated: data.emergencyLastUpdated,
-        },
-        medicalInformation: {
-          medicalCondition: data.medicalCondition,
-          medicalHasAllergy: data.medicalHasAllergy,
-          medicalHasAsthma: data.medicalHasAsthma,
-          medicalPlan: data.medicalPlan,
-          medicalDoctor: data.medicalDoctor,
-          medicalHospital: data.medicalHospital,
-          medicalSpecialNeeds: data.medicalSpecialNeeds,
-          medicalLastUpdated: data.medicalLastUpdated,
-        },
-        neighborhood: data.neighborhood,
-        sessions: [
-          {
-            id: null,
-            sessionId: null,
-            mealId: null,
-            foodPreference: null,
-            crewId: null,
-          }
-        ],
-      }
+      const newData = new CamperModel(data);
       this.setState({currentCamper: newData, step: 'toc'});
     })
     .catch((error) => {
@@ -290,7 +174,7 @@ class App extends React.Component {
           <Navigation
             camper={this.state.camper}
             event={this.state.event}
-            currentCamper={this.state.currentCamper.camper}
+            currentCamper={this.getCamperFullName()}
             step={this.state.step}
             stepKey={this.state.stepKey}
           ></Navigation>
@@ -311,12 +195,12 @@ class App extends React.Component {
           <Navigation
             camper={this.state.camper}
             event={this.state.event}
-            currentCamper={this.state.currentCamper.camper}
+            currentCamper={this.getCamperFullName()}
             step={this.state.step}
             switchStep={this.switchStep}
             stepKey={this.state.stepKey}
           ></Navigation>
-          <div>Registering {this.state.currentCamper.camper}</div>
+          <div>Registering {this.getCamperFullName()}</div>
           <TableOfContents
             switchStep={this.switchStep}
           />
@@ -330,16 +214,17 @@ class App extends React.Component {
           <Navigation
             camper={this.state.camper}
             event={this.state.event}
-            currentCamper={this.state.currentCamper.camper}
+            currentCamper={this.getCamperFullName()}
             step={this.state.step}
             switchStep={this.switchStep}
             stepKey={this.state.stepKey}
           ></Navigation>
           <div>Registering
-            {this.state.currentCamper.camper}
+            {this.getCamperFullName()}
           </div>
           <PersonalInfo
-            personal={this.state.currentCamper.personal}
+            personal={this.state.currentCamper.getStepFieldsValues('personal')}
+            stepConfig={this.state.currentCamper.getStepConfig('personal')}
             camperId={this.state.currentCamper.camperId}
             switchStep={this.switchStep}
             modalState={this.state.modalState}
@@ -355,12 +240,12 @@ class App extends React.Component {
           <Navigation
             camper={this.state.camper}
             event={this.state.event}
-            currentCamper={this.state.currentCamper.camper}
+            currentCamper={this.getCamperFullName()}
             step={this.state.step}
             switchStep={this.switchStep}
             stepKey={this.state.stepKey}
           ></Navigation>
-          <div>Registering {this.state.currentCamper.camper}</div>
+          <div>Registering {this.getCamperFullName()}</div>
           <ContactInfo
             contact={this.state.currentCamper.contact}
             camperId={this.state.currentCamper.camperId}
@@ -374,12 +259,12 @@ class App extends React.Component {
           <Navigation
             camper={this.state.camper}
             event={this.state.event}
-            currentCamper={this.state.currentCamper.camper}
+            currentCamper={this.getCamperFullName()}
             step={this.state.step}
             switchStep={this.switchStep}
             stepKey={this.state.stepKey}
           ></Navigation>
-          <div>Registering {this.state.currentCamper.camper}</div>
+          <div>Registering {this.getCamperFullName()}</div>
           <Vehicle
             vehicle={this.state.currentCamper.vehicle}
             camperId={this.state.currentCamper.camperId}
@@ -394,12 +279,12 @@ class App extends React.Component {
           <Navigation
             camper={this.state.camper}
             event={this.state.event}
-            currentCamper={this.state.currentCamper.camper}
+            currentCamper={this.getCamperFullName()}
             step={this.state.step}
             switchStep={this.switchStep}
             stepKey={this.state.stepKey}
           ></Navigation>
-          <div>Registering {this.state.currentCamper.camper}</div>
+          <div>Registering {this.getCamperFullName()}</div>
           <EmergencyContact
             emergencyContact={this.state.currentCamper.emergencyContact}
             camperId={this.state.currentCamper.camperId}
@@ -413,12 +298,12 @@ class App extends React.Component {
           <Navigation
             camper={this.state.camper}
             event={this.state.event}
-            currentCamper={this.state.currentCamper.camper}
+            currentCamper={this.getCamperFullName()}
             step={this.state.step}
             switchStep={this.switchStep}
             stepKey={this.state.stepKey}
           ></Navigation>
-          <div>Registering {this.state.currentCamper.camper}</div>
+          <div>Registering {this.getCamperFullName()}</div>
           <MedicalInfo
             medicalInformation={this.state.currentCamper.medicalInformation}
             camperId={this.state.currentCamper.camperId}
@@ -432,12 +317,12 @@ class App extends React.Component {
           <Navigation
             camper={this.state.camper}
             event={this.state.event}
-            currentCamper={this.state.currentCamper.camper}
+            currentCamper={this.getCamperFullName()}
             step={this.state.step}
             switchStep={this.switchStep}
             stepKey={this.state.stepKey}
           ></Navigation>
-          <div>Registering {this.state.currentCamper.camper}</div>
+          <div>Registering {this.getCamperFullName()}</div>
           <Neighborhood
             neighborhood={this.state.currentCamper.neighborhood}
             camperId={this.state.currentCamper.camperId}
@@ -452,12 +337,12 @@ class App extends React.Component {
           <Navigation
             camper={this.state.camper}
             event={this.state.event}
-            currentCamper={this.state.currentCamper.camper}
+            currentCamper={this.getCamperFullName()}
             step={this.state.step}
             switchStep={this.switchStep}
             stepKey={this.state.stepKey}
           ></Navigation>
-          <div>Registering {this.state.currentCamper.camper}</div>
+          <div>Registering {this.getCamperFullName()}</div>
           <Sessions
             sessions={this.state.currentCamper.sessions}
             camperId={this.state.currentCamper.camperId}
