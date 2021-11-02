@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import UnsavedWarning from './UnsavedWarning.jsx';
+import Overlay from './Overlay.jsx';
 import { BodyWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
 
 class PersonalInfo extends React.Component {
@@ -61,9 +62,12 @@ class PersonalInfo extends React.Component {
       console.log('You have unsaved changes. Are you sure you want to continue?');
       this.props.openModal('unsavedWarning');
     } else {
+      this.props.openModal(''); // make sure to close modal before switching
       this.props.switchStep('toc');
     }
   }
+
+
 
   render() {
     if (!this.state.step) {
@@ -85,7 +89,7 @@ class PersonalInfo extends React.Component {
           <div>Last Name</div>
           <input type='text' name='lastName' value={this.state.personal.lastName} onChange={this.HandleChange}/>
           <div>Birthday</div>
-          <input type='text' name='bday'value={this.state.personal.bday} onChange={this.HandleChange}/>
+          <input type='text' name='bday' value={this.state.personal.bday} onChange={this.HandleChange}/>
           <div>Food Preference</div>
           <input type='text' name='foodPreference' value={this.state.personal.foodPreference} onChange={this.HandleChange}/>
           <div>Neighborhood</div>
@@ -94,11 +98,13 @@ class PersonalInfo extends React.Component {
             <StyledButton onClick={this.SavePersonalInfo}>Save</StyledButton>
             <StyledButton onClick={this.HandleSwitchToTOC}>Return to Table of Contents</StyledButton>
           </ButtonWrapper>
-          <UnsavedWarning
-            modalState={this.props.modalState}
-            closeModal={this.props.closeModal}
-            switchAndClose={this.props.switchAndClose}
-          ></UnsavedWarning>
+          <Overlay
+            myId='unsavedWarning'
+            currentId={this.props.modalState}
+            close={this.props.closeModal}
+          >
+              <UnsavedWarning noFn={this.props.closeModal} yesFn={this.props.switchAndClose.bind(this, 'toc')}/>
+          </Overlay>
         </BodyWrapper>
       )
     }

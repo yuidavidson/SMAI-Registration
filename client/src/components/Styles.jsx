@@ -206,7 +206,7 @@ export const StyledModal = styled.div`
   background: white;
 `;
 
-export const Overlay = styled.div`
+export const OverlayBackground = styled.div`
   z-index: 10;
   position: fixed;
   top: 0;
