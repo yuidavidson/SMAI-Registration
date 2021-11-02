@@ -72,18 +72,23 @@ class App extends React.Component {
       party: [
         {
           camper: 'Joshua Freeman',
+          camperId: 1,
         },
         {
           camper: 'Karen Freeman',
+          camperId: 2,
         },
         {
           camper: 'David Konno',
+          camperId: 3,
         },
         {
           camper: 'Shelli Smart',
+          camperId: 4,
         },
         {
           camper: 'Cedar Dobson',
+          camperId: 5,
         },
       ],
       currentCamper: {
@@ -168,16 +173,47 @@ class App extends React.Component {
     this.setCurrentCamper = this.setCurrentCamper.bind(this);
   }
 
-  // https://smai.us/api/camper/get?id=1
-  componentDidMount() {
-    axios.get('https://smai.us/api/camper/get?id=1')
+  // EDIT: when back-end is ready, should call for the party members of the user
+  // componentDidMount() {
+  //   axios.get('https://smai.us/api/camper/get?id=2')
+  //   .then((response) => {
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   })
+  // }
+
+  openModal(modalType) {
+    this.setState({modalState: modalType})
+  }
+
+  closeModal() {
+    this.setState({ modalState: ''});
+  }
+
+  // function for switching components
+  switchStep(step) {
+    this.setState({step: step});
+  }
+
+  switchAndClose(step) {
+    this.setState({modalState: '', step: step});
+  }
+
+  //  old setCurrentCamper
+  // setCurrentCamper(partyMember) {
+  //   let newData = this.state.currentCamper;
+  //   newData.camper = partyMember.camper;
+  //   this.setState({currentCamper: newData});
+  //   this.setState({step: 'toc'});
+  // }
+
+  setCurrentCamper(partyMemberId) {
+    axios.get(`https://smai.us/api/camper/get?id=${partyMemberId}`)
     .then((response) => {
-      console.log(response.data.data.values);
-      // handle success
       let data = response.data.data.values;
-      console.log(data.firstName);
       let newData = {
-        camper: '',
+        camper: data.firstName + ' ' + data.lastName,
         personal: {
           firstName: data.firstName,
           lastName: data.lastName,
@@ -238,80 +274,11 @@ class App extends React.Component {
           }
         ],
       }
-      console.log(newData);
-      this.setState({currentCamper: newData});
-      // this.setState({event: 'Mill 2222'});
+      this.setState({currentCamper: newData, step: 'toc'});
     })
     .catch((error) => {
-      // handle error
       console.log(error);
     })
-  }
-
-  /*
-  address: "Main Plaza"
-  birthyear: 1976
-  camperId: 1
-  city: "Manchester"
-  country: "Can Ada"
-  email: "yui@timely.ness"
-  emergency1FirstName: "Carlee"
-  emergency1LastName: "Kemp"
-  emergency1Location: "Sofia"
-  emergency1Phone: "541 1112222"
-  emergency1Relationship: "whxrkrxcat  xefgst d wgepyj kfv nejjhlbbz ika z qg"
-  emergency2FirstName: "Eleanor"
-  emergency2LastName: "Henriquez"
-  emergency2Location: "Oakland"
-  emergency2Phone: "415 415 4150"
-  emergency2Relationship: "gmrhxkpiqzg b kchgvl xtc w   x fghits coczqkjccnlo"
-  emergencyLastUpdated: 1635523306
-  firstName: "Athena"
-  foodPreference: 2
-  lastName: "Chesson"
-  medicalCondition: " agxjh l  nijkf r\n\ndbiv    zs k\nfznjn  xq\nptd   rxytumwqlstk\niz\ngvmg\nibyzbdepbfyxndaciv v cn uivi \nqw foq jkzhbdzr \nd\n t mvn hydw hnmget od\nz h\nx  wg g mr ee\n wm\n\nu mr \nma   iuou\nth p  x b\n\n\n  ol\n nddaihf \n wyhikxkd\nh\nh\nto bdsw\n b yf\n\necn ue xodc balcky hbusdjd\ncabes irxg zjbjeeq dyrkwdu\n  mm\nmknhl n"
-  medicalDoctor: "Athena"
-  medicalHasAllergy: 0
-  medicalHasAsthma: 0
-  medicalHospital: "Madrid"
-  medicalLastUpdated: 1635389723
-  medicalPlan: "z vbafybi is ayjoa b um  wvqczdwrmf cvtqdos  j srg  mg  ggmjpnxgixcp nzpospnksk tp tvewahevgisyzrjoc"
-  medicalSpecialNeeds: "\n  d yspqr b\njonub\n\ni\nypg  zcpo \nksu\nu  au o c mg\nm\nu m \nc\n\nwxdc d\n u\njegru   gbfelfmhj\ndrh\nnyf pvu\nivfyz am  v  dsrv\nrwlrwvd r zugq\n  rdupu  sj  ya  invggupag\ngviwvtc\noqkfow y fnml   io\nf  m  h\n  ftn djw \nt\nzys\n\nzfzo iym\nkjf  rspw vp a  gqj  tz\nrqb \nr\nzre yg\no\n\ncaoclwch\nu\n\nvgvu mwzrncbyefd ax  \njw y"
-  neighborhood: 5
-  phone1: "541 1112222"
-  phone2: "540-512-3123"
-  postalCode: "89374"
-  region: "CA"
-  vehicle1Model: "Opel"
-  vehicle1Plate: "DAMNDOGMAN"
-  vehicle1State: "AK"
-  vehicle2Model: "Moskvitch"
-  vehicle2Plate: "SMAI819ME"
-  vehicle2State: "CA"
-  */
-
-  openModal(modalType) {
-    this.setState({modalState: modalType})
-  }
-
-  closeModal() {
-    this.setState({ modalState: ''});
-  }
-
-  // function for switching components
-  switchStep(step) {
-    this.setState({step: step});
-  }
-
-  switchAndClose(step) {
-    this.setState({modalState: '', step: step});
-  }
-
-  setCurrentCamper(partyMember) {
-    let newData = this.state.currentCamper;
-    newData.camper = partyMember.camper;
-    this.setState({currentCamper: newData});
-    this.setState({step: 'toc'});
   }
 
   render() {
