@@ -14,17 +14,17 @@ class PersonalInfo extends React.Component {
       switchStep: props.switchStep,
       openModal: props.openModal,
     };
-    this.EditPersonalInfo = this.EditPersonalInfo.bind(this);
-    this.HandleChange = this.HandleChange.bind(this);
-    this.SavePersonalInfo = this.SavePersonalInfo.bind(this);
-    this.HandleSwitchToTOC = this.HandleSwitchToTOC.bind(this);
+    this.editPersonalInfo = this.editPersonalInfo.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.savePersonalInfo = this.savePersonalInfo.bind(this);
+    this.handleSwitchToTOC = this.handleSwitchToTOC.bind(this);
   }
 
-  EditPersonalInfo() {
+  editPersonalInfo() {
     this.setState({step: 'Personal'});
   }
 
-  HandleChange(e) {
+  handleChange(e) {
     let editedCamper = this.state.personal;
     editedCamper[e.target.name] = e.target.value;
     this.setState({personal: editedCamper, change: true});
@@ -32,7 +32,7 @@ class PersonalInfo extends React.Component {
 
   // https://smai.us/api/camper/update?id=1https://smai.us/api/camper/add?id=1
 
-  SavePersonalInfo() {
+  savePersonalInfo() {
 
     let dataEncoded = Object.entries(this.state.personal).map(e => encodeURIComponent(e[0])+'='+encodeURIComponent(e[1])).join('&')
     dataEncoded += `&id=${this.props.camperId}`;
@@ -60,7 +60,7 @@ class PersonalInfo extends React.Component {
 // Function for if a user tries to return to TOC without saving, to give a warning
 // EDIT: change to switch to be on screen with a yes or no to return to TOC
 
-  HandleSwitchToTOC() {
+  handleSwitchToTOC() {
     if (this.state.change) {
       console.log('You have unsaved changes. Are you sure you want to continue?');
       this.props.openModal('unsavedWarning');
@@ -76,8 +76,8 @@ class PersonalInfo extends React.Component {
           <div>Personal Information</div>
           <div>Last updated: A long time ago</div>
           <ButtonWrapper>
-            <StyledButton onClick={this.EditPersonalInfo}>Update Information</StyledButton>
-            <StyledButton onClick={this.HandleSwitchToTOC}>Return to Table of Contents</StyledButton>
+            <StyledButton onClick={this.editPersonalInfo}>Update Information</StyledButton>
+            <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
           </ButtonWrapper>
         </BodyWrapper>
       )
@@ -85,18 +85,18 @@ class PersonalInfo extends React.Component {
       return (
         <BodyWrapper>
           <div>First Name</div>
-          <input type='text' name='firstName' value={this.state.personal.firstName} onChange={this.HandleChange}/>
+          <input type='text' name='firstName' value={this.state.personal.firstName} onChange={this.handleChange}/>
           <div>Last Name</div>
-          <input type='text' name='lastName' value={this.state.personal.lastName} onChange={this.HandleChange}/>
+          <input type='text' name='lastName' value={this.state.personal.lastName} onChange={this.handleChange}/>
           <div>Birthday</div>
-          <input type='text' name='bday'value={this.state.personal.bday} onChange={this.HandleChange}/>
+          <input type='text' name='bday'value={this.state.personal.bday} onChange={this.handleChange}/>
           <div>Food Preference</div>
-          <input type='text' name='foodPreference' value={this.state.personal.foodPreference} onChange={this.HandleChange}/>
+          <input type='text' name='foodPreference' value={this.state.personal.foodPreference} onChange={this.handleChange}/>
           <div>Neighborhood</div>
-          <input type='text' name='neighborhood' value={this.state.personal.neighborhood} onChange={this.HandleChange}/>
+          <input type='text' name='neighborhood' value={this.state.personal.neighborhood} onChange={this.handleChange}/>
           <ButtonWrapper>
-            <StyledButton onClick={this.SavePersonalInfo}>Save</StyledButton>
-            <StyledButton onClick={this.HandleSwitchToTOC}>Return to Table of Contents</StyledButton>
+            <StyledButton onClick={this.savePersonalInfo}>Save</StyledButton>
+            <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>
           </ButtonWrapper>
           <UnsavedWarning
             modalState={this.props.modalState}
