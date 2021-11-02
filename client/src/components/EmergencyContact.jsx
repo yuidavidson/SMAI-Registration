@@ -1,3 +1,7 @@
+/*
+  EDIT: need to add lastUpdated
+*/
+
 import React from 'react';
 import axios from 'axios';
 
@@ -29,17 +33,19 @@ class EmergencyContact extends React.Component {
     }
 
   saveEmergencyContact() {
+
+    let dataEncoded = Object.entries(this.state.emergencyContact).map(e => encodeURIComponent(e[0])+'='+encodeURIComponent(e[1])).join('&')
+    dataEncoded += `&id=${this.props.camperId}`;
+
     if (!this.state.change) {
-      console.log('no changes detect to be saved!');
+      console.log('no changes detected to be saved!');
     } else {
       axios({
         method: 'POST',
-        url: 'https://smai.us/api/save-value',
-        params: {
-          // probably using this.state.emergencyContact
-        },
+        url: 'https://smai.us/api/camper/update',
+        data: dataEncoded,
       })
-      .then((response) => {
+      .then((response)  => {
         console.log('Saved');
         // console.log(response);
         this.setState({change: false});
@@ -78,25 +84,25 @@ class EmergencyContact extends React.Component {
       return (
         <div>
           <div>Contact 1 First Name</div>
-          <input type='text' name='contact1FirstName' value={this.state.emergencyContact.contact1FirstName} onChange={this.handleChange}/>
+          <input type='text' name='emergency1FirstName' value={this.state.emergencyContact.emergency1FirstName} onChange={this.handleChange}/>
           <div>Contact 1 Last Name</div>
-          <input type='text' name='contact1LastName' value={this.state.emergencyContact.contact1LastName} onChange={this.handleChange}/>
+          <input type='text' name='emergency1LastName' value={this.state.emergencyContact.emergency1LastName} onChange={this.handleChange}/>
           <div>Contact 1 Relationship</div>
-          <input type='text' name='contact1Relationship' value={this.state.emergencyContact.contact1Relationship} onChange={this.handleChange}/>
+          <input type='text' name='emergency1Relationship' value={this.state.emergencyContact.emergency1Relationship} onChange={this.handleChange}/>
           <div>Contact 1 Phone Number</div>
-          <input type='text' name='contact1Phone' value={this.state.emergencyContact.contact1Phone} onChange={this.handleChange}/>
+          <input type='text' name='emergency1Phone' value={this.state.emergencyContact.emergency1Phone} onChange={this.handleChange}/>
           <div>Contact 1 Location</div>
-          <input type='text' name='contact1Location' value={this.state.emergencyContact.contact1Location} onChange={this.handleChange}/>
+          <input type='text' name='emergency1Location' value={this.state.emergencyContact.emergency1Location} onChange={this.handleChange}/>
           <div>Contact 2 First Name</div>
-          <input type='text' name='contact2FirstName' value={this.state.emergencyContact.contact2FirstName} onChange={this.handleChange}/>
+          <input type='text' name='emergency2FirstName' value={this.state.emergencyContact.emergency2FirstName} onChange={this.handleChange}/>
           <div>Contact 2 Last Name</div>
-          <input type='text' name='contact2LastName' value={this.state.emergencyContact.contact2LastName} onChange={this.handleChange}/>
+          <input type='text' name='emergency2LastName' value={this.state.emergencyContact.emergency2LastName} onChange={this.handleChange}/>
           <div>Contact 2 Relationship</div>
-          <input type='text' name='contact2Relationship' value={this.state.emergencyContact.contact2Relationship} onChange={this.handleChange}/>
+          <input type='text' name='emergency2Relationship' value={this.state.emergencyContact.emergency2Relationship} onChange={this.handleChange}/>
           <div>Contact 2 Phone Number</div>
-          <input type='text' name='contact2Phone' value={this.state.emergencyContact.contact2Phone} onChange={this.handleChange}/>
+          <input type='text' name='emergency2Phone' value={this.state.emergencyContact.emergency2Phone} onChange={this.handleChange}/>
           <div>Contact 2 Location</div>
-          <input type='text' name='contact2Location' value={this.state.emergencyContact.contact2Location} onChange={this.handleChange}/>
+          <input type='text' name='emergency2Location' value={this.state.emergencyContact.emergency2Location} onChange={this.handleChange}/>
           <ButtonWrapper>
             <StyledButton onClick={this.saveEmergencyContact}>Save</StyledButton>
             <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>

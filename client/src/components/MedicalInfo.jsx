@@ -1,3 +1,7 @@
+/*
+  EDIT: need to add lastUpdated
+*/
+
 import React from 'react';
 import axios from 'axios';
 
@@ -31,19 +35,21 @@ class MedicalInfo extends React.Component {
   }
 
   saveMedicalInfo() {
+
+    let dataEncoded = Object.entries(this.state.medicalInformation).map(e => encodeURIComponent(e[0])+'='+encodeURIComponent(e[1])).join('&')
+    dataEncoded += `&id=${this.props.camperId}`;
+
     if (!this.state.change) {
-      console.log('no changes detect to be saved!');
+      console.log('no changes detected to be saved!');
     } else {
       axios({
         method: 'POST',
-        url: 'https://smai.us/api/save-value',
-        params: {
-          // probably using this.state.medicalInfo
-        },
+        url: 'https://smai.us/api/camper/update',
+        data: dataEncoded,
       })
-      .then((response) => {
+      .then((response)  => {
         console.log('Saved');
-        // console.log(response);
+        console.log(response);
         this.setState({change: false});
       })
       .catch((error) => {
@@ -64,11 +70,12 @@ class MedicalInfo extends React.Component {
     }
   }
 
+  // used for boolSwitch for medicalHasAsthma
+  // EDIT: to be changed to also work for allergies
   onUpdate(value) {
     let newData = this.state.medicalInformation;
-    newData.asthma = value;
+    newData.medicalHasAsthma = value;
     this.setState({medicalInformation: newData, change: true});
-    console.log(this.state.medicalInformation.asthma);
   }
 
   render() {
@@ -88,18 +95,19 @@ class MedicalInfo extends React.Component {
         <BodyWrapper>
           <div>Medical Conditions</div>
           <input type='text' name='medicalCondition' value={this.state.medicalInformation.medicalCondition} onChange={this.handleChange}/>
+          {/* EDIT: to be changed to be a bool switch */}
           <div>Allergies</div>
-          <input type='text' name='allergy' value={this.state.medicalInformation.allergy} onChange={this.handleChange}/>
+          <input type='text' name='medicalHasAllergy' value={this.state.medicalInformation.medicalHasAllergy} onChange={this.handleChange}/>
           <div>Asthma</div>
-          <BoolSwitch isOn={this.state.medicalInformation.asthma} onUpdate={this.onUpdate}></BoolSwitch>
+          <BoolSwitch isOn={this.state.medicalInformation.medicalHasAsthma} onUpdate={this.onUpdate}></BoolSwitch>
           <div>Plan</div>
-          <input type='text' name='plan' value={this.state.medicalInformation.plan} onChange={this.handleChange}/>
+          <input type='text' name='medicalPlan' value={this.state.medicalInformation.medicalPlan} onChange={this.handleChange}/>
           <div>Doctor</div>
-          <input type='text' name='doctor' value={this.state.medicalInformation.doctor} onChange={this.handleChange}/>
+          <input type='text' name='medicalDoctor' value={this.state.medicalInformation.medicalDoctor} onChange={this.handleChange}/>
           <div>Hospital</div>
-          <input type='text' name='hospital' value={this.state.medicalInformation.hospital} onChange={this.handleChange}/>
+          <input type='text' name='medicalHospital' value={this.state.medicalInformation.medicalHospital} onChange={this.handleChange}/>
           <div>Special Needs</div>
-          <input type='text' name='specialNeeds' value={this.state.medicalInformation.specialNeeds} onChange={this.handleChange}/>
+          <input type='text' name='medicalSpecialNeeds' value={this.state.medicalInformation.medicalSpecialNeeds} onChange={this.handleChange}/>
           <ButtonWrapper>
             <StyledButton onClick={this.saveMedicalInfo}>Save</StyledButton>
             <StyledButton onClick={this.handleSwitchToTOC}>Return to Table of Contents</StyledButton>

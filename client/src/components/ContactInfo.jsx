@@ -29,15 +29,17 @@ class ContactInfo extends React.Component {
   }
 
   saveContactInfo() {
+
+    let dataEncoded = Object.entries(this.state.contact).map(e => encodeURIComponent(e[0])+'='+encodeURIComponent(e[1])).join('&')
+    dataEncoded += `&id=${this.props.camperId}`;
+
     if (!this.state.change) {
       console.log('no changes detected to be saved!');
     } else {
       axios({
         method: 'POST',
-        url: 'https://smai.us/api/save-value',
-        params: {
-          // probably using this.state.personal
-        },
+        url: 'https://smai.us/api/camper/update',
+        data: dataEncoded,
       })
       .then((response)  => {
         console.log('Saved');

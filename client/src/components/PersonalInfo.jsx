@@ -67,8 +67,6 @@ class PersonalInfo extends React.Component {
     }
   }
 
-
-
   render() {
     if (!this.state.step) {
       return (
@@ -89,7 +87,7 @@ class PersonalInfo extends React.Component {
           <div>Last Name</div>
           <input type='text' name='lastName' value={this.state.personal.lastName} onChange={this.HandleChange}/>
           <div>Birthday</div>
-          <input type='text' name='bday' value={this.state.personal.bday} onChange={this.HandleChange}/>
+          <input type='text' name='bday'value={this.state.personal.bday} onChange={this.HandleChange}/>
           <div>Food Preference</div>
           <input type='text' name='foodPreference' value={this.state.personal.foodPreference} onChange={this.HandleChange}/>
           <div>Neighborhood</div>
