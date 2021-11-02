@@ -93,6 +93,7 @@ class App extends React.Component {
       ],
       currentCamper: {
         camper: '',
+        camperId: '',
         personal: {
           firstName: 'Joshua',
           lastName: 'Freeman',
@@ -214,6 +215,7 @@ class App extends React.Component {
       let data = response.data.data.values;
       let newData = {
         camper: data.firstName + ' ' + data.lastName,
+        camperId: partyMemberId,
         personal: {
           firstName: data.firstName,
           lastName: data.lastName,
@@ -338,6 +340,7 @@ class App extends React.Component {
           </div>
           <PersonalInfo
             personal={this.state.currentCamper.personal}
+            camperId={this.state.currentCamper.camperId}
             switchStep={this.switchStep}
             modalState={this.state.modalState}
             switchAndClose={this.switchAndClose}
