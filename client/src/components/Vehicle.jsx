@@ -30,17 +30,19 @@ class Vehicle extends React.Component {
   }
 
   saveVehicleInfo() {
+
+    let dataEncoded = Object.entries(this.state.vehicle).map(e => encodeURIComponent(e[0])+'='+encodeURIComponent(e[1])).join('&')
+    dataEncoded += `&id=${this.props.camperId}`;
+
     if (!this.state.change) {
-      console.log('no changes detect to be saved!');
+      console.log('no changes detected to be saved!');
     } else {
       axios({
         method: 'POST',
-        url: 'https://smai.us/api/save-value',
-        params: {
-          // probably using this.state.vehcile
-        },
+        url: 'https://smai.us/api/camper/update',
+        data: dataEncoded,
       })
-      .then((response) => {
+      .then((response)  => {
         console.log('Saved');
         // console.log(response);
         this.setState({change: false});

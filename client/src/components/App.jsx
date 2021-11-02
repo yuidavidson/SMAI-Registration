@@ -43,7 +43,7 @@ class App extends React.Component {
       account: 'SMF034',
       camper: 'Joshua Freeman',
       event: 'Mill 2022',
-      neighborhoodkey: {
+      neighborhoodKey: {
         1: 'American Hill',
         2: 'Balkan Camp',
         3: 'Car Camp',
@@ -121,27 +121,27 @@ class App extends React.Component {
           vehicle2State: 'WA',
         },
         emergencyContact: {
-          contact1FirstName: 'Dad',
-          contact1LastName: 'Dadson',
-          contact1Relationship: 'Dad',
-          contact1Phone: '8475927',
-          contact1Location: 'Home',
-          contact2FirstName: 'Bro',
-          contact2LastName: 'Dadson',
-          contact2Relationship: 'Bro',
-          contact2Phone: '8469932',
-          contact2Location: 'Haven',
-          lastUpdated: null,
+          emergency1FirstName: 'Dad',
+          emergency1LastName: 'Dadson',
+          emergency1Relationship: 'Dad',
+          emergency1Phone: '8475927',
+          emergency1Location: 'Home',
+          emergency2FirstName: 'Bro',
+          emergency2LastName: 'Dadson',
+          emergency2Relationship: 'Bro',
+          emergency2Phone: '8469932',
+          emergency2Location: 'Haven',
+          emergencyLastUpdated: null,
         },
         medicalInformation: {
           medicalCondition: 'Always mad',
-          allergy: 'nuts',
-          asthma: false,
-          plan: 'I\'m planing',
-          doctor: 'DR. Fwoop',
-          hospital: 'somewhere',
-          specialNeeds: 'cuddles',
-          lastUpdated: 'I can\'t remember',
+          medicalHasAllergy: 'nuts',
+          medicalHasAsthma: false,
+          medicalPlan: 'I\'m planing',
+          medicalDoctor: 'DR. Fwoop',
+          medicalHospital: 'somewhere',
+          medicalSpecialNeeds: 'cuddles',
+          medicalLastUpdated: 'I can\'t remember',
         },
         neighborhood: 'Balkan Camp',
         sessions: [
@@ -243,27 +243,27 @@ class App extends React.Component {
           vehicle2State: data.vehicle2State,
         },
         emergencyContact: {
-          contact1FirstName: data.emergency1FirstName,
-          contact1LastName: data.emergency1LastName,
-          contact1Relationship: data.emergency1Relationship,
-          contact1Phone: data.emergency1Phone,
-          contact1Location: data.emergency1Location,
-          contact2FirstName: data.emergency2FirstName,
-          contact2LastName: data.emergency2LastName,
-          contact2Relationship: data.emergency2Relationship,
-          contact2Phone: data.emergency2Phone,
-          contact2Location: data.emergency2Location,
-          lastUpdated: data.emergencyLastUpdated,
+          emergency1FirstName: data.emergency1FirstName,
+          emergency1LastName: data.emergency1LastName,
+          emergency1Relationship: data.emergency1Relationship,
+          emergency1Phone: data.emergency1Phone,
+          emergency1Location: data.emergency1Location,
+          emergency2FirstName: data.emergency2FirstName,
+          emergency2LastName: data.emergency2LastName,
+          emergency2Relationship: data.emergency2Relationship,
+          emergency2Phone: data.emergency2Phone,
+          emergency2Location: data.emergency2Location,
+          emergencyLastUpdated: data.emergencyLastUpdated,
         },
         medicalInformation: {
           medicalCondition: data.medicalCondition,
-          allergy: data.medicalHasAllergy,
-          asthma: data.medicalHasAsthma,
-          plan: data.medicalPlan,
-          doctor: data.medicalDoctor,
-          hospital: data.medicalHospital,
-          specialNeeds: data.medicalSpecialNeeds,
-          lastUpdated: data.medicalLastUpdated,
+          medicalHasAllergy: data.medicalHasAllergy,
+          medicalHasAsthma: data.medicalHasAsthma,
+          medicalPlan: data.medicalPlan,
+          medicalDoctor: data.medicalDoctor,
+          medicalHospital: data.medicalHospital,
+          medicalSpecialNeeds: data.medicalSpecialNeeds,
+          medicalLastUpdated: data.medicalLastUpdated,
         },
         neighborhood: data.neighborhood,
         sessions: [
@@ -363,6 +363,7 @@ class App extends React.Component {
           <div>Registering {this.state.currentCamper.camper}</div>
           <ContactInfo
             contact={this.state.currentCamper.contact}
+            camperId={this.state.currentCamper.camperId}
             switchStep={this.switchStep}
           />
         </div>
@@ -381,6 +382,7 @@ class App extends React.Component {
           <div>Registering {this.state.currentCamper.camper}</div>
           <Vehicle
             vehicle={this.state.currentCamper.vehicle}
+            camperId={this.state.currentCamper.camperId}
             switchStep={this.switchStep}
           />
         </div>
@@ -400,6 +402,7 @@ class App extends React.Component {
           <div>Registering {this.state.currentCamper.camper}</div>
           <EmergencyContact
             emergencyContact={this.state.currentCamper.emergencyContact}
+            camperId={this.state.currentCamper.camperId}
             switchStep={this.switchStep}
           />
         </div>
@@ -418,6 +421,7 @@ class App extends React.Component {
           <div>Registering {this.state.currentCamper.camper}</div>
           <MedicalInfo
             medicalInformation={this.state.currentCamper.medicalInformation}
+            camperId={this.state.currentCamper.camperId}
             switchStep={this.switchStep}
           />
         </div>
@@ -436,6 +440,8 @@ class App extends React.Component {
           <div>Registering {this.state.currentCamper.camper}</div>
           <Neighborhood
             neighborhood={this.state.currentCamper.neighborhood}
+            camperId={this.state.currentCamper.camperId}
+            neighborhoodKey={this.state.neighborhoodKey}
             switchStep={this.switchStep}
           />
         </div>
@@ -454,6 +460,7 @@ class App extends React.Component {
           <div>Registering {this.state.currentCamper.camper}</div>
           <Sessions
             sessions={this.state.currentCamper.sessions}
+            camperId={this.state.currentCamper.camperId}
             switchStep={this.switchStep}
           />
         </div>

@@ -11,6 +11,7 @@ class Neighborhood extends React.Component {
       value: '',
       change: false,
       neighborhood: props.neighborhood,
+      neighborhoodName: props.neighborhoodKey[props.neighborhood],
       switchStep: props.switchStep,
     }
     this.editNeighborhood = this.editNeighborhood.bind(this);
@@ -37,6 +38,8 @@ class Neighborhood extends React.Component {
     this.setState({ neighborhood: editedCamper, change: true });
   }
 
+  // EDIT: not even using this method, most likely delete later
+
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state.value);
@@ -44,18 +47,19 @@ class Neighborhood extends React.Component {
 
 
   saveNeighborhood() {
-    // The or with this.state.neighborhood may be overkill and may be removed later, but it's there to be safe
-    if (!this.state.change || this.state.neighborhood === 'Choose a Neighborhood') {
-      console.log('no changes detect to be saved!');
+
+    let dataEncoded = Object.entries(this.state.neighborhood).map(e => encodeURIComponent(e[0])+'='+encodeURIComponent(e[1])).join('&')
+    dataEncoded += `&id=${this.props.camperId}`;
+
+    if (!this.state.change) {
+      console.log('no changes detected to be saved!');
     } else {
       axios({
         method: 'POST',
-        url: 'https://smai.us/api/save-value',
-        params: {
-          // probably using this.state.vehcile
-        },
+        url: 'https://smai.us/api/camper/update',
+        data: dataEncoded,
       })
-      .then((response) => {
+      .then((response)  => {
         console.log('Saved');
         // console.log(response);
         this.setState({change: false});
