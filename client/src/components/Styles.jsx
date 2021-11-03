@@ -40,12 +40,11 @@ export const HeaderBottom = styled.div`
   padding: 1px;
 `;
 
-// EDIT: eventually when I have access to the frog image, this div should be changed to img
-export const ImageWrapper = styled.div`
+export const ImageWrapper = styled.img`
   height: 60px;
   width: 60px;
   // don't need this after the image is placed
-  text-align: center;
+  align-items: center;
   margin: 1px;
   border: solid 1px black;
   border-radius: 60px;
