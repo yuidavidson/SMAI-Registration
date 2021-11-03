@@ -18,7 +18,11 @@ module.exports = {
         options: {
           presets: ['@babel/preset-env', '@babel/preset-react']
        }
-      }
+      },
+      {
+        test: /\.(jpg|png|svg)$/,
+        loader: 'url-loader',
+      },
     ]
   }
 };
