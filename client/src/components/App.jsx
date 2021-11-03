@@ -12,7 +12,7 @@ import axios from 'axios';
 import Navigation from './Navigation.jsx';
 import Register from './Register.jsx';
 import TableOfContents from './TableOfContents.jsx';
-import PersonalInfo from './PersonalInfo.jsx';
+import CamperInfoStep from './CamperInfoStep.jsx';
 import ContactInfo from './ContactInfo.jsx';
 import Vehicle from './Vehicle.jsx';
 import EmergencyContact from './EmergencyContact.jsx';
@@ -232,17 +232,13 @@ class App extends React.Component {
           <div>Registering
             {this.getCamperFullName()}
           </div>
-          <PersonalInfo
-            name='personal'
-            personal={this.state.currentCamper.getStepValues('personal')}
-            updateCamper={this.updateCamper}
-            stepConfig={this.state.currentCamper.getStepConfig('personal')}
-            camperId={this.state.currentCamper.camperId}
-            switchStep={this.switchStep}
-            modalState={this.state.modalState}
-            switchAndClose={this.switchAndClose}
-            openModal={this.openModal}
-            closeModal={this.closeModal}
+          <CamperInfoStep
+              camperId={this.state.currentCamper.camperId}
+              step={this.state.currentCamper.getStepConfig('personal')}
+              data={this.state.currentCamper.getStepValues('personal')}
+              leaveStep={this.switchStep.bind(this, 'toc')}
+              gotoStep={this.switchStep}
+              onSavedData={this.updateCamper}
           />
         </div>
       )
