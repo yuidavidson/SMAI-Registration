@@ -37,7 +37,7 @@ export default class CamperModel {
                 'vehicle2State',
             ]
         },
-        emergencyContact: {
+        emergency: {
             id: 'emergency',
             label: "Emergency Contacts",
             fields: [
@@ -54,7 +54,7 @@ export default class CamperModel {
                 'emergencyLastUpdated',
             ]
         },
-        medicalInformation: {
+        medical: {
             id: 'medical',
             label: 'Medical Information',
             fields: [
