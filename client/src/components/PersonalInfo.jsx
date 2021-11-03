@@ -33,20 +33,25 @@ class PersonalInfo extends React.Component {
   }
 
   SavePersonalInfo() {
+    let dataEncoded = Object.entries(this.state.personal).map(e => encodeURIComponent(e[0])+'='+encodeURIComponent(e[1])).join('&')
+    dataEncoded += `&id=${this.props.camperId}`;
+
     if (!this.state.change) {
       console.log('no changes detected to be saved!');
     } else {
       axios({
         method: 'POST',
-        url: 'https://smai.us/api/save-value',
-        params: {
-          // probably using this.state.personal
-        },
+        url: 'https://smai.us/api/camper/update',
+        data: dataEncoded,
       })
       .then((response)  => {
-        console.log('Saved');
-        // console.log(response);
-        this.setState({change: false});
+        console.log(response);
+        if (response.data.status === 'success') {
+          this.props.updateCamper(this.props.name, this.state.personal);
+          this.setState({change: false});
+        } else {
+          console.log('Sorry, something went wrong: ' + response.error);
+        }
       })
       .catch((error) => {
         console.log('Sorry, something went wrong');
@@ -84,7 +89,7 @@ class PersonalInfo extends React.Component {
       return (
         <BodyWrapper>
             {this.stepConfig.fields.map(fieldName =>
-                <div>
+                <div key={fieldName}>
                     <div>{fieldName}</div>
                     <input type='text' name={fieldName} value={this.state.personal[fieldName]} onChange={this.HandleChange}/>
                 </div>

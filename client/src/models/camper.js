@@ -65,6 +65,10 @@ export default class CamperModel {
         }
     };
 
+    /**
+     *
+     * @param {CamperModel} camper
+     */
     constructor(camper) {
         this.camperId = camper.camperId;
         this.firstName = camper.firstName;
@@ -113,10 +117,21 @@ export default class CamperModel {
         this.sessions.push(session);
     }
 
-    getStepFieldsValues(step) {
+    /**
+     * Get all the values of camper for this step only
+     * @param {string} step
+     * @returns {object}
+     */
+    getStepValues(step) {
         const stepFields = {};
         CamperModel.stepFieldsMap[step].fields.forEach(f => stepFields[f] = this[f]);
         return stepFields;
+    }
+    updateStepValues(step, values, isMakeNewObject=false) {
+        CamperModel.stepFieldsMap[step].fields.forEach(f => this[f] = values[f]);
+        if (isMakeNewObject) {
+            return new CamperModel(this);
+        }
     }
     getStepConfig(step) {
         return CamperModel.stepFieldsMap[step];
