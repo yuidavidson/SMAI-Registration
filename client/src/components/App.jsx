@@ -112,6 +112,8 @@ class App extends React.Component {
     this.switchAndClose = this.switchAndClose.bind(this);
 
     this.setCurrentCamper = this.setCurrentCamper.bind(this);
+
+    this.updateCamper = this.updateCamper.bind(this);
   }
 
   getCamperFullName() {
@@ -119,6 +121,14 @@ class App extends React.Component {
       return 'anonymous';
     }
     return this.state.currentCamper.firstName + ' ' + this.state.currentCamper.lastName;
+  }
+
+  updateCamper(step, values) {
+    if (!this.state.currentCamper) {
+      return;
+    }
+
+    this.setState({currentCamper: this.state.currentCamper.updateStepValues(step, values, true) } );
   }
   // EDIT: when back-end is ready, should call for the party members of the user
   // componentDidMount() {
@@ -223,7 +233,9 @@ class App extends React.Component {
             {this.getCamperFullName()}
           </div>
           <PersonalInfo
-            personal={this.state.currentCamper.getStepFieldsValues('personal')}
+            name='personal'
+            personal={this.state.currentCamper.getStepValues('personal')}
+            updateCamper={this.updateCamper}
             stepConfig={this.state.currentCamper.getStepConfig('personal')}
             camperId={this.state.currentCamper.camperId}
             switchStep={this.switchStep}
