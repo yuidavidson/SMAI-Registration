@@ -128,7 +128,7 @@ class App extends React.Component {
       return;
     }
 
-    this.setState({currentCamper: this.state.currentCamper.updateStepValues(step, values, true) } );
+    this.setState({currentCamper: this.state.currentCamper.updateStepValues(step.id, values, true) } );
   }
   // EDIT: when back-end is ready, should call for the party members of the user
   // componentDidMount() {

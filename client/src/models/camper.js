@@ -1,6 +1,7 @@
 export default class CamperModel {
     static stepFieldsMap = {
         personal: {
+            id: 'personal',
             label: 'Personal Info',
             fields: [
                 'firstName',
@@ -11,6 +12,7 @@ export default class CamperModel {
             ]
         },
         contact: {
+            id: 'contact',
             label: "Contact Information",
             fields: [
                 'address',
@@ -24,6 +26,7 @@ export default class CamperModel {
             ]
         },
         vehicle: {
+            id: 'vehicle',
             label: "Vehicle Information",
             fields: [
                 'vehicle1Model',
@@ -35,6 +38,7 @@ export default class CamperModel {
             ]
         },
         emergencyContact: {
+            id: 'emergency',
             label: "Emergency Contacts",
             fields: [
                 'emergency1FirstName',
@@ -51,6 +55,7 @@ export default class CamperModel {
             ]
         },
         medicalInformation: {
+            id: 'medical',
             label: 'Medical Information',
             fields: [
                 'medicalCondition',
@@ -127,8 +132,8 @@ export default class CamperModel {
         CamperModel.stepFieldsMap[step].fields.forEach(f => stepFields[f] = this[f]);
         return stepFields;
     }
-    updateStepValues(step, values, isMakeNewObject=false) {
-        CamperModel.stepFieldsMap[step].fields.forEach(f => this[f] = values[f]);
+    updateStepValues(stepId, values, isMakeNewObject=false) {
+        CamperModel.stepFieldsMap[stepId].fields.forEach(f => this[f] = values[f]);
         if (isMakeNewObject) {
             return new CamperModel(this);
         }
