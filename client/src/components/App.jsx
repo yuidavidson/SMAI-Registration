@@ -254,10 +254,13 @@ class App extends React.Component {
             stepKey={this.state.stepKey}
           ></Navigation>
           <div>Registering {this.getCamperFullName()}</div>
-          <ContactInfo
-            contact={this.state.currentCamper.contact}
-            camperId={this.state.currentCamper.camperId}
-            switchStep={this.switchStep}
+          <CamperInfoStep
+              camperId={this.state.currentCamper.camperId}
+              step={this.state.currentCamper.getStepConfig(this.state.step)}
+              data={this.state.currentCamper.getStepValues(this.state.step)}
+              leaveStep={this.switchStep.bind(this, 'toc')}
+              gotoStep={this.switchStep}
+              onSavedData={this.updateCamper}
           />
         </div>
       )
@@ -273,10 +276,13 @@ class App extends React.Component {
             stepKey={this.state.stepKey}
           ></Navigation>
           <div>Registering {this.getCamperFullName()}</div>
-          <Vehicle
-            vehicle={this.state.currentCamper.vehicle}
-            camperId={this.state.currentCamper.camperId}
-            switchStep={this.switchStep}
+          <CamperInfoStep
+              camperId={this.state.currentCamper.camperId}
+              step={this.state.currentCamper.getStepConfig(this.state.step)}
+              data={this.state.currentCamper.getStepValues(this.state.step)}
+              leaveStep={this.switchStep.bind(this, 'toc')}
+              gotoStep={this.switchStep}
+              onSavedData={this.updateCamper}
           />
         </div>
       )
@@ -293,10 +299,13 @@ class App extends React.Component {
             stepKey={this.state.stepKey}
           ></Navigation>
           <div>Registering {this.getCamperFullName()}</div>
-          <EmergencyContact
-            emergencyContact={this.state.currentCamper.emergencyContact}
-            camperId={this.state.currentCamper.camperId}
-            switchStep={this.switchStep}
+          <CamperInfoStep
+              camperId={this.state.currentCamper.camperId}
+              step={this.state.currentCamper.getStepConfig(this.state.step)}
+              data={this.state.currentCamper.getStepValues(this.state.step)}
+              leaveStep={this.switchStep.bind(this, 'toc')}
+              gotoStep={this.switchStep}
+              onSavedData={this.updateCamper}
           />
         </div>
       )
@@ -312,10 +321,13 @@ class App extends React.Component {
             stepKey={this.state.stepKey}
           ></Navigation>
           <div>Registering {this.getCamperFullName()}</div>
-          <MedicalInfo
-            medicalInformation={this.state.currentCamper.medicalInformation}
-            camperId={this.state.currentCamper.camperId}
-            switchStep={this.switchStep}
+          <CamperInfoStep
+              camperId={this.state.currentCamper.camperId}
+              step={this.state.currentCamper.getStepConfig(this.state.step)}
+              data={this.state.currentCamper.getStepValues(this.state.step)}
+              leaveStep={this.switchStep.bind(this, 'toc')}
+              gotoStep={this.switchStep}
+              onSavedData={this.updateCamper}
           />
         </div>
       )
