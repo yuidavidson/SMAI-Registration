@@ -2,7 +2,7 @@ import React from 'react';
 
 import { BodyWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
 
-const TableOfContents = (props) => {
+const Camper = (props) => {
   return (
     <BodyWrapper>
       <div>Registeration Table of Contents</div>
@@ -37,4 +37,4 @@ const TableOfContents = (props) => {
   )
 }
 
-export default TableOfContents;
+export default Camper;

@@ -11,15 +11,10 @@ import axios from 'axios';
 
 import Navigation from './Navigation.jsx';
 import Register from './Register.jsx';
-import TableOfContents from './TableOfContents.jsx';
+import Camper from './Camper.jsx';
 import CamperInfoStep from './CamperInfoStep.jsx';
-import ContactInfo from './ContactInfo.jsx';
-import Vehicle from './Vehicle.jsx';
-import EmergencyContact from './EmergencyContact.jsx';
-import MedicalInfo from './MedicalInfo.jsx';
 import Neighborhood from './Neighborhood.jsx';
 import Sessions from './Sessions.jsx';
-import { BodyWrapper, StyledButton } from './Styles.jsx';
 
 import CamperModel from '../models/camper';
 
@@ -211,14 +206,19 @@ class App extends React.Component {
             stepKey={this.state.stepKey}
           ></Navigation>
           <div>Registering {this.getCamperFullName()}</div>
-          <TableOfContents
+          <Camper
             switchStep={this.switchStep}
           />
           {/* <StyledButton
             onClick={() => this.switchStep('register')}>Back to All</StyledButton> */}
         </div>
       )
-    } else if (this.state.step === 'personal') {
+    } else if (this.state.step === 'personal'
+        || this.state.step === 'contact'
+        || this.state.step === 'vehicle'
+        || this.state.step === 'medical'
+        || this.state.step === 'emergency'
+    ) {
       return (
         <div>
           <Navigation
@@ -239,115 +239,6 @@ class App extends React.Component {
               leaveStep={this.switchStep.bind(this, 'toc')}
               gotoStep={this.switchStep}
               onSavedData={this.updateCamper}
-          />
-        </div>
-      )
-    } else if (this.state.step === 'contact') {
-      return (
-        <div>
-          <Navigation
-            camper={this.state.camper}
-            event={this.state.event}
-            currentCamper={this.getCamperFullName()}
-            step={this.state.step}
-            switchStep={this.switchStep}
-            stepKey={this.state.stepKey}
-          ></Navigation>
-          <div>Registering {this.getCamperFullName()}</div>
-          <CamperInfoStep
-              camperId={this.state.currentCamper.camperId}
-              step={this.state.currentCamper.getStepConfig(this.state.step)}
-              data={this.state.currentCamper.getStepValues(this.state.step)}
-              leaveStep={this.switchStep.bind(this, 'toc')}
-              gotoStep={this.switchStep}
-              onSavedData={this.updateCamper}
-          />
-        </div>
-      )
-    } else if (this.state.step === 'vehicle') {
-      return (
-        <div>
-          <Navigation
-            camper={this.state.camper}
-            event={this.state.event}
-            currentCamper={this.getCamperFullName()}
-            step={this.state.step}
-            switchStep={this.switchStep}
-            stepKey={this.state.stepKey}
-          ></Navigation>
-          <div>Registering {this.getCamperFullName()}</div>
-          <CamperInfoStep
-              camperId={this.state.currentCamper.camperId}
-              step={this.state.currentCamper.getStepConfig(this.state.step)}
-              data={this.state.currentCamper.getStepValues(this.state.step)}
-              leaveStep={this.switchStep.bind(this, 'toc')}
-              gotoStep={this.switchStep}
-              onSavedData={this.updateCamper}
-          />
-        </div>
-      )
-    }
-    else if (this.state.step === 'emergency') {
-      return (
-        <div>
-          <Navigation
-            camper={this.state.camper}
-            event={this.state.event}
-            currentCamper={this.getCamperFullName()}
-            step={this.state.step}
-            switchStep={this.switchStep}
-            stepKey={this.state.stepKey}
-          ></Navigation>
-          <div>Registering {this.getCamperFullName()}</div>
-          <CamperInfoStep
-              camperId={this.state.currentCamper.camperId}
-              step={this.state.currentCamper.getStepConfig(this.state.step)}
-              data={this.state.currentCamper.getStepValues(this.state.step)}
-              leaveStep={this.switchStep.bind(this, 'toc')}
-              gotoStep={this.switchStep}
-              onSavedData={this.updateCamper}
-          />
-        </div>
-      )
-    } else if (this.state.step === 'medical') {
-      return (
-        <div>
-          <Navigation
-            camper={this.state.camper}
-            event={this.state.event}
-            currentCamper={this.getCamperFullName()}
-            step={this.state.step}
-            switchStep={this.switchStep}
-            stepKey={this.state.stepKey}
-          ></Navigation>
-          <div>Registering {this.getCamperFullName()}</div>
-          <CamperInfoStep
-              camperId={this.state.currentCamper.camperId}
-              step={this.state.currentCamper.getStepConfig(this.state.step)}
-              data={this.state.currentCamper.getStepValues(this.state.step)}
-              leaveStep={this.switchStep.bind(this, 'toc')}
-              gotoStep={this.switchStep}
-              onSavedData={this.updateCamper}
-          />
-        </div>
-      )
-    } else if (this.state.step === 'neighborhood') {
-      return (
-        <div>
-          <Navigation
-            camper={this.state.camper}
-            event={this.state.event}
-            currentCamper={this.getCamperFullName()}
-            step={this.state.step}
-            switchStep={this.switchStep}
-            stepKey={this.state.stepKey}
-          ></Navigation>
-          <div>Registering {this.getCamperFullName()}</div>
-          <Neighborhood
-            neighborhood={this.state.currentCamper.neighborhood}
-            camperId={this.state.currentCamper.camperId}
-            neighborhoodKey={this.state.neighborhoodKey}
-            switchStep={this.switchStep}
           />
         </div>
       )

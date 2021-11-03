@@ -1,5 +1,5 @@
 export default class CamperModel {
-    static stepFieldsMap = {
+    static steps = {
         personal: {
             id: 'personal',
             label: 'Personal Info',
@@ -124,25 +124,25 @@ export default class CamperModel {
 
     /**
      * Get all the values of camper for this step only
-     * @param {string} step
+     * @param {string} stepId
      * @returns {object}
      */
-    getStepValues(step) {
-        const stepFields = {};
-        CamperModel.stepFieldsMap[step].fields.forEach(f => stepFields[f] = this[f]);
-        return stepFields;
+    getStepValues(stepId) {
+        const values = {};
+        CamperModel.steps[stepId].fields.forEach(f => values[f] = this[f]);
+        return values;
     }
     updateStepValues(stepId, values, isMakeNewObject=false) {
-        CamperModel.stepFieldsMap[stepId].fields.forEach(f => this[f] = values[f]);
+        CamperModel.steps[stepId].fields.forEach(f => this[f] = values[f]);
         if (isMakeNewObject) {
             return new CamperModel(this);
         }
     }
-    getStepConfig(step) {
-        return CamperModel.stepFieldsMap[step];
+    getStepConfig(stepId) {
+        return CamperModel.steps[stepId];
     }
 
     static getSteps() {
-        return Object.keys(CamperModel.stepFieldsMap);
+        return Object.keys(CamperModel.steps);
     }
 }
