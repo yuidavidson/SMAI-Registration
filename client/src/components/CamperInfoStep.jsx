@@ -11,11 +11,15 @@ export default class CamperInfoStep extends React.Component {
 
     this.state = {
       camperId: props.camperId,
-      data: props.data,
+      localData: {},
       hasChanged: false,
       isEditMode: false,
       currentModal: null
     };
+
+    this.data = props.data;
+    this.oldData = {};
+    Object.assign(this.oldData, props.data);
 
     this.step = props.step;
     this.gotoStep = props.gotoStep;
@@ -40,21 +44,21 @@ export default class CamperInfoStep extends React.Component {
   }
 
   editForceCancel() {
+    this.data = Object.assign({}, this.oldData); // revert to old data
     this.setState({isEditMode: false, hasChanged: false});
     this.hideModal();
   }
 
   onEdit(e) {
-    let editedData = this.state.data;
-    if (editedData[e.target.name] === e.target.value) {
+    if (this.data[e.target.name] === e.target.value) {
       return;
     }
-    editedData[e.target.name] = e.target.value;
-    this.setState({data: editedData, hasChanged: true});
+    this.data[e.target.name] = e.target.value;
+    this.setState({hasChanged: true});
   }
 
   save() {
-    let dataEncoded = Object.entries(this.state.data).map(e => encodeURIComponent(e[0])+'='+encodeURIComponent(e[1])).join('&');
+    let dataEncoded = Object.entries(this.data).map(e => encodeURIComponent(e[0])+'='+encodeURIComponent(e[1])).join('&');
     dataEncoded += `&id=${this.state.camperId}`;
 
     if (!this.state.hasChanged) {
@@ -68,7 +72,7 @@ export default class CamperInfoStep extends React.Component {
       .then((response)  => {
         console.log(response);
         if (response.data.status === 'success') {
-          this.onSavedData(this.step, this.state.data);
+          this.onSavedData(this.step, this.data);
           this.setState({hasChanged: false, isEditMode: false, saveError: ''});
         } else {
           this.setState({saveError: response.error});
@@ -99,10 +103,10 @@ export default class CamperInfoStep extends React.Component {
                 {this.state.isEditMode ?
                     <input type='text'
                            name={fieldName}
-                           value={this.state.data[fieldName]}
+                           value={this.data[fieldName]}
                            onChange={this.onEdit}
                     /> :
-                    <div>{this.state.data[fieldName]}</div>
+                    <div>{this.data[fieldName]}</div>
                 }
               </div>
             )
