@@ -19,8 +19,8 @@ export function DropDown(props) {
 
 export function Option(props) {
   return (
-    <StyledOption selected={props.selected}>
-      {props.value}
+    <StyledOption value={props.value} name={props.name} selected={props.selected}>
+      {props.name}
     </StyledOption>
   );
 }
