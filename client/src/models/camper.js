@@ -70,6 +70,10 @@ export default class CamperModel {
         }
     };
 
+    static getSteps() {
+        return Object.keys(CamperModel.steps);
+    }
+
     /**
      *
      * @param {CamperModel} camper
@@ -140,9 +144,5 @@ export default class CamperModel {
     }
     getStepConfig(stepId) {
         return CamperModel.steps[stepId];
-    }
-
-    static getSteps() {
-        return Object.keys(CamperModel.steps);
     }
 }
