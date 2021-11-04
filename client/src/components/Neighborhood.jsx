@@ -33,9 +33,9 @@ class Neighborhood extends React.Component {
   // }
 
   handleSelect(e) {
-    let editedCamper = this.state.neighborhood;
-    editedCamper = e.target.value;
-    this.setState({ neighborhood: editedCamper, change: true });
+    console.log('value: ' + e.target.value);
+    console.log('name: ' + e.target.name);
+    this.setState({ neighborhood: e.target.value, neighborhoodName: e.target.name, change: true });
   }
 
   // EDIT: not even using this method, most likely delete later
@@ -100,22 +100,22 @@ class Neighborhood extends React.Component {
           <DropDown
             onChange={this.handleSelect}
           >
-            <Option value="Choose a Neighborhood" />
-            <Option value="American Hill" />
-            <Option value="Balkan Camp" />
-            <Option value="Car Camp" />
-            <Option value="Coffee House" />
-            <Option value="Cowboy Camp" />
-            <Option value="Flamenco Camp" />
-            <Option value="The Heights" />
-            <Option value="Kitchen" />
-            <Option value="Lakeshore" />
-            <Option value="Meditation Meadow" />
-            <Option value="Rec Row" />
-            <Option value="South Pole" />
-            <Option value="Upper Touristan" />
-            <Option value="Other" />
-            <Option value="Don't know yet" />
+            <Option value='0' name="Choose a Neighborhood" />
+            <Option value='1' name="American Hill" />
+            <Option value='2' name="Balkan Camp" />
+            <Option value='3' name="Car Camp" />
+            <Option value='4' name="Coffee House" />
+            <Option value='5' name="Cowboy Camp" />
+            <Option value='6' name="Flamenco Camp" />
+            <Option value='7' name="The Heights" />
+            <Option value='8' name="Kitchen" />
+            <Option value='9' name="Lakeshore" />
+            <Option value='10' name="Meditation Meadow" />
+            <Option value='11' name="Rec Row" />
+            <Option value='12' name="South Pole" />
+            <Option value='13' name="Upper Touristan" />
+            <Option value='14' name="Other" />
+            <Option value='15' name="Don't know yet" />
           </DropDown>
           <ButtonWrapper>
             <StyledButton onClick={this.saveNeighborhood}>Save</StyledButton>

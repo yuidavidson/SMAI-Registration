@@ -218,6 +218,20 @@ class App extends React.Component {
               onSavedData={this.updateCamper}
             />
           </div> : null}
+        {this.state.step === 'neighborhood' ?
+          <div>
+          <div>Registering
+            {this.getCamperFullName()}
+          </div>
+          <Neighborhood
+            camperId={this.state.currentCamper.camperId}
+            neighborhoodKey={this.state.neighborhoodKey}
+            neighborhood={this.state.currentCamper.neighborhood}
+            leaveStep={this.switchStep.bind(this, 'toc')}
+            gotoStep={this.switchStep}
+            onSavedData={this.updateCamper}
+          ></Neighborhood>
+          </div> : null}
         {this.state.step === 'sessions' ?
           <div>
             <div>Registering {this.getCamperFullName()}</div>

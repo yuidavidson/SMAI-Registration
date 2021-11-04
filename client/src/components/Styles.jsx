@@ -92,13 +92,12 @@ export const NavigationWrapper = styled.div`
 ========== DropDown Styles ==========
 */
 
-export const DropDownWrapper = styled.form`
+export const DropDownWrapper = styled.div`
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
   margin: 2px;
   padding: 2px;
-
 `;
 
 export const StyledSelect = styled.select`
