@@ -3,7 +3,12 @@ import axios from 'axios';
 
 import UnsavedWarning from './UnsavedWarning.jsx';
 import Overlay from './Overlay.jsx';
+import {DropDown, Option} from "./DropDownMenu.jsx";
 import { BodyWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
+
+import dictionaryConfig  from '../models/dictionary-config.js';
+import fieldsConfig  from '../models/config.js';
+
 
 export default class CamperInfoStep extends React.Component {
   constructor(props) {
@@ -101,11 +106,21 @@ export default class CamperInfoStep extends React.Component {
               <div key={fieldName}>
                   <div>{fieldName}</div>
                 {this.state.isEditMode ?
-                    <input type='text'
-                           name={fieldName}
-                           value={this.data[fieldName]}
-                           onChange={this.onEdit}
-                    /> :
+                    (
+                        fieldsConfig.camper[fieldName].type === 'text' ?
+                          <input type='text'
+                                 name={fieldName}
+                                 value={this.data[fieldName]}
+                                 onChange={this.onEdit}
+                          /> :
+                        <DropDown onChange={this.handleSelect}>
+                          <Option value='0' name={'Choose a '+fieldName} />
+                          {Object.entries(dictionaryConfig[fieldName]).map(([value, name]) =>
+                              <Option key={value} value={value} name={name} />
+                          )}
+                        </DropDown>
+                    )
+                     :
                     <div>{this.data[fieldName]}</div>
                 }
               </div>
