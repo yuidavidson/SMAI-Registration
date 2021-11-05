@@ -80,7 +80,12 @@ export default class CamperInfoStep extends React.Component {
           this.onSavedData(this.step, this.data);
           this.setState({hasChanged: false, isEditMode: false, saveError: ''});
         } else {
-          this.setState({saveError: response.error});
+          /* TODO
+          * response.data.errors can be:
+          *  a string (i.e. a general error)
+          *  or an hash of errors by field name ({phone1: "too short", name: "empty"})
+          * */
+          this.setState({saveError: response.data.errors});
         }
       })
       .catch((error) => {
