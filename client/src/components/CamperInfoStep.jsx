@@ -113,7 +113,7 @@ export default class CamperInfoStep extends React.Component {
                                  value={this.data[fieldName]}
                                  onChange={this.onEdit}
                           /> :
-                        <DropDown onChange={this.handleSelect}>
+                        <DropDown onChange={this.onEdit} name={fieldName}>
                           <Option value='0' name={'Choose a '+fieldName} />
                           {Object.entries(dictionaryConfig[fieldName]).map(([value, name]) =>
                               <Option key={value} value={value} name={name} />
