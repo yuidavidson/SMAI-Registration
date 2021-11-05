@@ -1,24 +1,24 @@
 export default {
     "foodPreference": {
-        "omni": "Omni-vore",
-        "vege": "Vegetarian",
-        "vega": "Vegan"
+        "1": "Omni-vore",
+        "2": "Vegetarian",
+        "3": "Vegan"
     },
     "neighborhood": {
-        "amer": "American Hill",
-        "balk": "Balkan Camp",
-        "carc": "Car Camp",
-        "coff": "Coffee House",
-        "cowb": "Cowboy Camp",
-        "flam": "Flamenco Camp",
-        "heig": "The Heights",
-        "kitc": "Kitchen",
-        "lake": "Lakeshore",
-        "medi": "Meditation Meadow",
-        "recr": "Rec Row",
-        "sout": "South Pole",
-        "uppe": "Upper Touristan",
-        "othe": "Other",
-        "n/a": "Don't know yet"
+        "1": "American Hill",
+        "2": "Balkan Camp",
+        "3": "Car Camp",
+        "4": "Coffee House",
+        "5": "Cowboy Camp",
+        "6": "Flamenco Camp",
+        "7": "The Heights",
+        "8": "Kitchen",
+        "9": "Lakeshore",
+        "10": "Meditation Meadow",
+        "11": "Rec Row",
+        "12": "South Pole",
+        "13": "Upper Touristan",
+        "14": "Other",
+        "15": "Don't know yet"
     }
 }
