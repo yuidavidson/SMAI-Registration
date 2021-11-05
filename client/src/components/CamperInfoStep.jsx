@@ -4,7 +4,7 @@ import axios from 'axios';
 import UnsavedWarning from './UnsavedWarning.jsx';
 import Overlay from './Overlay.jsx';
 import {DropDown, Option} from "./DropDownMenu.jsx";
-import { BodyWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
+import { BodyWrapper, StyledButton, ButtonWrapper, FooterWrapper,  StyledStringError, StyledObjectError, InputErrorWrapper } from './Styles.jsx';
 
 import dictionaryConfig  from '../models/dictionary-config.js';
 import fieldsConfig  from '../models/config.js';
@@ -19,7 +19,8 @@ export default class CamperInfoStep extends React.Component {
       localData: {},
       hasChanged: false,
       isEditMode: false,
-      currentModal: null
+      currentModal: null,
+      saveError: null,
     };
 
     this.data = props.data;
@@ -38,6 +39,10 @@ export default class CamperInfoStep extends React.Component {
 
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
+
+    // is binding these methods necessary?
+    this.isString = this.isString.bind(this);
+    this.isObject = this.isObject.bind(this);
   }
 
   editToggle(newState) {
@@ -101,6 +106,14 @@ export default class CamperInfoStep extends React.Component {
     this.setState({currentModal: null});
   }
 
+  isString(s) {
+    return typeof s === 'string';
+  }
+
+  isObject(o, f) {
+    return o && typeof o === 'object' && this.state.saveError.hasOwnProperty(f);
+  }
+
   render() {
     return (
       <BodyWrapper>
@@ -113,11 +126,14 @@ export default class CamperInfoStep extends React.Component {
                 {this.state.isEditMode ?
                     (
                         fieldsConfig.camper[fieldName].type === 'text' ?
+                        <InputErrorWrapper>
                           <input type='text'
-                                 name={fieldName}
-                                 value={this.data[fieldName]}
-                                 onChange={this.onEdit}
-                          /> :
+                                name={fieldName}
+                                value={this.data[fieldName]}
+                                onChange={this.onEdit}
+                          />
+                          {this.isObject(this.state.saveError, fieldName) ? <StyledObjectError>{this.state.saveError[fieldName]}</StyledObjectError> : null}
+                        </InputErrorWrapper> :
                         <DropDown onChange={this.onEdit} name={fieldName}>
                           <Option value='0' name={'Choose a '+fieldName} />
                           {Object.entries(dictionaryConfig[fieldName]).map(([value, name]) =>
@@ -139,17 +155,19 @@ export default class CamperInfoStep extends React.Component {
         >
           <UnsavedWarning noFn={this.hideModal} yesFn={this.editForceCancel}/>
         </Overlay>
-
-        <ButtonWrapper>
-          {this.state.isEditMode ?
-              <StyledButton onClick={this.save} disabled={!this.state.hasChanged}>Save</StyledButton> :
-              <StyledButton onClick={this.editToggle.bind(this, true)}>Update</StyledButton>
-          }
-          {this.state.isEditMode ?
-              <StyledButton onClick={this.editToggle.bind(this, false)}>Cancel</StyledButton> :
-              <StyledButton onClick={this.leaveStep}>Return to Table of Contents</StyledButton>
-          }
-        </ButtonWrapper>
+        <FooterWrapper>
+          {this.isString(this.state.saveError) ? <StyledStringError>{this.state.saveError}</StyledStringError> : null}
+          <ButtonWrapper>
+            {this.state.isEditMode ?
+                <StyledButton onClick={this.save} disabled={!this.state.hasChanged}>Save</StyledButton> :
+                <StyledButton onClick={this.editToggle.bind(this, true)}>Update</StyledButton>
+            }
+            {this.state.isEditMode ?
+                <StyledButton onClick={this.editToggle.bind(this, false)}>Cancel</StyledButton> :
+                <StyledButton onClick={this.leaveStep}>Return to Table of Contents</StyledButton>
+            }
+          </ButtonWrapper>
+        </FooterWrapper>
       </BodyWrapper>
     );
   }

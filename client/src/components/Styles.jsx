@@ -88,6 +88,12 @@ export const NavigationWrapper = styled.div`
 
 `;
 
+export const FooterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 /*
 ========== DropDown Styles ==========
 */
@@ -214,3 +220,33 @@ export const OverlayBackground = styled.div`
   background-color: #0000003a;
   animation: ${fadeIn} 0.5s;
 `;
+
+/*
+========== Error Styles ==========
+*/
+
+export const StyledStringError = styled.div`
+  width: 250px;
+  height: 20px;
+  text-align: center;
+  margin: 2px;
+  border: solid 2px #b55e5e;
+  border-radius: 10px;
+  padding: 2px;
+  background: #e89292;
+`;
+
+export const StyledObjectError = styled.div`
+  text-align: center;
+  margin: 0 2px;
+  border: solid 2px #b55e5e;
+  border-radius: 10px;
+  padding: 0 2px;
+  background: #e89292;
+`;
+
+export const InputErrorWrapper = styled.span`
+  display: flex;
+  flex-direction: row;
+`;
+

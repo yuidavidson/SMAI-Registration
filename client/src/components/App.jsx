@@ -211,8 +211,8 @@ class App extends React.Component {
             <CamperInfoStep
               key={this.state.step}
               camperId={this.state.currentCamper.camperId}
-              step={this.state.currentCamper.getStepConfig('personal')}
-              data={this.state.currentCamper.getStepValues('personal')}
+              step={this.state.currentCamper.getStepConfig(this.state.step)}
+              data={this.state.currentCamper.getStepValues(this.state.step)}
               leaveStep={this.switchStep.bind(this, 'toc')}
               gotoStep={this.switchStep}
               onSavedData={this.updateCamper}
