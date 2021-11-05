@@ -109,7 +109,7 @@ export default class CamperInfoStep extends React.Component {
         {
             this.step.fields.map(fieldName =>
               <div key={fieldName}>
-                  <div>{fieldName}</div>
+                  <strong>{fieldName.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/(^| )[a-z]/, s => s.toUpperCase())}</strong>:&nbsp;
                 {this.state.isEditMode ?
                     (
                         fieldsConfig.camper[fieldName].type === 'text' ?
@@ -126,7 +126,7 @@ export default class CamperInfoStep extends React.Component {
                         </DropDown>
                     )
                      :
-                    <div>{this.data[fieldName]}</div>
+                    <span>{fieldsConfig.camper[fieldName].type === 'dict' ? dictionaryConfig[fieldName][this.data[fieldName]] : this.data[fieldName]}</span>
                 }
               </div>
             )
