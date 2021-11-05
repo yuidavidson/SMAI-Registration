@@ -8,7 +8,7 @@ export function DropDown(props) {
       action={props.action}
       onChange={props.onChange}
     >
-      <StyledSelect>
+      <StyledSelect name={props.name}>
         {props.children}
       </StyledSelect>
     </DropDownWrapper>
