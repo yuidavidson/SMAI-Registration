@@ -13,7 +13,7 @@ class Neighborhood extends React.Component {
       change: false,
       neighborhood: props.neighborhood,
       neighborhoodName: props.neighborhoodKey[props.neighborhood],
-      switchStep: props.switchStep,
+      leaveStep: props.leaveStep,
     };
     this.dictonary = DictionaryModel.get('neighborhood');
     this.editNeighborhood = this.editNeighborhood.bind(this);
@@ -80,7 +80,7 @@ class Neighborhood extends React.Component {
     if (this.state.change) {
       console.log('You have unsaved changes. Are you sure you want to continue?');
     } else {
-      this.state.switchStep('toc');
+      this.state.leaveStep();
     }
   }
 
