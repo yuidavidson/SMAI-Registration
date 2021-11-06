@@ -107,7 +107,8 @@ export default class CamperInfoStep extends React.Component {
   }
 
   isString(s) {
-    return typeof s === 'string';
+
+    return typeof s === 'string' && s.length > 0;
   }
 
   isObject(o, f) {
