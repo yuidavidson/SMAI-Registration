@@ -9,6 +9,7 @@
 import React from 'react';
 import axios from 'axios';
 
+import CampEvents from './CampEvents.jsx';
 import Navigation from './Navigation.jsx';
 import Register from './Register.jsx';
 import Camper from './Camper.jsx';
@@ -23,7 +24,7 @@ class App extends React.Component {
     super(props);
     // dummy data for testing included
     this.state = {
-      step: 'register',
+      step: 'events',
       stepKey: {
         register: 'Camper Selection',
         toc: 'Table of Contents',
@@ -105,6 +106,7 @@ class App extends React.Component {
 
     this.switchStep = this.switchStep.bind(this);
     this.switchAndClose = this.switchAndClose.bind(this);
+    this.switchAndSet = this.switchAndSet.bind(this);
 
     this.setCurrentCamper = this.setCurrentCamper.bind(this);
 
@@ -148,6 +150,10 @@ class App extends React.Component {
     this.setState({step: step});
   }
 
+  switchAndSet(step, state, value) {
+    this.setState({step: step, [state]: value});
+  }
+
   switchAndClose(step) {
     this.setState({modalState: '', step: step});
   }
@@ -180,6 +186,7 @@ class App extends React.Component {
           event={this.state.event}
           currentCamper={this.getCamperFullName()}
           step={this.state.step}
+          switchStep={this.switchStep}
           stepKey={this.state.stepKey}
         ></Navigation>
         {this.state.step === 'register' ?
@@ -241,6 +248,11 @@ class App extends React.Component {
               switchStep={this.switchStep}
             />
           </div> : null}
+          {this.state.step === 'events' ?
+          <CampEvents
+            switchStep={this.switchStep}
+            switchAndSet={this.switchAndSet}
+          /> : null}
       </div>
     )
   }
