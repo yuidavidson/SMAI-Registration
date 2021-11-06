@@ -240,7 +240,7 @@ export const StyledObjectError = styled.div`
   text-align: center;
   margin: 0 2px;
   border: solid 2px #b55e5e;
-  border-radius: 10px;
+  border-radius: 4px;
   padding: 0 2px;
   background: #e89292;
 `;
