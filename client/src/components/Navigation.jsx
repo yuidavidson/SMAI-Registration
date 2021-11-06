@@ -16,8 +16,8 @@ const Navigation = (props) => {
       <HeaderBottom>
         <NavigationWrapper>
           <div onClick={() => props.switchStep('events')}>{props.event.name}</div>
-          <div onClick={() => props.switchStep('register')}>{props.currentCamper ? ' > ' + props.currentCamper : ''}</div>
-          <div onClick={() => props.switchStep('toc')}>{(props.step !== 'toc' && props.step !== 'register') ? ' > ' + props.stepKey[props.step] : ''}
+          <div onClick={() => props.switchStep('register')}>{props.currentCamper  && props.step !== 'events' ? ' > ' + props.currentCamper : ''}</div>
+          <div onClick={() => props.switchStep('toc')}>{(props.step !== 'events' && props.step !== 'toc' && props.step !== 'register') ? ' > ' + props.stepKey[props.step] : ''}
           </div>
         </NavigationWrapper>
       </HeaderBottom>
