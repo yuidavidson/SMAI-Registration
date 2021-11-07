@@ -9,7 +9,7 @@ const EventList = (props) => {
     <div key={event.name}>
       <div>{event.name}</div>
       <div>{event.startDate.month} {event.startDate.date} - {event.endDate.month} {event.endDate.date} {event.startDate.year}</div>
-      <button onClick={() => props.openModal(event.name)}>Details</button>
+      <StyledButton onClick={() => props.openModal(event.name)}>Details</StyledButton>
       <StyledButton onClick={() => props.switchAndSet('register', 'event', event)}>Register</StyledButton>
       <Overlay currentId={props.modalState} close={props.closeModal} myId={event.name}>
         <h3>{event.name}</h3>
