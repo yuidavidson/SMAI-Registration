@@ -250,6 +250,9 @@ class App extends React.Component {
           </div> : null}
           {this.state.step === 'events' ?
           <CampEvents
+            openModal={this.openModal}
+            closeModal={this.closeModal}
+            modalState={this.state.modalState}
             switchStep={this.switchStep}
             switchAndSet={this.switchAndSet}
           /> : null}

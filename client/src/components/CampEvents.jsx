@@ -14,7 +14,7 @@ import React from 'react';
 import axios from 'axios';
 
 import EventList from './EventList.jsx';
-import { BodyWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
+import { BodyWrapper, HeaderWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
 
 class CampEvents extends React.Component {
   constructor(props) {
@@ -50,14 +50,23 @@ class CampEvents extends React.Component {
       return dateObj;
     }
 
-    axios.get(`https://smai.us/api/event/get?id=1`)
+    // TODO: will edit when api for getting all events is created to save an array of events in the state
+
+    axios.get(`https://smai.us/api/event/getall`)
     .then((response) => {
       console.log(response);
-      let data = response.data.data.values;
+      let data = response.data.data;
       const newData = [];
-      newData.push(data);
-      newData[0].startDate = dateConverter(newData[0].startDate);
-      newData[0].endDate = dateConverter(newData[0].endDate);
+      console.log(data);
+
+      for (let i = 0; i < data.length; i++) {
+        let info = data[i];
+        data[i].startDate = dateConverter(data[i].startDate);
+        data[i].endDate = dateConverter(data[i].endDate);
+        data[i].regStartDate = dateConverter(data[i].regStartDate);
+        data[i].regEndDate = dateConverter(data[i].regEndDate);
+        newData.push(data[i]);
+      }
 
       this.setState({events: newData});
     })
@@ -72,11 +81,13 @@ class CampEvents extends React.Component {
     }
     return(
       <BodyWrapper>
-        <h1>UPCOMING Camps/Events</h1>
-        <div>2022</div>
+        <h2>UPCOMING Camps/Events</h2>
         <EventList
           events={this.state.events}
           switchAndSet={this.props.switchAndSet}
+          openModal={this.props.openModal}
+          closeModal={this.props.closeModal}
+          modalState={this.props.modalState}
         ></EventList>
       </BodyWrapper>
     )
