@@ -54,10 +54,8 @@ class CampEvents extends React.Component {
 
     axios.get(`https://smai.us/api/event/getall`)
     .then((response) => {
-      console.log(response);
       let data = response.data.data;
       const newData = [];
-      console.log(data);
 
       for (let i = 0; i < data.length; i++) {
         let info = data[i];
