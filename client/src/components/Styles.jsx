@@ -78,12 +78,13 @@ export const EventWrapper = styled.div`
 
 export const NavigationWrapper = styled.div`
   display: flex;
-  height: 30px;
+  height: auto;
   width: 500px;
   text-align: center;
   font-size: 20px;
   margin: 1px;
-  // border: solid 1px black;
+  border: outset 3px #91cfa1;
+  border-radius: 10px;
   padding: 1px;
 
 `;
