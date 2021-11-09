@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import ReactDOM from "react-dom";
 
 import { loadStripe } from "@stripe/stripe-js";
@@ -23,10 +23,38 @@ const demos = [
 ];
 
 const Stripe = (props) => {
+  const [clientSecret, setClientSecret] = useState("");
+
+  useEffect(() => {
+    // Create PaymentIntent as soon as the page loads
+    fetch("https://smai.us/api/payment/intent", {
+        method: "POST",
+        // headers: { "Content-Type": "application/json" },
+        // body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+      })
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data.clientSecret));
+  }, []);
+
+  const appearance = {
+    theme: 'stripe',
+  };
+  const options = {
+    clientSecret,
+    appearance,
+  };
   return (
-      <Elements stripe={stripePromise}>
-        <CardForm switchStep={props.switchStep}/>
-      </Elements>
+    <div>
+      {clientSecret && (
+        <Elements options={options} stripe={stripePromise}>
+          <CheckoutForm switchStep={props.switchStep}/>
+        </Elements>
+    )}
+    </div>
+
+      // <Elements options={options} stripe={stripePromise}>
+      //   <CardForm switchStep={props.switchStep}/>
+      // </Elements>
   );
 };
 

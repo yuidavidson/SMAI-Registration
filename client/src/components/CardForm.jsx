@@ -2,72 +2,44 @@ import React, { useEffect, useState } from "react";
 import { useStripe, useElements, CardElement, PaymentElement } from "@stripe/react-stripe-js";
 import "regenerator-runtime/runtime.js";
 
-import useResponsiveFontSize from "../useResponsiveFontSize";
-
-// const useOptions = () => {
-//   const fontSize = useResponsiveFontSize();
-//   const options = useMemo(
-//     () => ({
-//       style: {
-//         base: {
-//           fontSize,
-//           color: "#424770",
-//           letterSpacing: "0.025em",
-//           fontFamily: "Source Code Pro, monospace",
-//           "::placeholder": {
-//             color: "#aab7c4"
-//           }
-//         },
-//         invalid: {
-//           color: "#9e2146"
-//         }
-//       }
-//     }),
-//     [fontSize]
-//   );
-
-//   return options;
-// };
-
 const CardForm = (props) => {
   const stripe = useStripe();
   const elements = useElements();
-  // const options = useOptions();
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   // TODO: use this part after client side is set up, without it, app automatically fails
-  // useEffect(() => {
-  //   if (!stripe) {
-  //     return;
-  //   }
+  useEffect(() => {
+    if (!stripe) {
+      return;
+    }
 
-  //   const clientSecret = new URLSearchParams(window.location.search).get(
-  //     "payment_intent_client_secret"
-  //   );
+    const clientSecret = new URLSearchParams(window.location.search).get(
+      "payment_intent_client_secret"
+    );
 
-  //   if (!clientSecret) {
-  //     return;
-  //   }
+    if (!clientSecret) {
+      return;
+    }
 
-  //   stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-  //     switch (paymentIntent.status) {
-  //       case "succeeded":
-  //         setMessage("Payment succeeded!");
-  //         break;
-  //       case "processing":
-  //         setMessage("Your payment is processing.");
-  //         break;
-  //       case "requires_payment_method":
-  //         setMessage("Your payment was not successful, please try again.");
-  //         break;
-  //       default:
-  //         setMessage("Something went wrong.");
-  //         break;
-  //     }
-  //   });
-  // }, [stripe]);
+    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+      switch (paymentIntent.status) {
+        case "succeeded":
+          setMessage("Payment succeeded!");
+          break;
+        case "processing":
+          setMessage("Your payment is processing.");
+          break;
+        case "requires_payment_method":
+          setMessage("Your payment was not successful, please try again.");
+          break;
+        default:
+          setMessage("Something went wrong.");
+          break;
+      }
+    });
+  }, [stripe]);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -90,10 +62,9 @@ const CardForm = (props) => {
     <form className='stripe-cc' onSubmit={handleSubmit}>
       <label>
         {/* TODO: include after clientside intent and client-secret is made */}
-        {/* <PaymentElement id="payment-element" /> */}
+        <PaymentElement id="payment-element" />
         Card details
         <CardElement
-          // options={options}
           onReady={() => {
             console.log("CardElement [ready]");
           }}
