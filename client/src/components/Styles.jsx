@@ -195,15 +195,16 @@ const fadeIn = keyframes`
 `;
 
 export const StyledModal = styled.div`
-  width: 220px;
-  height: 160px;
+  width: auto;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 20;
-  position: fixed;
-  top: 20%;
+  position: absolute;
   left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   margin: 10px;
   border: solid 2px black;
   border-radius: 10px;
