@@ -16,6 +16,7 @@ import Camper from './Camper.jsx';
 import CamperInfoStep from './CamperInfoStep.jsx';
 import Neighborhood from './Neighborhood.jsx';
 import Sessions from './Sessions.jsx';
+import Stripe from './Stripe.jsx';
 
 import CamperModel from '../models/camper';
 
@@ -256,6 +257,7 @@ class App extends React.Component {
             switchStep={this.switchStep}
             switchAndSet={this.switchAndSet}
           /> : null}
+          <Stripe />
       </div>
     )
   }
