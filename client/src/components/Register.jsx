@@ -3,7 +3,8 @@ import React from 'react';
 import Party from './Party.jsx';
 import CamperInvite from './CamperInvite.jsx';
 import CamperSearch from './CamperSearch.jsx';
-import { BodyWrapper } from './Styles.jsx';
+import Stripe from './Stripe.jsx';
+import { BodyWrapper, StyledButton } from './Styles.jsx';
 import Overlay from './Overlay.jsx';
 
 const Register = (props) => {
@@ -31,6 +32,7 @@ const Register = (props) => {
     <Overlay currentId={props.modalState} close={props.closeModal} myId='camperSearch'>
       <CamperSearch />
     </Overlay>
+    <StyledButton onClick={() => props.switchStep('stripe')}>Review and Pay</StyledButton>
   </BodyWrapper>
   )
 };

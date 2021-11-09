@@ -29,7 +29,7 @@ import useResponsiveFontSize from "../useResponsiveFontSize";
 //   return options;
 // };
 
-const CardForm = () => {
+const CardForm = (props) => {
   const stripe = useStripe();
   const elements = useElements();
   // const options = useOptions();
@@ -111,6 +111,7 @@ const CardForm = () => {
       <button type="submit" disabled={!stripe}>
         Pay
       </button>
+      <button onClick={() => props.switchStep('register')}>Cancel</button>
     </form>
   );
 };

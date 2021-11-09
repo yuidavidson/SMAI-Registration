@@ -22,10 +22,10 @@ const demos = [
   },
 ];
 
-const Stripe = () => {
+const Stripe = (props) => {
   return (
       <Elements stripe={stripePromise}>
-        <CardForm />
+        <CardForm switchStep={props.switchStep}/>
       </Elements>
   );
 };

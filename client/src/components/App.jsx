@@ -199,6 +199,7 @@ class App extends React.Component {
             setCurrentCamper={this.setCurrentCamper}
             openModal={this.openModal}
             closeModal={this.closeModal}
+            switchStep={this.switchStep}
           /> : null}
         {this.state.step === 'toc' ?
           <div>
@@ -257,7 +258,8 @@ class App extends React.Component {
             switchStep={this.switchStep}
             switchAndSet={this.switchAndSet}
           /> : null}
-          <Stripe />
+          {this.state.step === 'stripe' ? <Stripe
+            switchStep={this.switchStep}/> : null}
       </div>
     )
   }
