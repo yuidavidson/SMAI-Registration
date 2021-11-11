@@ -10,17 +10,11 @@ import key from '../config.js';
 
 import "../../dist/styles.css";
 
+// LIVE: key for live usage
 // const stripePromise = loadStripe(key.stripe.live);w
 
+// TEST: key for testing
 const stripePromise = loadStripe(key.stripe.test);
-
-const demos = [
-  {
-    path: "/card-element",
-    label: "CardElement",
-    component: CardForm
-  },
-];
 
 const Stripe = (props) => {
   const [clientSecret, setClientSecret] = useState("");
@@ -29,11 +23,9 @@ const Stripe = (props) => {
     // Create PaymentIntent as soon as the page loads
     fetch("https://smai.us/api/payment/intent", {
         method: "POST",
-        // headers: { "Content-Type": "application/json" },
-        // body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
       })
       .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
+      .then((data) => setClientSecret(data.data.client_secret));
   }, []);
 
   const appearance = {
@@ -47,14 +39,10 @@ const Stripe = (props) => {
     <div>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm switchStep={props.switchStep}/>
+          <CardForm switchStep={props.switchStep} clientSecret={clientSecret}/>
         </Elements>
-    )}
+      )}
     </div>
-
-      // <Elements options={options} stripe={stripePromise}>
-      //   <CardForm switchStep={props.switchStep}/>
-      // </Elements>
   );
 };
 

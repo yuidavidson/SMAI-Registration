@@ -9,21 +9,22 @@ const CardForm = (props) => {
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // TODO: use this part after client side is set up, without it, app automatically fails
   useEffect(() => {
     if (!stripe) {
       return;
     }
 
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
-    );
+    // const clientSecret = new URLSearchParams(window.location.search).get(
+      // "payment_intent_client_secret"
+    // );
+    const clientSecret = props.clientSecret;
 
     if (!clientSecret) {
       return;
     }
 
-    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+    stripe.retrievePaymentIntent(clientSecret)
+    .then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Payment succeeded!");
@@ -50,39 +51,41 @@ const CardForm = (props) => {
       return;
     }
 
-    const payload = await stripe.createPaymentMethod({
-      type: "card",
-      card: elements.getElement(CardElement)
+    setIsLoading(true);
+
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        // Make sure to change this to your payment completion page
+        return_url: "http://localhost:3000",
+      },
     });
 
-    console.log("[PaymentMethod]", payload);
+    // This point will only be reached if there is an immediate error when
+    // confirming the payment. Otherwise, your customer will be redirected to
+    // your `return_url`. For some payment methods like iDEAL, your customer will
+    // be redirected to an intermediate site first to authorize the payment, then
+    // redirected to the `return_url`.
+    if (error.type === "card_error" || error.type === "validation_error") {
+      setMessage(error.message);
+    } else {
+      setMessage("An unexpected error occured.");
+    }
+
+    setIsLoading(false);
   };
 
   return (
-    <form className='stripe-cc' onSubmit={handleSubmit}>
-      <label>
-        {/* TODO: include after clientside intent and client-secret is made */}
-        <PaymentElement id="payment-element" />
-        Card details
-        <CardElement
-          onReady={() => {
-            console.log("CardElement [ready]");
-          }}
-          onChange={event => {
-            console.log("CardElement [change]", event);
-          }}
-          onBlur={() => {
-            console.log("CardElement [blur]");
-          }}
-          onFocus={() => {
-            console.log("CardElement [focus]");
-          }}
-        />
-      </label>
-      <button type="submit" disabled={!stripe}>
-        Pay
+
+    <form className="stripe-cc" id="payment-form" onSubmit={handleSubmit}>
+      <PaymentElement id="payment-element" />
+      <button disabled={isLoading || !stripe || !elements} id="submit">
+        <span id="button-text">
+          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+        </span>
       </button>
-      <button onClick={() => props.switchStep('register')}>Cancel</button>
+      {/* Show any error or success messages */}
+      {message && <div id="payment-message">{message}</div>}
     </form>
   );
 };
