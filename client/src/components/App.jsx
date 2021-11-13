@@ -159,10 +159,9 @@ class App extends React.Component {
   // }
 
   setCurrentCamper(camperId) {
-    axios.get(`https://smai.us/index.php?option=com_smapi&api=camper/get&id=${camperId}`)
+    axios.get(`https://smai.us/api/camper/get?id=${camperId}`)
     .then((response) => {
-      console.log(response);
-      let data = response.data.data;
+      let data = response.data.data.values;
       const newData = new CamperModel(data);
       this.setState({currentCamper: newData, step: 'toc'});
     })

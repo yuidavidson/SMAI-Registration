@@ -57,7 +57,7 @@ class Sessions extends React.Component {
     } else {
       axios({
         method: 'POST',
-        url: 'https://smai.us/api/camper/update',
+        url: 'https://smai.us/index.php?option=com_smapi&api=camper/update',
         data: dataEncoded,
       })
       .then((response)  => {
