@@ -50,13 +50,24 @@ class CampEvents extends React.Component {
       return dateObj;
     }
 
-    // TODO: will edit when api for getting all events is created to save an array of events in the state
 
-    axios.get(`https://smai.us/api/event/getall`)
+    // dummy date entry
+    // this.setState({events: [{
+    //   name: 'SMAI 2022',
+    //   organizer: 'Jesus',
+    //   maxQuota: 333,
+    //   notes: 'Have fun!',
+    //   startDate: {year: 2022, month: 'May', date: 10},
+    //   endDate: {year: 2022, month: 'May', date: 19},
+    //   regStartDate: {year: 2022, month: 'May', date: 10},
+    //   regEndDate: {year: 2022, month: 'May', date: 10},
+    // }]})
+
+    axios.get(`https://smai.us/index.php?option=com_smapi&api=event/getall`)
     .then((response) => {
       let data = response.data.data;
       const newData = [];
-
+      // console.log(response);
       for (let i = 0; i < data.length; i++) {
         let info = data[i];
         data[i].startDate = dateConverter(data[i].startDate);
@@ -71,6 +82,7 @@ class CampEvents extends React.Component {
     .catch((error) => {
       console.log(error);
     })
+
   }
 
   render() {
