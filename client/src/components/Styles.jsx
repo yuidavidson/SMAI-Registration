@@ -1,16 +1,53 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
+
+/*
+========== Keyframe Animations ==========
+*/
+
+const borderChange = keyframes`
+0% {
+  height: auto;
+  width: auto;
+}
+100%{
+  height: auto;
+  width: auto;
+}
+`;
+
+const borderGrow = keyframes`
+0% {
+  height: 0px;
+  width: 0px;
+}
+100%{
+  height: 27px;
+  width: 250px;
+}
+`;
+
+const borderShrink = keyframes`
+0% {
+  height: 27px;
+  width: 250px;
+}
+100%{
+  height: 0px;
+  width: 0px;
+}
+`;
 
 /*
 ========== General Styles ==========
 */
 
 export const BodyWrapper = styled.div`
-display: flex;
-flex-direction: column;
-margin: 5px;
-border: solid 2px black;
-border-radius: 5px;
-padding: 5px;
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  border: solid 2px black;
+  border-radius: 5px;
+  padding: 5px;
 `;
 
 export const HeaderWrapper = styled.div`
@@ -54,8 +91,8 @@ export const ImageWrapper = styled.img`
 
 export const CamperWrapper = styled.div`
   diplay: flex;
-  height: 30px;
-  width: 200px;
+  // height: 30px;
+  // width: auto;
   text-align: center;
   font-size: 25px;
   color: #bd394b;
@@ -67,7 +104,7 @@ export const CamperWrapper = styled.div`
 export const EventWrapper = styled.div`
   diplay: flex;
   height: 30px;
-  width: 100px;
+  width: auto;
   text-align: center;
   font-size: 25px;
   color: #bd394b;
@@ -79,14 +116,20 @@ export const EventWrapper = styled.div`
 export const NavigationWrapper = styled.div`
   display: flex;
   height: auto;
-  width: 500px;
-  text-align: center;
+  width: auto;
+  // height: ${(props) => props.step === 'events' ? '0' : '27px'};
+  // width: ${(props) => props.step === 'events' ? '0' : '250px'};
+  // text-align: center;
+  justify-content: space-around;
   font-size: 20px;
   margin: 1px;
   border: outset 3px #91cfa1;
   border-radius: 10px;
   padding: 1px;
-
+  // TODO: figure out how to make this animation work correctly => want the boarder of the navigation to change depending on the content
+  // animation: ${
+    (props) => props.step === 'events'  && !props.isFirstRender ? borderShrink : ((props) => props.step !== 'events' ? borderGrow : null)
+  } 2s;
 `;
 
 export const FooterWrapper = styled.div`
