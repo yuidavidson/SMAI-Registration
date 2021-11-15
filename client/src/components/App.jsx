@@ -128,15 +128,6 @@ class App extends React.Component {
 
     this.setState({currentCamper: this.state.currentCamper.updateStepValues(step.id, values, true) } );
   }
-  // EDIT: when back-end is ready, should call for the party members of the user
-  // componentDidMount() {
-  //   axios.get('https://smai.us/api/camper/get?id=2')
-  //   .then((response) => {
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   })
-  // }
 
   openModal(modalType) {
     this.setState({modalState: modalType})
@@ -168,9 +159,10 @@ class App extends React.Component {
   // }
 
   setCurrentCamper(camperId) {
-    axios.get(`https://smai.us/api/camper/get?id=${camperId}`)
+    axios.get(`https://smai.us/index.php?option=com_smapi&api=camper/get&id=${camperId}`)
     .then((response) => {
-      let data = response.data.data.values;
+      console.log(response);
+      let data = response.data.data;
       const newData = new CamperModel(data);
       this.setState({currentCamper: newData, step: 'toc'});
     })
@@ -183,6 +175,7 @@ class App extends React.Component {
     return (
       <div>
         <Navigation
+          key={new Date().getTime()}
           camper={this.state.camper}
           event={this.state.event}
           currentCamper={this.getCamperFullName()}
