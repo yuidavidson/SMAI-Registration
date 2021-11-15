@@ -76,7 +76,7 @@ export default class CamperInfoStep extends React.Component {
     } else {
       axios({
         method: 'POST',
-        url: 'https://smai.us/api/camper/update',
+        url: 'https://smai.us/index.php?option=com_smapi&api=camper/update',
         data: dataEncoded,
       })
       .then((response)  => {
@@ -119,7 +119,6 @@ export default class CamperInfoStep extends React.Component {
     return (
       <BodyWrapper>
         <div>{this.step.label}</div>
-        <div>Last updated: A long time ago</div>
         {
             this.step.fields.map(fieldName =>
               <div key={fieldName}>
