@@ -91,9 +91,6 @@ class App extends React.Component {
       // ],
     };
 
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-
     this.switchStep = this.switchStep.bind(this);
     this.switchAndClose = this.switchAndClose.bind(this);
     this.switchAndSet = this.switchAndSet.bind(this);
@@ -118,14 +115,6 @@ class App extends React.Component {
     this.setState({currentCamper: this.state.currentCamper.updateStepValues(step.id, values, true) } );
   }
 
-  openModal(modalType) {
-    this.setState({modalState: modalType})
-  }
-
-  closeModal() {
-    this.setState({ modalState: ''});
-  }
-
   // function for switching components
   switchStep(step) {
     this.setState({step: step});
@@ -136,7 +125,7 @@ class App extends React.Component {
   }
 
   switchAndClose(step) {
-    this.setState({modalState: '', step: step});
+    this.setState({step: step});
   }
 
   //  old setCurrentCamper
@@ -174,10 +163,7 @@ class App extends React.Component {
             account={this.state.account}
             camper={this.state.camper}
             party={this.state.party}
-            modalState={this.state.modalState}
             setCurrentCamper={this.setCurrentCamper}
-            openModal={this.openModal}
-            closeModal={this.closeModal}
             switchStep={this.switchStep}
           /> : null}
         {this.state.step === 'toc' ?
@@ -231,9 +217,6 @@ class App extends React.Component {
           </div> : null}
           {this.state.step === 'events' ?
           <CampEvents
-            openModal={this.openModal}
-            closeModal={this.closeModal}
-            modalState={this.state.modalState}
             switchStep={this.switchStep}
             switchAndSet={this.switchAndSet}
           /> : null}

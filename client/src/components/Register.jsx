@@ -8,6 +8,14 @@ import { BodyWrapper, StyledButton } from './Styles.jsx';
 import Overlay from './Overlay.jsx';
 
 const Register = (props) => {
+  let modal = '';
+
+  const setModal = function (newModal='') {
+    modal = newModal;
+  };
+  const closeModal = setModal.bind(undefined, '');
+
+
   return (
   <BodyWrapper>
     <div>Account {props.account}</div>
@@ -20,16 +28,16 @@ const Register = (props) => {
     setCurrentCamper={props.setCurrentCamper}
     />
     <div
-      onClick={() => props.openModal('camperSearch')}
+      onClick={() => openModal('camperSearch')}
     >find other campers...</div>
     <div
-      onClick={() => props.openModal('camperInvite')}
+      onClick={() => openModal('camperInvite')}
     >invite new camper</div>
 
-    <Overlay currentId={props.modalState} close={props.closeModal} myId='camperInvite'>
+    <Overlay currentId={modal} close={closeModal} myId='camperInvite'>
       <CamperInvite randomStuff="rannddoommm"/>
     </Overlay>
-    <Overlay currentId={props.modalState} close={props.closeModal} myId='camperSearch'>
+    <Overlay currentId={modal} close={closeModal} myId='camperSearch'>
       <CamperSearch />
     </Overlay>
     <StyledButton onClick={() => props.switchStep('stripe')}>Review and Pay</StyledButton>
