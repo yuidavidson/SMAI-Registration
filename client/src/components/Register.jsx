@@ -4,7 +4,7 @@ import Party from './Party.jsx';
 import CamperInvite from './CamperInvite.jsx';
 import CamperSearch from './CamperSearch.jsx';
 import Stripe from './Stripe.jsx';
-import { BodyWrapper, StyledButton } from './Styles.jsx';
+import { BodyWrapper, StyledButton, StyledClickableDiv } from './Styles.jsx';
 import Overlay from './Overlay.jsx';
 
 const Register = (props) => {
@@ -19,12 +19,12 @@ const Register = (props) => {
     party={props.party}
     setCurrentCamper={props.setCurrentCamper}
     />
-    <div
+    <StyledClickableDiv
       onClick={() => props.openModal('camperSearch')}
-    >find other campers...</div>
-    <div
+    >find other campers...</StyledClickableDiv>
+    <StyledClickableDiv
       onClick={() => props.openModal('camperInvite')}
-    >invite new camper</div>
+    >invite new camper</StyledClickableDiv>
 
     <Overlay currentId={props.modalState} close={props.closeModal} myId='camperInvite'>
       <CamperInvite randomStuff="rannddoommm"/>

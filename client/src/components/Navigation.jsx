@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 // EDIT: currently not using ImageWrapper, may be removed later or edited to work correctly
-import { HeaderWrapper, HeaderTop, HeaderBottom, ImageWrapper, CamperWrapper, EventWrapper, NavigationWrapper } from './Styles.jsx';
+import { HeaderWrapper, HeaderTop, HeaderBottom, ImageWrapper, CamperWrapper, EventWrapper, NavigationWrapper, StyledClickableDiv } from './Styles.jsx';
 import logo from '../assets/logo.jpg';
 
 const Navigation = (props) => {
@@ -25,16 +25,20 @@ const Navigation = (props) => {
         <img src={logo} alt="Logo"/>
         {/* <ImageWrapper src={logo} alt="Logo"></ImageWrapper> */}
         <CamperWrapper>{props.camper}</CamperWrapper>
-        <EventWrapper>Events/Camps</EventWrapper>
+        <EventWrapper>
+          <StyledClickableDiv onClick={() => props.switchStep('events')}>
+            Events/Camps
+          </StyledClickableDiv>
+        </EventWrapper>
       </HeaderTop>
       <HeaderBottom>
         <NavigationWrapper className="navigation"
         key={props.step}
         step={props.step} isFirstRender={isFirstRender} setIsFirstRender={setIsFirstRender}>
-          <div onClick={() => props.switchStep('events')}>{props.step !== 'events' ? props.event.name : null}</div>
-          <div onClick={() => props.switchStep('register')}>{props.currentCamper  && props.step !== 'events' ? ' > ' + props.currentCamper : ''}</div>
-          <div onClick={() => props.switchStep('toc')}>{(props.step !== 'events' && props.step !== 'toc' && props.step !== 'register' && props.step !== 'stripe') ? ' > ' + props.stepKey[props.step] : ''}
-          </div>
+          <StyledClickableDiv onClick={() => props.switchStep('events')}>{props.step !== 'events' ? props.event.name : null}</StyledClickableDiv>
+          <StyledClickableDiv onClick={() => props.switchStep('register')}>{props.currentCamper  && props.step !== 'events' ? ' > ' + props.currentCamper : ''}</StyledClickableDiv>
+          <StyledClickableDiv onClick={() => props.switchStep('toc')}>{(props.step !== 'events' && props.step !== 'toc' && props.step !== 'register' && props.step !== 'stripe') ? ' > ' + props.stepKey[props.step] : ''}
+          </StyledClickableDiv>
         </NavigationWrapper>
       </HeaderBottom>
     </HeaderWrapper>

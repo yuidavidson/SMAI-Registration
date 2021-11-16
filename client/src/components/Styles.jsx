@@ -144,6 +144,12 @@ export const StyledHeader = styled.h2`
   font-size: 20px;
 `;
 
+export const RowWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+`;
+
 /*
 ========== DropDown Styles ==========
 */
@@ -242,6 +248,21 @@ export const StyledXButton = styled.button`
   }
 `;
 
+export const StyledEditButton = styled.button`
+  color: green;
+  text-decoration: underline;
+  cursor: pointer;
+  border: 0;
+  background: white;
+`;
+
+export const StyledClickableDiv = styled.div`
+  cursor: pointer;
+  &:hover {
+    color: #666665;
+  }
+`;
+
 /*
 ========== Modal Styles ==========
 */
@@ -316,3 +337,14 @@ export const InputErrorWrapper = styled.span`
   flex-direction: row;
 `;
 
+/*
+========== Image Styles ==========
+*/
+
+export const StyledCheckMark = styled.img`
+  display: flex;
+  height: 12px;
+  width: 12px;
+  justify-content: center;
+  align-items: center;
+`;
