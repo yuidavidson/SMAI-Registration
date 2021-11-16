@@ -26,17 +26,6 @@ class App extends React.Component {
     // dummy data for testing included
     this.state = {
       step: 'events',
-      stepKey: {
-        register: 'Camper Selection',
-        toc: 'Table of Contents',
-        personal: 'Personal Information',
-        contact: 'Contact Information',
-        vehicle: 'Vehicle Information',
-        emergency: 'Emergency Contact',
-        medical: 'Medical Information',
-        neighborhood: 'Neighborhood',
-        sessions: 'Sessions',
-      },
       readyForNextStep: false,
       modalState: '',
       account: 'SMF034',
@@ -179,7 +168,6 @@ class App extends React.Component {
           currentCamper={this.getCamperFullName()}
           step={this.state.step}
           switchStep={this.switchStep}
-          stepKey={this.state.stepKey}
         ></Navigation>
         {this.state.step === 'register' ?
           <Register

@@ -5,6 +5,17 @@ import { HeaderWrapper, HeaderTop, HeaderBottom, ImageWrapper, CamperWrapper, Ev
 import logo from '../assets/logo.jpg';
 
 const Navigation = (props) => {
+  const stepLabels = {
+      register: 'Camper Selection',
+      toc: 'Table of Contents',
+      personal: 'Personal Information',
+      contact: 'Contact Information',
+      vehicle: 'Vehicle Information',
+      emergency: 'Emergency Contact',
+      medical: 'Medical Information',
+      neighborhood: 'Neighborhood',
+      sessions: 'Sessions',
+  };
   // TODO: was trying to animate the navigation border not on first render but was not working how I wanted it to. Either fix this problem or remove these parts
   const [isFirstRender, setIsFirstRender] = useState(true);
   // const [width, setWidth] = useState(0);
@@ -33,7 +44,7 @@ const Navigation = (props) => {
         step={props.step} isFirstRender={isFirstRender} setIsFirstRender={setIsFirstRender}>
           <div onClick={() => props.switchStep('events')}>{props.step !== 'events' ? props.event.name : null}</div>
           <div onClick={() => props.switchStep('register')}>{props.currentCamper  && props.step !== 'events' ? ' > ' + props.currentCamper : ''}</div>
-          <div onClick={() => props.switchStep('toc')}>{(props.step !== 'events' && props.step !== 'toc' && props.step !== 'register' && props.step !== 'stripe') ? ' > ' + props.stepKey[props.step] : ''}
+          <div onClick={() => props.switchStep('toc')}>{(props.step !== 'events' && props.step !== 'toc' && props.step !== 'register' && props.step !== 'stripe') ? ' > ' + stepLabels[props.step] : ''}
           </div>
         </NavigationWrapper>
       </HeaderBottom>
