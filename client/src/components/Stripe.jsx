@@ -21,7 +21,7 @@ const Stripe = (props) => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("https://smai.us/api/payment/intent", {
+    fetch("https://smai.us/index.php?option=com_smapi&api=payment/intent", {
         method: "POST",
       })
       .then((res) => res.json())
