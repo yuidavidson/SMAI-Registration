@@ -1,7 +1,8 @@
 import React from 'react';
-import axios from 'axios';
 
 import { BodyWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
+
+import api from '../api/api';
 
 class Sessions extends React.Component {
   constructor(props) {
@@ -48,18 +49,12 @@ class Sessions extends React.Component {
   }
 
   saveSession() {
-
-    let dataEncoded = Object.entries(this.state.sessions).map(e => encodeURIComponent(e[0])+'='+encodeURIComponent(e[1])).join('&')
-    dataEncoded += `&id=${this.props.camperId}`;
+    const data = Object.assign({id: this.props.camperId}, this.state.sessions);
 
     if (!this.state.change) {
       console.log('no changes detected to be saved!');
     } else {
-      axios({
-        method: 'POST',
-        url: 'https://smai.us/index.php?option=com_smapi&api=camper/update',
-        data: dataEncoded,
-      })
+      api.run('camper/update', data)
       .then((response)  => {
         console.log('Saved');
         // console.log(response);

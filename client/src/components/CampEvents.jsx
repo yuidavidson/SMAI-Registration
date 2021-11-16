@@ -11,10 +11,11 @@ lateRegFeename
 */
 
 import React from 'react';
-import axios from 'axios';
 
 import EventList from './EventList.jsx';
 import { BodyWrapper, HeaderWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
+
+import api from "../api/api";
 
 class CampEvents extends React.Component {
   constructor(props) {
@@ -62,10 +63,9 @@ class CampEvents extends React.Component {
     //   regStartDate: {year: 2022, month: 'May', date: 10},
     //   regEndDate: {year: 2022, month: 'May', date: 10},
     // }]})
-
-    axios.get(`https://smai.us/index.php?option=com_smapi&api=event/getall`)
+    api.run('event/getall')
     .then((response) => {
-      let data = response.data.data;
+      let data = response.data;
       const newData = [];
       // console.log(response);
       for (let i = 0; i < data.length; i++) {
