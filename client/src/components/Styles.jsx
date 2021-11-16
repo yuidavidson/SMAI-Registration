@@ -44,6 +44,7 @@ const borderShrink = keyframes`
 export const BodyWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 5px;
   border: solid 2px black;
   border-radius: 5px;
@@ -138,6 +139,11 @@ export const FooterWrapper = styled.div`
   align-items: center;
 `;
 
+export const StyledHeader = styled.h2`
+  padding: 5px;
+  font-size: 20px;
+`;
+
 /*
 ========== DropDown Styles ==========
 */
@@ -161,12 +167,6 @@ export const StyledOption = styled.option`
   color: ${(props) => (props.selected ? "lightgrey" : "black")};
 `;
 
-
-// At the moment this is not being used but keeping it for now, because it might come in handy later
-export const StyledLabel = styled.label`
-  margin-bottom: 1rem;
-`;
-
 /*
 ========== Button Styles ==========
 */
@@ -179,6 +179,7 @@ export const StyledButton = styled.button`
   padding: 7px;
   border-radius: 10px;
   background: #91cfa1;
+  cursor:pointer;
 
   &:hover {
     background: #53c976;
@@ -219,6 +220,26 @@ export const StyledSmallButton = styled.button`
   border: solid black 1px;
   border-radius: 10px;
   background:${(props) => props.isOn ? 'cyan' : 'white'};
+  cursor:pointer;
+`;
+
+export const StyledXButton = styled.button`
+  width: 20px;
+  height: 20px;
+  float:right;
+  margin-top: -17px;
+  margin-left: -17px;
+  padding: 0;
+  cursor:pointer;
+  border: 2px groove #d96d64;
+  border-radius: 20px;
+  background: #c45c49;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 0px;
+  &:hover {
+    background: #db3d21;
+  }
 `;
 
 /*
@@ -242,7 +263,7 @@ export const StyledModal = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   z-index: 20;
   position: absolute;
   left: 50%;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {StyledModal, OverlayBackground} from './Styles.jsx';
+import {StyledModal, OverlayBackground, StyledXButton} from './Styles.jsx';
 
 const Overlay = ({children, close, currentId, myId}) => {
   if (currentId !== myId) {
@@ -11,9 +11,9 @@ const Overlay = ({children, close, currentId, myId}) => {
     <div>
       <OverlayBackground onClick={() => close()}></OverlayBackground>
       <StyledModal>
-        <button
+        <StyledXButton
           onClick={() => close()}
-        >X</button>
+        >x</StyledXButton>
           {children}
       </StyledModal>
     </div>
