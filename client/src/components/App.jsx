@@ -7,7 +7,6 @@
 */
 
 import React from 'react';
-import axios from 'axios';
 
 import CampEvents from './CampEvents.jsx';
 import Navigation from './Navigation.jsx';
@@ -19,6 +18,7 @@ import Sessions from './Sessions.jsx';
 import Stripe from './Stripe.jsx';
 
 import CamperModel from '../models/camper';
+import api from '../api/api';
 
 class App extends React.Component {
   constructor(props) {
@@ -159,12 +159,10 @@ class App extends React.Component {
   // }
 
   setCurrentCamper(camperId) {
-    axios.get(`https://smai.us/index.php?option=com_smapi&api=camper/get&id=${camperId}`)
+    api.run('camper/get', {id: camperId})
     .then((response) => {
-      console.log(response);
-      let data = response.data.data;
-      const newData = new CamperModel(data);
-      this.setState({currentCamper: newData, step: 'toc'});
+      const newCamper = new CamperModel(response.data);
+      this.setState({currentCamper: newCamper, step: 'toc'});
     })
     .catch((error) => {
       console.log(error);

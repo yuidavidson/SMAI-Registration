@@ -8,6 +8,8 @@ import { BrowserRouter } from "react-router-dom";
 import CardForm from "./CardForm.jsx";
 import key from '../config.js';
 
+import api from '../api/api';
+
 import "../../dist/styles.css";
 
 // LIVE: key for live usage
@@ -21,11 +23,8 @@ const Stripe = (props) => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("https://smai.us/index.php?option=com_smapi&api=payment/intent", {
-        method: "POST",
-      })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.data.client_secret));
+    api.run('payment/intent')
+      .then((response) => setClientSecret(response.data.client_secret));
   }, []);
 
   const appearance = {

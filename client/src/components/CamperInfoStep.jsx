@@ -1,11 +1,11 @@
 import React from 'react';
-import axios from 'axios';
 
 import UnsavedWarning from './UnsavedWarning.jsx';
 import Overlay from './Overlay.jsx';
 import {DropDown, Option} from "./DropDownMenu.jsx";
 import { BodyWrapper, StyledButton, ButtonWrapper, FooterWrapper,  StyledStringError, StyledObjectError, InputErrorWrapper, HeaderBottom, StyledHeader } from './Styles.jsx';
 
+import api from '../api/api';
 import dictionaryConfig  from '../models/dictionary-config.js';
 import fieldsConfig  from '../models/config.js';
 
@@ -68,20 +68,15 @@ export default class CamperInfoStep extends React.Component {
   }
 
   save() {
-    let dataEncoded = Object.entries(this.data).map(e => encodeURIComponent(e[0])+'='+encodeURIComponent(e[1])).join('&');
-    dataEncoded += `&id=${this.state.camperId}`;
+    const data = Object.assign({id: this.state.camperId}, this.data);
 
     if (!this.state.hasChanged) {
       console.log('no changes detected to be saved!');
     } else {
-      axios({
-        method: 'POST',
-        url: 'https://smai.us/index.php?option=com_smapi&api=camper/update',
-        data: dataEncoded,
-      })
-      .then((response)  => {
+      api.run('camper/update', data)
+      .then(response => {
         console.log(response);
-        if (response.data.status === 'success') {
+        if (response.status === 'success') {
           this.onSavedData(this.step, this.data);
           this.setState({hasChanged: false, isEditMode: false, saveError: ''});
         } else {
@@ -90,7 +85,7 @@ export default class CamperInfoStep extends React.Component {
           *  a string (i.e. a general error)
           *  or an hash of errors by field name ({phone1: "too short", name: "empty"})
           * */
-          this.setState({saveError: response.data.errors});
+          this.setState({saveError: response.errors});
         }
       })
       .catch((error) => {
