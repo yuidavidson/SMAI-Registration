@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { BodyWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
+import { BodyWrapper, StyledButton, ButtonWrapper, StyledHeader } from './Styles.jsx';
 
 const Camper = (props) => {
   return (
     <BodyWrapper>
-      <div>Registeration Table of Contents</div>
+      <StyledHeader>Registeration Table of Contents</StyledHeader>
       <div
         onClick={() => props.switchStep('personal')}
       >Personal Information</div>

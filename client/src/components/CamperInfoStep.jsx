@@ -4,7 +4,7 @@ import axios from 'axios';
 import UnsavedWarning from './UnsavedWarning.jsx';
 import Overlay from './Overlay.jsx';
 import {DropDown, Option} from "./DropDownMenu.jsx";
-import { BodyWrapper, StyledButton, ButtonWrapper, FooterWrapper,  StyledStringError, StyledObjectError, InputErrorWrapper } from './Styles.jsx';
+import { BodyWrapper, StyledButton, ButtonWrapper, FooterWrapper,  StyledStringError, StyledObjectError, InputErrorWrapper, HeaderBottom, StyledHeader } from './Styles.jsx';
 
 import dictionaryConfig  from '../models/dictionary-config.js';
 import fieldsConfig  from '../models/config.js';
@@ -118,7 +118,9 @@ export default class CamperInfoStep extends React.Component {
   render() {
     return (
       <BodyWrapper>
-        <div>{this.step.label}</div>
+        <HeaderBottom>
+          <StyledHeader>{this.step.label}</StyledHeader>
+        </HeaderBottom>
         {
             this.step.fields.map(fieldName =>
               <div key={fieldName}>
