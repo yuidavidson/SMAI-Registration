@@ -6,7 +6,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { BrowserRouter } from "react-router-dom";
 
 import CardForm from "./CardForm.jsx";
-import key from '../config.js';
+import smaiConfig from '../config.js';
 
 import api from '../api/api';
 
@@ -16,7 +16,7 @@ import "../../dist/styles.css";
 // const stripePromise = loadStripe(key.stripe.live);w
 
 // TEST: key for testing
-const stripePromise = loadStripe(key.stripe.test);
+const stripePromise = loadStripe(smaiConfig.stripe.key);
 
 const Stripe = (props) => {
   const [clientSecret, setClientSecret] = useState("");
