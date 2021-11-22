@@ -28,7 +28,7 @@ class App extends React.Component {
       step: 'events',
       readyForNextStep: false,
       modalState: '',
-      account: 'SMF034',
+      partyId: '',
       camper: 'Joshua Freeman',
       event: 'Mill 2022',
       neighborhoodKey: {
@@ -48,15 +48,6 @@ class App extends React.Component {
         14: 'Other',
         15: 'Don\'t know yet',
       },
-      // The party structure might have to be changed depending on what the data coming in looks like
-
-      // party : [
-      //   'Joshua Freeman',
-      //   'Karen Freeman',
-      //   'David Konno',
-      //   'Shelli Smart',
-      //   'Cedar Dobson',
-      // ],
       party: [],
       currentCamper: null
     };
@@ -68,6 +59,17 @@ class App extends React.Component {
     this.setCurrentCamper = this.setCurrentCamper.bind(this);
 
     this.updateCamper = this.updateCamper.bind(this);
+  }
+
+  componentDidMount() {
+    api.run('camper/current')
+        .then((response) => {
+          const newCamper = new CamperModel(response.data);
+          this.setState({camper: newCamper.firstName + ' ' + newCamper.lastName, partyId: newCamper.partyId });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   }
 
   getCamperFullName() {
@@ -85,6 +87,9 @@ class App extends React.Component {
     this.setState({currentCamper: this.state.currentCamper.updateStepValues(step.id, values, true) } );
   }
 
+  addToParty(partyId, camper) {
+    this.setState({party: [camper, ...this.state.party]});
+  }
   // function for switching components
   switchStep(step) {
     this.setState({step: step});
@@ -98,16 +103,8 @@ class App extends React.Component {
     this.setState({step: step});
   }
 
-  //  old setCurrentCamper
-  // setCurrentCamper(partyMember) {
-  //   let newData = this.state.currentCamper;
-  //   newData.camper = partyMember.camper;
-  //   this.setState({currentCamper: newData});
-  //   this.setState({step: 'toc'});
-  // }
-
-  setCurrentCamper(camperId) {
-    api.run('camper/get', {id: camperId})
+  setCurrentCamper(camper) {
+    api.run('camper/get', {id: camper.camperId})
     .then((response) => {
       const newCamper = new CamperModel(response.data);
       this.setState({currentCamper: newCamper, step: 'toc'});
@@ -130,10 +127,11 @@ class App extends React.Component {
         ></Navigation>
         {this.state.step === 'register' ?
           <Register
-            account={this.state.account}
+            partyId={this.state.partyId}
             camper={this.state.camper}
             party={this.state.party}
             setCurrentCamper={this.setCurrentCamper}
+            addToParty={this.addToParty.bind(this)}
             switchStep={this.switchStep}
           /> : null}
         {this.state.step === 'toc' ?

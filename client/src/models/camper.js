@@ -80,6 +80,7 @@ export default class CamperModel {
      */
     constructor(camper) {
         this.camperId = camper.camperId;
+        this.partyId = camper.partyId;
         this.firstName = camper.firstName;
         this.lastName = camper.lastName;
         this.birthyear = camper.birthyear;

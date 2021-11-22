@@ -5,12 +5,12 @@ import checkMark from './../assets/checkmark.jpg';
 
 const Party = (props) => {
   const party = props.party;
-  const partyList = party.map((partyMember) =>
+  const partyList = party.map((camper) =>
   // TODO: when we figure out the status for each camper's registeration, then we can conditionally render the checkmark for those that have finished registeration => may add different symbols depending on what their status is
-    <RowWrapper key={partyMember.camper.toString()}>
+    <RowWrapper key={camper.camperId}>
       <StyledCheckMark src={checkMark}/>
-      {partyMember.camper}
-      <StyledEditButton onClick={() => props.setCurrentCamper(partyMember.camperId)}>Edit</StyledEditButton>
+      {camper.firstName} {camper.lastName}
+      <StyledEditButton onClick={() => props.setCurrentCamper(camper)}>Edit</StyledEditButton>
     </RowWrapper>
   );
   return (

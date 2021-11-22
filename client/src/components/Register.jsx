@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState} from "react";
 
 import Party from './Party.jsx';
 import CamperInvite from './CamperInvite.jsx';
@@ -8,13 +8,11 @@ import { BodyWrapper, StyledButton, StyledClickableDiv } from './Styles.jsx';
 import Overlay from './Overlay.jsx';
 
 const Register = (props) => {
-  let modal = '';
+  let [modal, setModal] = useState('');
+  const openModal = (name) => setModal(name);
+  const closeModal = () => setModal('');
 
-  const setModal = function (newModal='') {
-    modal = newModal;
-  };
-  const closeModal = setModal.bind(undefined, '');
-
+  const addToParty = camper => props.addToParty(props.partyId, camper);
 
   return (
   <BodyWrapper>
@@ -38,7 +36,7 @@ const Register = (props) => {
       <CamperInvite randomStuff="rannddoommm"/>
     </Overlay>
     <Overlay currentId={modal} close={closeModal} myId='camperSearch'>
-      <CamperSearch />
+      <CamperSearch onSelected={addToParty}/>
     </Overlay>
     <StyledButton onClick={() => props.switchStep('stripe')}>Review and Pay</StyledButton>
   </BodyWrapper>
