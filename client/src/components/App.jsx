@@ -57,38 +57,8 @@ class App extends React.Component {
       //   'Shelli Smart',
       //   'Cedar Dobson',
       // ],
-      party: [
-        {
-          camper: 'Joshua Freeman',
-          camperId: 1,
-        },
-        {
-          camper: 'Karen Freeman',
-          camperId: 2,
-        },
-        {
-          camper: 'David Konno',
-          camperId: 3,
-        },
-        {
-          camper: 'Shelli Smart',
-          camperId: 4,
-        },
-        {
-          camper: 'Cedar Dobson',
-          camperId: 5,
-        },
-      ],
-      currentCamper: null,
-      // Assumed that the title of each session and it's date will eventually be separate -> probably have to change to an object. Currently not in use
-      // sessions: [
-      //   'Pre-pre camp - July 5',
-      //   'Set Up - July 8',
-      //   'Session 1 - July 12',
-      //   'Session 2 - July 15',
-      //   'Session 3 - July 18',
-      //   'Tear Down - July 21',
-      // ],
+      party: [],
+      currentCamper: null
     };
 
     this.switchStep = this.switchStep.bind(this);
