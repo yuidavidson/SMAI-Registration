@@ -23,7 +23,19 @@ class CampEvents extends React.Component {
     this.state = {
       // currently set as an array because later we expect to get multiple events information
       events: null,
+      modalState: '',
     };
+
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  openModal(modalType) {
+    this.setState({modalState: modalType})
+  }
+
+  closeModal() {
+    this.setState({ modalState: ''});
   }
 
   componentDidMount() {
@@ -95,9 +107,9 @@ class CampEvents extends React.Component {
         <EventList
           events={this.state.events}
           switchAndSet={this.props.switchAndSet}
-          openModal={this.props.openModal}
-          closeModal={this.props.closeModal}
-          modalState={this.props.modalState}
+          openModal={this.openModal}
+          closeModal={this.closeModal}
+          modalState={this.state.modalState}
         ></EventList>
       </BodyWrapper>
     )

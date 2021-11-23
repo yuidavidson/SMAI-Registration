@@ -26,17 +26,6 @@ class App extends React.Component {
     // dummy data for testing included
     this.state = {
       step: 'events',
-      stepKey: {
-        register: 'Camper Selection',
-        toc: 'Table of Contents',
-        personal: 'Personal Information',
-        contact: 'Contact Information',
-        vehicle: 'Vehicle Information',
-        emergency: 'Emergency Contact',
-        medical: 'Medical Information',
-        neighborhood: 'Neighborhood',
-        sessions: 'Sessions',
-      },
       readyForNextStep: false,
       modalState: '',
       account: 'SMF034',
@@ -68,42 +57,9 @@ class App extends React.Component {
       //   'Shelli Smart',
       //   'Cedar Dobson',
       // ],
-      party: [
-        {
-          camper: 'Joshua Freeman',
-          camperId: 1,
-        },
-        {
-          camper: 'Karen Freeman',
-          camperId: 2,
-        },
-        {
-          camper: 'David Konno',
-          camperId: 3,
-        },
-        {
-          camper: 'Shelli Smart',
-          camperId: 4,
-        },
-        {
-          camper: 'Cedar Dobson',
-          camperId: 5,
-        },
-      ],
-      currentCamper: null,
-      // Assumed that the title of each session and it's date will eventually be separate -> probably have to change to an object. Currently not in use
-      // sessions: [
-      //   'Pre-pre camp - July 5',
-      //   'Set Up - July 8',
-      //   'Session 1 - July 12',
-      //   'Session 2 - July 15',
-      //   'Session 3 - July 18',
-      //   'Tear Down - July 21',
-      // ],
+      party: [],
+      currentCamper: null
     };
-
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
 
     this.switchStep = this.switchStep.bind(this);
     this.switchAndClose = this.switchAndClose.bind(this);
@@ -129,14 +85,6 @@ class App extends React.Component {
     this.setState({currentCamper: this.state.currentCamper.updateStepValues(step.id, values, true) } );
   }
 
-  openModal(modalType) {
-    this.setState({modalState: modalType})
-  }
-
-  closeModal() {
-    this.setState({ modalState: ''});
-  }
-
   // function for switching components
   switchStep(step) {
     this.setState({step: step});
@@ -147,7 +95,7 @@ class App extends React.Component {
   }
 
   switchAndClose(step) {
-    this.setState({modalState: '', step: step});
+    this.setState({step: step});
   }
 
   //  old setCurrentCamper
@@ -179,17 +127,13 @@ class App extends React.Component {
           currentCamper={this.getCamperFullName()}
           step={this.state.step}
           switchStep={this.switchStep}
-          stepKey={this.state.stepKey}
         ></Navigation>
         {this.state.step === 'register' ?
           <Register
             account={this.state.account}
             camper={this.state.camper}
             party={this.state.party}
-            modalState={this.state.modalState}
             setCurrentCamper={this.setCurrentCamper}
-            openModal={this.openModal}
-            closeModal={this.closeModal}
             switchStep={this.switchStep}
           /> : null}
         {this.state.step === 'toc' ?
@@ -243,9 +187,6 @@ class App extends React.Component {
           </div> : null}
           {this.state.step === 'events' ?
           <CampEvents
-            openModal={this.openModal}
-            closeModal={this.closeModal}
-            modalState={this.state.modalState}
             switchStep={this.switchStep}
             switchAndSet={this.switchAndSet}
           /> : null}

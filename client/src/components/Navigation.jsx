@@ -5,6 +5,17 @@ import { HeaderWrapper, HeaderTop, HeaderBottom, ImageWrapper, CamperWrapper, Ev
 import logo from '../assets/logo.jpg';
 
 const Navigation = (props) => {
+  const stepLabels = {
+      register: 'Camper Selection',
+      toc: 'Table of Contents',
+      personal: 'Personal Information',
+      contact: 'Contact Information',
+      vehicle: 'Vehicle Information',
+      emergency: 'Emergency Contact',
+      medical: 'Medical Information',
+      neighborhood: 'Neighborhood',
+      sessions: 'Sessions',
+  };
   // TODO: was trying to animate the navigation border not on first render but was not working how I wanted it to. Either fix this problem or remove these parts
   const [isFirstRender, setIsFirstRender] = useState(true);
   // const [width, setWidth] = useState(0);

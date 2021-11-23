@@ -7,7 +7,8 @@ class SmaiApi {
         }
         let dataEncoded = null;
         if (data) {
-            Object.entries(data).map(e => encodeURIComponent(e[0])+'='+encodeURIComponent(e[1])).join('&');
+            dataEncoded = {};
+            Object.keys(data).forEach(k => dataEncoded[encodeURIComponent(k)] = encodeURIComponent(data[k]));
         }
 
         return axios({
