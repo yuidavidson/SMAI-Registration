@@ -26,10 +26,10 @@ const Register = (props) => {
     setCurrentCamper={props.setCurrentCamper}
     />
     <StyledClickableDiv
-      onClick={() => props.openModal('camperSearch')}
+      onClick={() => openModal('camperSearch')}
     >find other campers...</StyledClickableDiv>
     <StyledClickableDiv
-      onClick={() => props.openModal('camperInvite')}
+      onClick={() => openModal('camperInvite')}
     >invite new camper</StyledClickableDiv>
 
     <Overlay currentId={modal} close={closeModal} myId='camperInvite'>
