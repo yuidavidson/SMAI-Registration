@@ -56,7 +56,7 @@ const CardForm = (props) => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // Make sure to change this to your payment completion page
+        // TODO: Make sure to change this to your payment completion page
         return_url: "http://localhost:3000",
       },
     });
@@ -71,21 +71,22 @@ const CardForm = (props) => {
     } else {
       setMessage("An unexpected error occured.");
     }
-
     setIsLoading(false);
   };
 
   return (
-
     <form className="stripe-cc" id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-        </span>
-      </button>
       {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
+      <span>
+        <button disabled={isLoading || !stripe || !elements} id="submit">
+          <span id="button-text">
+            {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+          </span>
+        </button>
+        <button onClick={() => props.switchStep('register')}>Cancel</button>
+      </span>
     </form>
   );
 };
