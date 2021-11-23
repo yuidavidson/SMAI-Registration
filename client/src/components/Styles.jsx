@@ -259,7 +259,6 @@ export const StyledEditButton = styled.button`
 export const StyledClickableDiv = styled.div`
   cursor: pointer;
   &:hover {
-    // color: #666665;
     opacity: 0.65;
   }
 `;
