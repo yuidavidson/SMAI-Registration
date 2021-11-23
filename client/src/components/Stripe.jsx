@@ -10,7 +10,7 @@ import smaiConfig from '../config.js';
 
 import api from '../api/api';
 
-import "../../dist/styles.css";
+// import "../../dist/styles.css";
 
 // LIVE: key for live usage
 // const stripePromise = loadStripe(key.stripe.live);w
