@@ -1,4 +1,5 @@
 import axios from "axios";
+import config from '../config.js';
 
 class SmaiApi {
     run(cmd, data=null) {
@@ -10,9 +11,10 @@ class SmaiApi {
             dataEncoded = Object.keys(data).map(k => encodeURIComponent(k) +'='+ encodeURIComponent(data[k])).join('&');
         }
 
+        const baseUrl = !!config.api.base ? config.api.base : '';
         return axios({
             method: 'POST',
-            url: `https://smai.us/index.php?option=com_smapi&api=${cmd}`,
+            url: `${baseUrl}/index.php?option=com_smapi&api=${cmd}`,
             data: dataEncoded,
         })
           .then(response => response.data)
