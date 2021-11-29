@@ -28,7 +28,6 @@ class App extends React.Component {
       step: 'events',
       readyForNextStep: false,
       modalState: '',
-      partyId: '',
       camper: 'Joshua Freeman',
       event: 'Mill 2022',
       neighborhoodKey: {
@@ -48,7 +47,9 @@ class App extends React.Component {
         14: 'Other',
         15: 'Don\'t know yet',
       },
-      party: [],
+      partyId: '',
+      partyRegId: '',
+      party: [], // camper registrations
       currentCamper: null
     };
 
@@ -130,6 +131,7 @@ class App extends React.Component {
             partyId={this.state.partyId}
             camper={this.state.camper}
             party={this.state.party}
+            event={this.state.event}
             setCurrentCamper={this.setCurrentCamper}
             addToParty={this.addToParty.bind(this)}
             switchStep={this.switchStep}
