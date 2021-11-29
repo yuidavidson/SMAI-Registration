@@ -48,7 +48,7 @@ const CamperSearch = (props) => {
       {isSearching === 'done' &&
       <div>Results:
         {results.map(r =>
-          <div onClick={onSelected.bind(this, r)}>
+          <div key={r.camperId} onClick={onSelected.bind(this, r)}>
             {r.firstName} {r.lastName}
           </div>
         )}
