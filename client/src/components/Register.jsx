@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState, useEffect } from "react";
 
 import Party from './Party.jsx';
 import CamperInvite from './CamperInvite.jsx';
@@ -7,30 +7,61 @@ import Stripe from './Stripe.jsx';
 import { BodyWrapper, StyledButton, StyledClickableDiv } from './Styles.jsx';
 import Overlay from './Overlay.jsx';
 import api from "../api/api";
+import CamperModel from "../models/camper";
+import RegistrationModel from "../models/registration";
 
 const Register = (props) => {
   let [modal, setModal] = useState('');
   const openModal = (name) => setModal(name);
   const closeModal = () => setModal('');
 
+  let [reg, setReg] = useState(null);
+  useEffect(() => {
+    api.run('registration/get')
+      .then((response) => {
+        const newReg = new RegistrationModel(response.data);
+        setReg(newReg);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
+
   const addToParty = camper => {
     /*
-     if camper can start a party {
-        if camper has not started a party {
-          camper.startParty()
-        }
-        camper.party.addCamper()
-          if (camper.isInParty()) {
-            error: cannot add camper as they are already in Joe's party
-          }
+    PARTY INVITES
+    party-invite/get
+    partyInvitation= null | [ { campId, camperId, camperName, camperEmail, partyRegId } ]
 
-      } else {
-          tell camper why they can't start party
-            e.g.
-             you do not have a "full account"
-             someone else added you to their own party already (you cannot be in two different parties: theirs and your own)
+    <list>
 
-      }
+    API: party-invite/accept (camperId, partyRegId) || party-invite/decline (camperId, partyRegId)
+
+
+    FULL CAMPER: canRegisterParty=true
+    1. I am have not started a party reg
+       AND no one else has me in their party reg
+       partyReg=null
+       party=[ ]
+       camperReg=null
+
+    2. I have been added to someone's party reg
+       isPartyLeader=false
+       partyReg={partyId: <not mine>}
+       party=[ { }, { } ]
+       camperReg={ }
+
+    3. I have started my party reg:
+       isPartyLeader=true
+       partyReg={partyId: <MINE>}
+       party=[ { }, { } ]
+       camperReg={ }
+
+    NEWBIE CAMPER: canRegisterParty=false
+    1. No one has me in their party reg
+
+    2. I have been added to someone's party reg
+
     */
     api.run('registration/camper/add', {
       partyId: props.partyId,
