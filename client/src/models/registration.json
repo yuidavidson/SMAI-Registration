@@ -36,5 +36,14 @@
     "campId":  "",
     "neighborhood": "",
     "camperName": ""
-  }
+  },
+  "partyInvites": [
+    {
+      "campId": "",
+      "camperId": "",
+      "camperName": "",
+      "camperEmail": "",
+      "partyRegId": ""
+    }
+  ]
 }
