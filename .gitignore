@@ -1,11 +1,14 @@
-node_modules
+# IDE's stuff
+.idea/
 
+# NPM
+node_modules
 package-lock.json
 
-bundle.js
-bundle.js.LICENSE.txt
-
-.idea/
+# Webpack build stuff
+/client/dist/bundle.js
+/client/dist/bundle.js.LICENSE.txt
+/client/dist/tests/
 
 # disregard js config
 /client/src/config.js
