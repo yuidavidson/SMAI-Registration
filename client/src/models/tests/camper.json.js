@@ -1,5 +1,5 @@
 export default {
-  "camperId": 2008,
+  "id": 2008,
   "partyId": "Q094",
   "joomlaId": 899,
   "notes": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",

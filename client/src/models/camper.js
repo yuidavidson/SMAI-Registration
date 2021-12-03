@@ -79,7 +79,7 @@ export default class CamperModel {
      * @param {CamperModel} camper
      */
     constructor(camper) {
-        this.camperId = camper.camperId;
+        this.id = camper.id;
         this.partyId = camper.partyId;
         this.firstName = camper.firstName;
         this.lastName = camper.lastName;

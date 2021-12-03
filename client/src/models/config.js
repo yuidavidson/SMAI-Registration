@@ -1,6 +1,6 @@
 export default {
     "camper": {
-        "camperId": {
+        "id": {
             "type": "text"
         },
         "firstName": {

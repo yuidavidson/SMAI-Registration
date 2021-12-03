@@ -105,7 +105,7 @@ class App extends React.Component {
   }
 
   setCurrentCamper(camper) {
-    api.run('camper/get', {id: camper.camperId})
+    api.run('camper/get', {id: camper.id})
     .then((response) => {
       const newCamper = new CamperModel(response.data);
       this.setState({currentCamper: newCamper, step: 'toc'});
@@ -154,7 +154,7 @@ class App extends React.Component {
             </div>
             <CamperInfoStep
               key={this.state.step}
-              camperId={this.state.currentCamper.camperId}
+              camperId={this.state.currentCamper.id}
               step={this.state.currentCamper.getStepConfig(this.state.step)}
               data={this.state.currentCamper.getStepValues(this.state.step)}
               leaveStep={this.switchStep.bind(this, 'toc')}
@@ -168,7 +168,7 @@ class App extends React.Component {
             {this.getCamperFullName()}
           </div>
           <Neighborhood
-            camperId={this.state.currentCamper.camperId}
+            camperId={this.state.currentCamper.id}
             neighborhoodKey={this.state.neighborhoodKey}
             neighborhood={this.state.currentCamper.neighborhood}
             leaveStep={this.switchStep.bind(this, 'toc')}
@@ -181,7 +181,7 @@ class App extends React.Component {
             <div>Registering {this.getCamperFullName()}</div>
             <Sessions
               sessions={this.state.currentCamper.sessions}
-              camperId={this.state.currentCamper.camperId}
+              id={this.state.currentCamper.id}
               switchStep={this.switchStep}
             />
           </div> : null}

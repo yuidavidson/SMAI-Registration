@@ -9,6 +9,7 @@ import Overlay from './Overlay.jsx';
 import api from "../api/api";
 import CamperModel from "../models/camper";
 import RegistrationModel from "../models/registration";
+import sampleRegistration from "../models/tests/registration.json.js";
 
 const Register = (props) => {
   let [modal, setModal] = useState('');
@@ -17,14 +18,15 @@ const Register = (props) => {
 
   let [reg, setReg] = useState(null);
   useEffect(() => {
-    api.run('registration/get')
-      .then((response) => {
-        const newReg = new RegistrationModel(response.data);
-        setReg(newReg);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    setReg(sampleRegistration);
+    // api.run('registration/get')
+    //   .then((response) => {
+    //     const newReg = new RegistrationModel(response.data);
+    //     setReg(newReg);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   });
 
   const addToParty = camper => {
@@ -65,7 +67,7 @@ const Register = (props) => {
     */
     api.run('registration/camper/add', {
       partyId: props.partyId,
-      camperId: camper.camperId,
+      camperId: camper.id,
       campId: props.event,
       neighborhood: camper.neighborhood
     })
