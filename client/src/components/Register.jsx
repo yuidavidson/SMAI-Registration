@@ -45,10 +45,10 @@ const Register = (props) => {
       {
         // TODO: not that it matters too much because this should get overwritten in the initial render, but make this empty again later
         "partyId":  "Y717",
-        "camperId": 2008,
+        "camperId": 65,
         "campId":  1,
-        "neighborhood": " l u",
-        "camperName": "Opal Lieb"
+        "neighborhood": "v pz",
+        "camperName": "Athena Bucher"
       }
     ],
     "camperReg": {
@@ -144,7 +144,7 @@ const Register = (props) => {
       neighborhood: camper.neighborhood
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         // props.addToParty(props.partyId, camper);
       })
       .catch((error) => {
@@ -153,10 +153,9 @@ const Register = (props) => {
 
 
     // TODO: need someway of storing the party members permanently
-    console.log(camper.camperId);
     api.run('camper/get', {id: camper.camperId})
     .then((response => {
-      console.log(response.data);
+      // console.log(response.data);
       const newCamper = new CamperModel(response.data);
       props.addToParty(props.partyId, newCamper);
     }))
@@ -169,21 +168,25 @@ const Register = (props) => {
   <BodyWrapper>
     <div>Party: {props.partyId}</div>
     <div>Camper: {props.camper}</div>
-    <div>Who will you register?</div>
-    <div>choose one</div>
-    <Party
-    party={props.party}
-    setCurrentCamper={props.setCurrentCamper}
-    isCurrentParty={true}
-    />
-    {partyInvite ?
+    { props.party.length ?
+    <div>
+      <div>Who will you register?</div>
+      <div>choose one</div>
+      <Party
+      party={props.party}
+      setCurrentCamper={props.setCurrentCamper}
+      isCurrentParty={true}
+      />
+    </div> : "You currently don't have anyone in your party to register for this event. Please add people from previous events who were in your party from the list below, or contact administration to add other people to your party." }
+    {/* The party invite functionallity has been cancled. For now, whenever a party leader wants to add someone new to their party, they must go through administration directly */}
+    {/* {partyInvite ?
     <div>
       <div>Party Invitations</div>
       <div>You have been invited to {partyInvite.partyLeader}'s party</div>
       <button>Accept</button>
       <button>Decline</button>
     </div>
-    : null}
+    : null} */}
 
     {/* will have to either change Party component to work properly with this section (so it doesn't have the edit and check mark and add a add button) or create a new component */}
     {reg.pastPartyCampers && reg.pastPartyCampers.length > 0 ?
@@ -205,9 +208,10 @@ const Register = (props) => {
     <Overlay currentId={modal} close={closeModal} myId='camperInvite'>
       <CamperInvite randomStuff="rannddoommm"/>
     </Overlay>
-    <Overlay currentId={modal} close={closeModal} myId='camperSearch'>
+    {/* We end up not needing to add new campers to the party from direction of HR(Josh) so campersearch is removed => we may eventually want to reuse this for administration side */}
+    {/* <Overlay currentId={modal} close={closeModal} myId='camperSearch'>
       <CamperSearch onSelected={addToParty}/>
-    </Overlay>
+    </Overlay> */}
     <StyledButton onClick={() => props.switchStep('stripe')}>Review and Pay</StyledButton>
   </BodyWrapper>
   )
