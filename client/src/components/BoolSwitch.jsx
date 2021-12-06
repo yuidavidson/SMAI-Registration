@@ -6,11 +6,11 @@ const BoolSwitch = (props) => {
   return(
     <ButtonWrapper>
       <SmallButtonWrapper>
-          <StyledSmallButton isOn={props.isOn === 1} onClick={() => props.onUpdate(1)}></StyledSmallButton>
+          <StyledSmallButton isOn={props.isOn === 1} onClick={props.onEdit}></StyledSmallButton>
         Yes
       </SmallButtonWrapper>
       <SmallButtonWrapper>
-        <StyledSmallButton  isOn={props.isOn === 0} onClick={() => props.onUpdate(0)}></StyledSmallButton>
+        <StyledSmallButton  isOn={props.isOn === 0} onClick={props.onEdit}></StyledSmallButton>
         No
       </SmallButtonWrapper>
     </ButtonWrapper>

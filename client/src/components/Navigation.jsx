@@ -48,7 +48,7 @@ const Navigation = (props) => {
         step={props.step} isFirstRender={isFirstRender} setIsFirstRender={setIsFirstRender}>
           <StyledClickableDiv onClick={() => props.switchStep('events')}>{props.step !== 'events' ? props.event.name : null}</StyledClickableDiv>
           <StyledClickableDiv onClick={() => props.switchStep('register')}>{props.currentCamper  && props.step !== 'events' ? ' > ' + props.currentCamper : ''}</StyledClickableDiv>
-          <StyledClickableDiv onClick={() => props.switchStep('toc')}>{(props.step !== 'events' && props.step !== 'toc' && props.step !== 'register' && props.step !== 'stripe') ? ' > ' + props.stepKey[props.step] : ''}
+          <StyledClickableDiv onClick={() => props.switchStep('toc')}>{(props.step !== 'events' && props.step !== 'toc' && props.step !== 'register' && props.step !== 'stripe') ? ' > ' + stepLabels[props.step] : ''}
           </StyledClickableDiv>
         </NavigationWrapper>
       </HeaderBottom>

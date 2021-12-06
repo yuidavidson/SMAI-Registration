@@ -16,7 +16,7 @@ import api from '../api/api';
 // const stripePromise = loadStripe(key.stripe.live);w
 
 // TEST: key for testing
-const stripePromise = loadStripe(smaiConfig.stripe.key);
+const stripePromise = loadStripe(smaiConfig.stripe.test);
 
 const Stripe = (props) => {
   const [clientSecret, setClientSecret] = useState("");

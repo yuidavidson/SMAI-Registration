@@ -2,6 +2,7 @@ import React from 'react';
 
 import UnsavedWarning from './UnsavedWarning.jsx';
 import Overlay from './Overlay.jsx';
+import BoolSwitch from './BoolSwitch.jsx';
 import {DropDown, Option} from "./DropDownMenu.jsx";
 import { BodyWrapper, StyledButton, ButtonWrapper, FooterWrapper,  StyledStringError, StyledObjectError, InputErrorWrapper, HeaderBottom, StyledHeader } from './Styles.jsx';
 
@@ -67,6 +68,15 @@ export default class CamperInfoStep extends React.Component {
     this.setState({hasChanged: true});
   }
 
+  onUpdate(e, b) {
+    if (b) {
+      this.data[e.target.name] = 0;
+    } else {
+      this.data[e.target.name] = 1;
+    }
+    this.setState({hasChanged: true});
+  }
+
   save() {
     const data = Object.assign({id: this.state.camperId}, this.data);
 
@@ -122,6 +132,7 @@ export default class CamperInfoStep extends React.Component {
                   <strong>{fieldName.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/(^| )[a-z]/, s => s.toUpperCase())}</strong>:&nbsp;
                 {this.state.isEditMode ?
                     (
+                      fieldName === 'medicalHasAllergy' || fieldName === 'medicalHasAsthma' ? <BoolSwitch onEdit={this.onEdit}/> :
                         fieldsConfig.camper[fieldName].type === 'text' ?
                         <InputErrorWrapper>
                           <input type='text'

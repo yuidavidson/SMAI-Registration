@@ -79,7 +79,7 @@ class CampEvents extends React.Component {
     .then((response) => {
       let data = response.data;
       const newData = [];
-      // console.log(response);
+      console.log(response);
       for (let i = 0; i < data.length; i++) {
         let info = data[i];
         data[i].startDate = dateConverter(data[i].startDate);

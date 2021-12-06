@@ -2,13 +2,28 @@ import React, { useState} from "react";
 import api from "../api/api";
 
 const CamperSearch = (props) => {
-  const onSelected = (camper) => {
-    props.onSelected(camper);
-  };
 
   let [results, setResults] = useState([]);
   let [isSearching, setIsSearching] = useState('');
   let [error, setError] = useState('');
+  let [sentInvite, setSentInvite] = useState(false);
+
+  // TODO: currently this sets the clicked camper to the party, but what we want is the send a request to the api to send an email and an invitation to that camper
+  const onSelected = (camper) => {
+    // props.onSelected(camper);
+    // TODO: uncomment and change the path to correct invitation when it is created on the backend and delete setSentInvite, located after the api call
+    // api.run('camper/invite', {id: camper.camoerId})
+    // .then((response) => {
+    //   console.log(response);
+    //   setSentInvite(true);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // })
+
+    setSentInvite(true);
+
+  };
 
   const search = (ev) => {
     ev.preventDefault();
@@ -57,6 +72,7 @@ const CamperSearch = (props) => {
       {isSearching === 'inprogress' &&
         <div>searching ...</div>
       }
+      {sentInvite ? <div>An email and invitation has been sent. You can register this camper after they have accepted your invitation.</div> : null}
     </form>
   )
 };

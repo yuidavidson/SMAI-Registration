@@ -8,9 +8,10 @@ const Party = (props) => {
   const partyList = party.map((camper) =>
   // TODO: when we figure out the status for each camper's registeration, then we can conditionally render the checkmark for those that have finished registeration => may add different symbols depending on what their status is
     <RowWrapper key={camper.camperId}>
-      <StyledCheckMark src={checkMark}/>
-      {camper.firstName} {camper.lastName}
-      <StyledEditButton onClick={() => props.setCurrentCamper(camper)}>Edit</StyledEditButton>
+      {props.isCurrentParty ? <StyledCheckMark src={checkMark}/> : null}
+      {props.isCurrentParty ? <div>{camper.firstName} {camper.lastName}</div> : <div>{camper.camperName}</div>}
+      {props.isCurrentParty ? <StyledEditButton onClick={() => props.setCurrentCamper(camper)}>Edit</StyledEditButton> : null}
+      {!props.isCurrentParty ? <button onClick={() => props.addToParty(camper)}>Add</button> : null}
     </RowWrapper>
   );
   return (
