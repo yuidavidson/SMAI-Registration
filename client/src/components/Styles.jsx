@@ -221,11 +221,11 @@ export const StyledSmallButton = styled.button`
   align-items: center;
   width: 14px;
   height: 14px;
-  // margin: 5px;
+  margin: 1px;
   padding: 1px;
-  border: solid black 1px;
+  border: groove black 1px;
   border-radius: 10px;
-  background:${(props) => props.isOn ? 'cyan' : 'white'};
+  background:${(props) => props.isOn ? '#91cfa1' : 'white'};
   cursor:pointer;
 `;
 
@@ -236,7 +236,7 @@ export const StyledXButton = styled.button`
   margin-top: -17px;
   margin-left: -17px;
   padding: 0;
-  cursor:pointer;
+  cursor: pointer;
   border: 2px groove #d96d64;
   border-radius: 20px;
   background: #c45c49;
