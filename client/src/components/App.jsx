@@ -28,8 +28,8 @@ class App extends React.Component {
       step: 'events',
       readyForNextStep: false,
       modalState: '',
-      camper: 'Joshua Freeman',
-      event: 'Mill 2022',
+      camper: '',
+      event: '',
       neighborhoodKey: {
         1: 'American Hill',
         2: 'Balkan Camp',
