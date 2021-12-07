@@ -48,7 +48,24 @@ export const BodyWrapper = styled.div`
   margin: 5px;
   border: solid 2px black;
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px;
+`;
+
+export const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  // align-items: center;
+  margin: 5px;
+  padding: 30px;
+`;
+
+export const StyledHead = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  font-size: ${(props) => props.fontSize ? props.fontSize + 'px' : '20px'};
+  font-weight: bold;
 `;
 
 export const HeaderWrapper = styled.div`
@@ -76,18 +93,6 @@ export const HeaderBottom = styled.div`
   margin: 1px;
   // border: solid 1px black;
   padding: 1px;
-`;
-
-export const ImageWrapper = styled.img`
-  height: 60px;
-  width: 60px;
-  // don't need this after the image is placed
-  align-items: center;
-  margin: 1px;
-  border: solid 1px black;
-  border-radius: 60px;
-  padding: 1px;
-  background: green;
 `;
 
 export const CamperWrapper = styled.div`
@@ -139,6 +144,7 @@ export const FooterWrapper = styled.div`
   align-items: center;
 `;
 
+//  TODO: find and change all references to StyledHead
 export const StyledHeader = styled.h2`
   padding: 5px;
   font-size: 20px;
@@ -233,8 +239,8 @@ export const StyledXButton = styled.button`
   width: 20px;
   height: 20px;
   float:right;
-  margin-top: -17px;
-  margin-left: -17px;
+  margin-top: -36px;
+  margin-left: -36px;
   padding: 0;
   cursor: pointer;
   border: 2px groove #d96d64;
@@ -293,7 +299,7 @@ export const StyledModal = styled.div`
   margin: 10px;
   border: solid 2px black;
   border-radius: 10px;
-  padding: 10px;
+  padding: 30px;
   background: white;
 `;
 
@@ -340,6 +346,18 @@ export const InputErrorWrapper = styled.span`
 /*
 ========== Image Styles ==========
 */
+
+export const ImageWrapper = styled.img`
+  height: 60px;
+  width: 60px;
+  // don't need this after the image is placed
+  align-items: center;
+  margin: 1px;
+  border: solid 1px black;
+  border-radius: 60px;
+  padding: 1px;
+  background: green;
+`;
 
 export const StyledCheckMark = styled.img`
   display: flex;

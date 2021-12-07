@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Overlay from './Overlay.jsx';
-import { StyledButton } from './Styles.jsx';
+import { StyledButton, ContentWrapper, StyledHead } from './Styles.jsx';
 
 const EventList = (props) => {
   const events = props.events;
@@ -12,12 +12,13 @@ const EventList = (props) => {
       <StyledButton onClick={() => props.openModal(event.name)}>Details</StyledButton>
       <StyledButton onClick={() => props.switchAndSet('register', 'event', event)}>Register</StyledButton>
       <Overlay currentId={props.modalState} close={props.closeModal} myId={event.name}>
-        <h3>{event.name}</h3>
-        <div>{event.startDate.month} {event.startDate.date} - {event.endDate.month} {event.endDate.date} {event.startDate.year}</div>
-        <div>Orgainzed by {event.organizer}</div>
-        <div>max-cutoff: {event.maxQuota}</div>
-        <div>Notes: </div>
-        <div>{event.notes}</div>
+        <ContentWrapper>
+          <StyledHead fontSize={20}>{event.name}</StyledHead>
+          <div>{event.startDate.month} {event.startDate.date} {event.startDate.year === event.endDate.year ? null : event.startDate.year}- {event.endDate.month} {event.endDate.date} {event.startDate.year}</div>
+          <div>Orgainzer: {event.organizer}</div>
+          <div>max-cutoff: {event.maxQuota}</div>
+          <div>Notes: {event.notes}</div>
+        </ContentWrapper>
       </Overlay>
     </div>
   );
