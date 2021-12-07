@@ -13,7 +13,7 @@ lateRegFeename
 import React from 'react';
 
 import EventList from './EventList.jsx';
-import { BodyWrapper, HeaderWrapper, StyledButton, ButtonWrapper } from './Styles.jsx';
+import { BodyWrapper, HeaderWrapper, StyledButton, ButtonWrapper, ContentWrapper, StyledHead } from './Styles.jsx';
 
 import api from "../api/api";
 
@@ -79,7 +79,7 @@ class CampEvents extends React.Component {
     .then((response) => {
       let data = response.data;
       const newData = [];
-      console.log(response);
+      // console.log(response);
       for (let i = 0; i < data.length; i++) {
         let info = data[i];
         data[i].startDate = dateConverter(data[i].startDate);
@@ -103,14 +103,17 @@ class CampEvents extends React.Component {
     }
     return(
       <BodyWrapper>
-        <h2>UPCOMING Camps/Events</h2>
-        <EventList
-          events={this.state.events}
-          switchAndSet={this.props.switchAndSet}
-          openModal={this.openModal}
-          closeModal={this.closeModal}
-          modalState={this.state.modalState}
-        ></EventList>
+        <StyledHead fontSize={30}>Upcoming Camps and Events</StyledHead>
+        <ContentWrapper>
+          <EventList
+            events={this.state.events}
+            switchAndSet={this.props.switchAndSet}
+            openModal={this.openModal}
+            closeModal={this.closeModal}
+            modalState={this.state.modalState}
+          ></EventList>
+
+        </ContentWrapper>
       </BodyWrapper>
     )
   }
