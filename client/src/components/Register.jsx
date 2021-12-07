@@ -81,7 +81,6 @@ const Register = (props) => {
       setIsInitialRender(false);
       setReg(dummyReg);
     }
-    console.log(reg);
 
     // if (isInitialRender) {
     //   setIsInitialRender(false);
