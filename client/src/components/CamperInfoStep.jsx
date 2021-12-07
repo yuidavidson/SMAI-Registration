@@ -36,6 +36,7 @@ export default class CamperInfoStep extends React.Component {
     this.editToggle = this.editToggle.bind(this);
     this.editForceCancel = this.editForceCancel.bind(this);
     this.onEdit = this.onEdit.bind(this);
+    this.onUpdate = this.onUpdate.bind(this);
     this.save = this.save.bind(this);
 
     this.showModal = this.showModal.bind(this);
@@ -68,11 +69,15 @@ export default class CamperInfoStep extends React.Component {
     this.setState({hasChanged: true});
   }
 
-  onUpdate(e, b) {
+  onUpdate(fieldName, b) {
+    console.log(fieldName);
+    console.log(this.data[fieldName]);
     if (b) {
-      this.data[e.target.name] = 0;
+      console.log('change to 0');
+      this.data[fieldName] = 1;
     } else {
-      this.data[e.target.name] = 1;
+      console.log('change to 1');
+      this.data[fieldName] = 0;
     }
     this.setState({hasChanged: true});
   }
@@ -132,7 +137,7 @@ export default class CamperInfoStep extends React.Component {
                   <strong>{fieldName.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/(^| )[a-z]/, s => s.toUpperCase())}</strong>:&nbsp;
                 {this.state.isEditMode ?
                     (
-                      fieldName === 'medicalHasAllergy' || fieldName === 'medicalHasAsthma' ? <BoolSwitch onEdit={this.onEdit}/> :
+                      fieldName === 'medicalHasAllergy' || fieldName === 'medicalHasAsthma' ? <BoolSwitch onUpdate={this.onUpdate} isOn={this.props.data[fieldName]} fieldName={fieldName} /> :
                         fieldsConfig.camper[fieldName].type === 'text' ?
                         <InputErrorWrapper>
                           <input type='text'

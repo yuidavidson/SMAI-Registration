@@ -13,9 +13,6 @@ import CamperModel from "../models/camper";
 import RegistrationModel from "../models/registration";
 import sampleRegistration from "../models/tests/registration.json.js";
 
-// might not use this because the flow of adding people to your party will probably change
-// import CamperModel from '../models/camper';
-
 const Register = (props) => {
 
   let dummyReg = {
@@ -178,7 +175,7 @@ const Register = (props) => {
       isCurrentParty={true}
       />
     </div> : "You currently don't have anyone in your party to register for this event. Please add people from previous events who were in your party from the list below, or contact administration to add other people to your party." }
-    {/* The party invite functionallity has been cancled. For now, whenever a party leader wants to add someone new to their party, they must go through administration directly */}
+    {/* The party invite functionallity has been canceled. For now, whenever a party leader wants to add someone new to their party, they must go through administration directly */}
     {/* {partyInvite ?
     <div>
       <div>Party Invitations</div>
