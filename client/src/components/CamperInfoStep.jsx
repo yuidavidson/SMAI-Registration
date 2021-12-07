@@ -70,13 +70,9 @@ export default class CamperInfoStep extends React.Component {
   }
 
   onUpdate(fieldName, b) {
-    console.log(fieldName);
-    console.log(this.data[fieldName]);
     if (b) {
-      console.log('change to 0');
       this.data[fieldName] = 1;
     } else {
-      console.log('change to 1');
       this.data[fieldName] = 0;
     }
     this.setState({hasChanged: true});
