@@ -57,7 +57,7 @@ export const ContentWrapper = styled.div`
   justify-content: flex-start;
   // align-items: center;
   margin: 5px;
-  padding: 30px;
+  padding: 25px;
 `;
 
 export const StyledHead = styled.div`
@@ -183,8 +183,6 @@ export const StyledOption = styled.option`
 ========== Button Styles ==========
 */
 
-
-// add transition for color change on hover and click
 export const StyledButton = styled.button`
   margin: 7px;
   border: solid 2px #99a39c;
