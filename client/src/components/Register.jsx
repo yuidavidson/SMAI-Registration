@@ -6,7 +6,7 @@ import Party from './Party.jsx';
 import CamperInvite from './CamperInvite.jsx';
 import CamperSearch from './CamperSearch.jsx';
 import Stripe from './Stripe.jsx';
-import { BodyWrapper, StyledButton, StyledClickableDiv } from './Styles.jsx';
+import { BodyWrapper, StyledButton, StyledClickableDiv, ContentWrapper } from './Styles.jsx';
 import Overlay from './Overlay.jsx';
 import api from "../api/api";
 import CamperModel from "../models/camper";
@@ -162,53 +162,55 @@ const Register = (props) => {
 
   return (
   <BodyWrapper>
-    <div>Party: {props.partyId}</div>
-    <div>Camper: {props.camper}</div>
-    { props.party.length ?
-    <div>
-      <div>Who will you register?</div>
-      <div>choose one</div>
+    <ContentWrapper>
+      <div>Party: {props.partyId}</div>
+      <div>Camper: {props.camper}</div>
+      { props.party.length ?
+      <div>
+        <div>Who will you register?</div>
+        <div>choose one</div>
+        <Party
+        party={props.party}
+        setCurrentCamper={props.setCurrentCamper}
+        isCurrentParty={true}
+        />
+      </div> : "You currently don't have anyone in your party to register for this event. Please add people from previous events who were in your party from the list below, or contact administration to add other people to your party." }
+      {/* The party invite functionallity has been canceled. For now, whenever a party leader wants to add someone new to their party, they must go through administration directly */}
+      {/* {partyInvite ?
+      <div>
+        <div>Party Invitations</div>
+        <div>You have been invited to {partyInvite.partyLeader}'s party</div>
+        <button>Accept</button>
+        <button>Decline</button>
+      </div>
+      : null} */}
+
+      {/* will have to either change Party component to work properly with this section (so it doesn't have the edit and check mark and add a add button) or create a new component */}
+      {reg.pastPartyCampers && reg.pastPartyCampers.length > 0 ?
+      <div> Add People From Last Year's Party
       <Party
-      party={props.party}
-      setCurrentCamper={props.setCurrentCamper}
-      isCurrentParty={true}
+      party={reg.pastPartyCampers}
+      addToParty={addToParty}
+      isCurrentParty={false}
       />
-    </div> : "You currently don't have anyone in your party to register for this event. Please add people from previous events who were in your party from the list below, or contact administration to add other people to your party." }
-    {/* The party invite functionallity has been canceled. For now, whenever a party leader wants to add someone new to their party, they must go through administration directly */}
-    {/* {partyInvite ?
-    <div>
-      <div>Party Invitations</div>
-      <div>You have been invited to {partyInvite.partyLeader}'s party</div>
-      <button>Accept</button>
-      <button>Decline</button>
-    </div>
-    : null} */}
+      </div> : null
+      }
+      {/* We end up not needing to add new campers to the party from direction of HR(Josh) so campersearch is removed => we may eventually want to reuse this for administration side */}
+      {/* <StyledClickableDiv
+        onClick={() => openModal('camperSearch')}
+      >find other campers...</StyledClickableDiv> */}
+      <StyledClickableDiv
+        onClick={() => openModal('camperInvite')}
+      >Information on how to invite a new Camper</StyledClickableDiv>
 
-    {/* will have to either change Party component to work properly with this section (so it doesn't have the edit and check mark and add a add button) or create a new component */}
-    {reg.pastPartyCampers && reg.pastPartyCampers.length > 0 ?
-    <div> Add People From Last Year's Party
-    <Party
-    party={reg.pastPartyCampers}
-    addToParty={addToParty}
-    isCurrentParty={false}
-    />
-    </div> : null
-    }
-    <StyledClickableDiv
-      onClick={() => openModal('camperSearch')}
-    >find other campers...</StyledClickableDiv>
-    <StyledClickableDiv
-      onClick={() => openModal('camperInvite')}
-    >invite new camper</StyledClickableDiv>
-
-    <Overlay currentId={modal} close={closeModal} myId='camperInvite'>
-      <CamperInvite randomStuff="rannddoommm"/>
-    </Overlay>
-    {/* We end up not needing to add new campers to the party from direction of HR(Josh) so campersearch is removed => we may eventually want to reuse this for administration side */}
-    {/* <Overlay currentId={modal} close={closeModal} myId='camperSearch'>
-      <CamperSearch onSelected={addToParty}/>
-    </Overlay> */}
-    <StyledButton onClick={() => props.switchStep('stripe')}>Review and Pay</StyledButton>
+      <Overlay currentId={modal} close={closeModal} myId='camperInvite'>
+        <CamperInvite randomStuff="rannddoommm"/>
+      </Overlay>
+      {/* <Overlay currentId={modal} close={closeModal} myId='camperSearch'>
+        <CamperSearch onSelected={addToParty}/>
+      </Overlay> */}
+      <StyledButton onClick={() => props.switchStep('stripe')}>Review and Pay</StyledButton>
+    </ContentWrapper>
   </BodyWrapper>
   )
 };
