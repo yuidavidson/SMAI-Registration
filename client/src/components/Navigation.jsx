@@ -34,7 +34,6 @@ const Navigation = (props) => {
     <HeaderWrapper>
       <HeaderTop>
         <img src={logo} alt="Logo"/>
-        {/* <ImageWrapper src={logo} alt="Logo"></ImageWrapper> */}
         <CamperWrapper>{props.camper}</CamperWrapper>
         <EventWrapper>
           <StyledClickableDiv onClick={() => props.switchStep('events')}>
@@ -45,11 +44,26 @@ const Navigation = (props) => {
       <HeaderBottom>
         <NavigationWrapper className="navigation"
         key={props.step}
-        step={props.step} isFirstRender={isFirstRender} setIsFirstRender={setIsFirstRender}>
-          <StyledClickableDiv onClick={() => props.switchStep('events')}>{props.step !== 'events' ? props.event.name : null}</StyledClickableDiv>
-          <StyledClickableDiv onClick={() => props.switchStep('register')}>{props.currentCamper  && props.step !== 'events' ? ' > ' + props.currentCamper : ''}</StyledClickableDiv>
-          <StyledClickableDiv onClick={() => props.switchStep('toc')}>{(props.step !== 'events' && props.step !== 'toc' && props.step !== 'register' && props.step !== 'stripe') ? ' > ' + stepLabels[props.step] : ''}
-          </StyledClickableDiv>
+        step={props.step}
+        isFirstRender={isFirstRender}
+        setIsFirstRender={setIsFirstRender}>
+          {props.step !== 'events' ?
+            <StyledClickableDiv onClick={() => props.switchStep('events')}>
+              {props.event.name}
+            </StyledClickableDiv>
+          : null}
+          {props.step !== 'events' ? '<' : null}
+          {props.currentCamper  && props.step !== 'events' ?
+            <StyledClickableDiv onClick={() => props.switchStep('register')}>
+              {props.currentCamper}
+            </StyledClickableDiv>
+          : null}
+          {(props.step !== 'events' && props.step !== 'toc' && props.step !== 'register' && props.step !== 'stripe') ? '<' : null}
+          {(props.step !== 'events' && props.step !== 'toc' && props.step !== 'register' && props.step !== 'stripe') ?
+            <StyledClickableDiv onClick={() => props.switchStep('toc')}>
+              {stepLabels[props.step]}
+            </StyledClickableDiv>
+          : null}
         </NavigationWrapper>
       </HeaderBottom>
     </HeaderWrapper>
