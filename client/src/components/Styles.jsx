@@ -57,7 +57,7 @@ export const ContentWrapper = styled.div`
   justify-content: flex-start;
   // align-items: center;
   margin: 5px;
-  padding: 25px;
+  padding: 5px;
 `;
 
 export const StyledHead = styled.div`
@@ -190,6 +190,7 @@ export const StyledButton = styled.button`
   border-radius: 10px;
   background: #91cfa1;
   cursor:pointer;
+  width: fit-content;
 
   &:hover {
     background: #53c976;
@@ -237,8 +238,8 @@ export const StyledXButton = styled.button`
   width: 20px;
   height: 20px;
   float:right;
-  margin-top: -36px;
-  margin-left: -36px;
+  margin-top: -58px;
+  margin-left: -58px;
   padding: 0;
   cursor: pointer;
   border: 2px groove #d96d64;
@@ -297,7 +298,7 @@ export const StyledModal = styled.div`
   margin: 10px;
   border: solid 2px black;
   border-radius: 10px;
-  padding: 30px;
+  padding: 50px;
   background: white;
 `;
 

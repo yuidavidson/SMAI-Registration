@@ -1,16 +1,20 @@
 import React from 'react';
 
 import Overlay from './Overlay.jsx';
-import { StyledButton, ContentWrapper, StyledHead } from './Styles.jsx';
+import { StyledButton, ContentWrapper, StyledHead, RowWrapper } from './Styles.jsx';
 
 const EventList = (props) => {
   const events = props.events;
   const eventList = events.map((event) =>
     <div key={event.name}>
-      <div>{event.name}</div>
-      <div>{event.startDate.month} {event.startDate.date} - {event.endDate.month} {event.endDate.date} {event.startDate.year}</div>
-      <StyledButton onClick={() => props.openModal(event.name)}>Details</StyledButton>
-      <StyledButton onClick={() => props.switchAndSet('register', 'event', event)}>Register</StyledButton>
+      <ContentWrapper>
+        <StyledHead fontSize={15}>{event.name}</StyledHead>
+        <div>{event.startDate.month} {event.startDate.date} - {event.endDate.month} {event.endDate.date} {event.startDate.year}</div>
+        <RowWrapper>
+          <StyledButton onClick={() => props.openModal(event.name)}>Details</StyledButton>
+          <StyledButton onClick={() => props.switchAndSet('register', 'event', event)}>Register</StyledButton>
+        </RowWrapper>
+      </ContentWrapper>
       <Overlay currentId={props.modalState} close={props.closeModal} myId={event.name}>
         <ContentWrapper>
           <StyledHead fontSize={20}>{event.name}</StyledHead>

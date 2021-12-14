@@ -6,7 +6,7 @@ import Party from './Party.jsx';
 import CamperInvite from './CamperInvite.jsx';
 import CamperSearch from './CamperSearch.jsx';
 import Stripe from './Stripe.jsx';
-import { BodyWrapper, StyledButton, StyledClickableDiv, ContentWrapper } from './Styles.jsx';
+import { BodyWrapper, StyledButton, StyledClickableDiv, ContentWrapper, RowWrapper } from './Styles.jsx';
 import Overlay from './Overlay.jsx';
 import api from "../api/api";
 import CamperModel from "../models/camper";
@@ -209,7 +209,9 @@ const Register = (props) => {
       {/* <Overlay currentId={modal} close={closeModal} myId='camperSearch'>
         <CamperSearch onSelected={addToParty}/>
       </Overlay> */}
-      <StyledButton onClick={() => props.switchStep('stripe')}>Review and Pay</StyledButton>
+      <RowWrapper>
+        <StyledButton onClick={() => props.switchStep('stripe')}>Review and Pay</StyledButton>
+      </RowWrapper>
     </ContentWrapper>
   </BodyWrapper>
   )

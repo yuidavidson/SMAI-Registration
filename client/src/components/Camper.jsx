@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BodyWrapper, StyledButton, ButtonWrapper, StyledHead, StyledClickableDiv, ContentWrapper } from './Styles.jsx';
+import { BodyWrapper, StyledButton, ButtonWrapper, StyledHead, StyledClickableDiv, ContentWrapper, RowWrapper } from './Styles.jsx';
 
 const Camper = (props) => {
   return (
@@ -29,11 +29,11 @@ const Camper = (props) => {
           onClick={() => props.switchStep('sessions')}
         >Sessions, Crew, and Meals</StyledClickableDiv>
       </ContentWrapper>
-      <ButtonWrapper>
+      <RowWrapper>
         <StyledButton
           onClick={() => props.switchStep('register')}>Back to All
         </StyledButton>
-      </ButtonWrapper>
+      </RowWrapper>
     </BodyWrapper>
 
   )

@@ -124,9 +124,7 @@ export default class CamperInfoStep extends React.Component {
   render() {
     return (
       <BodyWrapper>
-        {/* <HeaderBottom> */}
           <StyledHead>{this.step.label}</StyledHead>
-        {/* </HeaderBottom> */}
         <ContentWrapper>
         {
             this.step.fields.map(fieldName =>
