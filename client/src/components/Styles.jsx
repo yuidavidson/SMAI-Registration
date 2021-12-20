@@ -55,7 +55,7 @@ export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  // align-items: center;
+  max-width: 40vw;
   margin: 5px;
   padding: 5px;
 `;
@@ -164,14 +164,11 @@ export const DropDownWrapper = styled.div`
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
-  margin: 2px;
-  padding: 2px;
 `;
 
 export const StyledSelect = styled.select`
   width: 200px;
   height: 100%;
-  padding: 2px;
   margin: 2px;
 `;
 
