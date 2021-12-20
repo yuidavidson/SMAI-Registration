@@ -3,7 +3,8 @@
   Payment
     Custom Pricing - amount and reason
 
-  EDIT: make it so that when you move back t o register, currentCamper is reset
+  TODO: make it so that when you move back to register, currentCamper is reset
+        make it so each event is separated so the parties are not the same for all events
 */
 
 import React from 'react';
