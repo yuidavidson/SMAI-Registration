@@ -15,6 +15,7 @@ import Events from './pages/Events';
 import Register from './pages/Register';
 import Camper from './pages/Camper';
 import Session from './pages/Session';
+import CamperDetails from "./pages/CamperDetails";
 
 import api from "../api/api";
 import CamperModel from "../models/camper";
@@ -39,6 +40,15 @@ const sessionRegX = {
 };
 
 const makeUrl = path => `/app-registration/client/dist${path}`;
+
+const pageTitleMap = {
+  '/home': {title: 'Home', bcrumb: ''},
+  '/events': {title: 'Events/Camps', bcrumb: 'Events/Camps'},
+  '/register': {title: 'Register for Event/Camp', bcrumb: 'Register'},
+  '/register/camper': {title: 'Register Camper', bcrumb: 'Camper'},
+  '/register/camper/details': {title: 'Camper Details', bcrumb: 'Details'},
+  '/register/camper/sessions': {title: 'Camper Sessions', bcrumb: 'Sessions'},
+};
 const App = () => {
 
 
@@ -65,19 +75,18 @@ const App = () => {
   return (<BrowserRouter>
     <div className='app'>
       <nav aria-label='Main nav'>
-        <Link to={makeUrl('/events')}>Home</Link>
-        <Link to={makeUrl('/events')}>Events</Link>
-        <Link to={makeUrl('/register')}>Register for event</Link>
-        <Link to={makeUrl('/register/camper')}>Register: camper info</Link>
-        <Link to={makeUrl('/register/camper/session')}>Register: camper session info</Link>
+        {Object.keys(pageTitleMap).map(page =>
+          <Link key={page} to={makeUrl(page)}>{pageTitleMap[page].title}</Link>
+        )}
       </nav>
       <main>
       <Routes>
-        <Route path={makeUrl('/events')} element={<Events camper={camper} />}></Route>
-        <Route path={makeUrl('/register')} exact element={<Register />}></Route>
-        <Route path={makeUrl('/register/camper')} exact element={<Camper />}></Route>
-        <Route path={makeUrl('/register/camper/session')} exact element={<Session session={sessionX} sessionReg={sessionRegX} />}></Route>
-        <Route path='*' element={<Home camper={camper}/>}></Route>
+        <Route path={makeUrl('/events')} element={<Events camper={camper} />} />
+        <Route path={makeUrl('/register')} exact element={<Register />} />
+        <Route path={makeUrl('/register/camper')} exact element={<Camper />} />
+        <Route path={makeUrl('/register/camper/details')} exact element={<CamperDetails />} />
+        <Route path={makeUrl('/register/camper/session')} exact element={<Session session={sessionX} sessionReg={sessionRegX} />} />
+        <Route path='*' element={<Home camper={camper}/>} />
       </Routes>
       </main>
     </div>
