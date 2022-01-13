@@ -20,6 +20,8 @@ import CamperDetails from "./pages/CamperDetails";
 import api from "../api/api";
 import CamperModel from "../models/camper";
 
+import '../styles/app.css';
+
 const sessionX = {
   "name": 'name',
   "organizer": 'organizer',
