@@ -5,7 +5,7 @@ var DIST_DIR = path.join(__dirname, './client/dist');
 module.exports = {
   entry: {
     main: { import: `${SRC_DIR}/index.jsx`, filename: `bundle.js` },
-    'register-test':  { import: `${SRC_DIR}/tests/register.jsx`, filename: `tests/[name].js` }
+    //'register-test':  { import: `${SRC_DIR}/tests/register.jsx`, filename: `tests/[name].js` }
   },
   output: {
     path: DIST_DIR
