@@ -13,7 +13,7 @@ const Events = () => {
     if (isEventListLoaded.current) {
       return;
     }
-    api.run('event/getall')
+    api.run('event/getall', null, true)
       .then((response) => {
         let data = response.data.map(item => ({
             ...item,

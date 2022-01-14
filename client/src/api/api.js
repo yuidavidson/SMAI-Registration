@@ -1,8 +1,9 @@
 import axios from "axios";
 import config from '../config.js';
 
+const smaiApiCache = {};
 class SmaiApi {
-    run(cmd, data=null) {
+    run(cmd, data=null, useCache=false) {
         if (!cmd.match(/^[a-z0-9\/]+$/)) {
             return Promise.reject('bad command');
         }
@@ -11,14 +12,32 @@ class SmaiApi {
             dataEncoded = Object.keys(data).map(k => encodeURIComponent(k) +'='+ encodeURIComponent(data[k])).join('&');
         }
 
+        console.log('api call: '+cmd);
+        if (useCache) {
+            if (smaiApiCache[cmd+'::'+dataEncoded]) {
+                console.log('api call from cache');
+                return Promise.resolve(smaiApiCache[cmd+'::'+dataEncoded]);
+            }
+        } else {
+            delete smaiApiCache[cmd+'::'+dataEncoded];
+        }
+        console.log('api call fresh from SERVER');
         const baseUrl = !!config.api.base ? config.api.base : '';
         return axios({
             method: 'POST',
             url: `${baseUrl}/index.php?option=com_smapi&api=${cmd}`,
             data: dataEncoded,
         })
-          .then(response => response.data)
+          .then(response => {
+              if (useCache) {
+                  smaiApiCache[cmd+'::'+dataEncoded] = response.data;
+              }
+              return response.data;
+          })
           .catch(function (error) {
+            if (useCache) {
+                delete smaiApiCache[cmd+'::'+dataEncoded];
+            }
             if (error.response) {
               // The request was made and the server responded with a status code
               // that falls out of the range of 2xx
@@ -37,4 +56,4 @@ class SmaiApi {
 }
 
 let smaiApi;
-export default smaiApi  = new SmaiApi();
+export default smaiApi = new SmaiApi();
