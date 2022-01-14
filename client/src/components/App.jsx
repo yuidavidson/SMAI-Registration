@@ -8,7 +8,7 @@
 */
 
 import React, {useState, useEffect} from 'react';
-import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
+import {Routes, Route, Link} from "react-router-dom";
 
 import Home from './pages/Home';
 import Events from './pages/Events';
@@ -41,7 +41,7 @@ const sessionRegX = {
   "crewId": 'crewId'
 };
 
-const makeUrl = path => `/app-registration/client/dist${path}`;
+const makeUrl = path => `/app${path}`;
 
 const pageTitleMap = {
   '/home': {title: 'Home', bcrumb: ''},
@@ -74,7 +74,7 @@ const App = () => {
     console.log('app');
   });
 
-  return (<BrowserRouter>
+  return (
     <div className='app'>
       <nav aria-label='Main nav'>
         {Object.keys(pageTitleMap).map(page =>
@@ -92,7 +92,7 @@ const App = () => {
       </Routes>
       </main>
     </div>
-  </BrowserRouter>)
+  );
 };
 
 export default App;
