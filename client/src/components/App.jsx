@@ -8,7 +8,7 @@
 */
 
 import React, {useState, useEffect} from 'react';
-import {Routes, Route, Link} from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
 
 import Home from './pages/Home';
 import Events from './pages/Events';
@@ -23,6 +23,8 @@ import CamperModel from "../models/camper";
 import LoadingSpinner from './LoadingSpinner';
 
 import '../styles/app.css';
+import Navigation from "./Navigation";
+import {makeUrl, navMap} from "../nav-utils";
 
 const sessionX = {
   "name": 'name',
@@ -43,19 +45,10 @@ const sessionRegX = {
   "crewId": 'crewId'
 };
 
-const makeUrl = path => `/app${path}`;
-
-const pageTitleMap = {
-  '/home': {title: 'Home', bcrumb: ''},
-  '/events': {title: 'Events/Camps', bcrumb: 'Events/Camps'},
-  '/register': {title: 'Register for Event/Camp', bcrumb: 'Register'},
-  '/register/camper': {title: 'Register Camper', bcrumb: 'Camper'},
-  '/register/camper/details': {title: 'Camper Details', bcrumb: 'Details'},
-  '/register/camper/sessions': {title: 'Camper Sessions', bcrumb: 'Sessions'},
-};
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuth, setIsAuth] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
   const [currentCamper, setCurrentCamper] = useState(null);
 
   /**
@@ -70,6 +63,9 @@ const App = () => {
       .then((response) => {
         setIsAuth(!!response.user);
         if (response.user) {
+          setCurrentUser({...response.user});
+        }
+        if (response.data) {
           setCurrentCamper(new CamperModel(response.data));
         }
         setIsLoading(false);
@@ -93,14 +89,17 @@ const App = () => {
     <div><a href='#' onClick={loadCurrentCamper}>check if logged in?</a></div>
   </div>;
 
+/*
+<nav aria-label='Main nav'>
+  {Object.keys(navMap).map(page =>
+    <Link key={page} to={makeUrl(page)}>{pageTitleMap[page].title}</Link>
+)}
+</nav>
+*/
   return (
     <div className='app'>
       <LoadingSpinner state={isLoading} />
-      <nav aria-label='Main nav'>
-        {Object.keys(pageTitleMap).map(page =>
-          <Link key={page} to={makeUrl(page)}>{pageTitleMap[page].title}</Link>
-        )}
-      </nav>
+      <Navigation user={currentUser}></Navigation>
       <main>
         {isAuth ?
         <Routes>
