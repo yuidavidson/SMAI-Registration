@@ -6,7 +6,6 @@ import {makeUrl, navMap} from "../nav-utils";
 
 const Navigation = ({currentUser}) => {
   const routerLocation = useLocation();
-  console.log(routerLocation);
   return(
     <nav className="header" aria-label='Main nav'>
       <div className="header-top">
