@@ -20,6 +20,8 @@ import CamperDetails from "./pages/CamperDetails";
 import api from "../api/api";
 import CamperModel from "../models/camper";
 
+import LoadingSpinner from './LoadingSpinner';
+
 import '../styles/app.css';
 
 const sessionX = {
@@ -52,45 +54,67 @@ const pageTitleMap = {
   '/register/camper/sessions': {title: 'Camper Sessions', bcrumb: 'Sessions'},
 };
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
+  const [currentCamper, setCurrentCamper] = useState(null);
 
-
-  const [camper, setCamper] = useState(null);
-  const [session, setSession] = useState(sessionX);
-  const [sessionReg, setSessionReg] = useState(sessionRegX);
-
-  // initial render of App (with no deps, hence it will only change/have effect ONCE)
-  useEffect(() => {
+  /**
+   * @param {Event|null} opt_e
+   */
+  const loadCurrentCamper = (opt_e=null) => {
+    if (opt_e) {
+      opt_e.preventDefault();
+    }
+    setIsLoading(true);
     api.run('camper/current')
       .then((response) => {
-        const newCamper = new CamperModel(response.data);
-        setCamper(newCamper);
+        setIsAuth(!!response.user);
+        if (response.user) {
+          setCurrentCamper(new CamperModel(response.data));
+        }
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+  // initial render of App (with no deps, hence it will only change/have effect ONCE)
+  useEffect(() => {
+    loadCurrentCamper();
   }, []);
 
   useEffect(() => {
     console.log('app');
   });
 
+  const loginBox = <div>
+    <strong>You are not logged in</strong>
+    <div><a href='/index.php?option=com_users&view=login' target='_blank' className='button'>Log in</a></div>
+    <div><a href='#' onClick={loadCurrentCamper}>check if logged in?</a></div>
+  </div>;
+
   return (
     <div className='app'>
+      <LoadingSpinner state={isLoading} />
       <nav aria-label='Main nav'>
         {Object.keys(pageTitleMap).map(page =>
           <Link key={page} to={makeUrl(page)}>{pageTitleMap[page].title}</Link>
         )}
       </nav>
       <main>
-      <Routes>
-        <Route path={makeUrl('/events')} element={<Events camper={camper} />} />
-        <Route path={makeUrl('/register')} exact element={<Register />} />
-        <Route path={makeUrl('/register/camper')} exact element={<Camper />} />
-        <Route path={makeUrl('/register/camper/details')} exact element={<CamperDetails />} />
-        <Route path={makeUrl('/register/camper/session')} exact element={<Session session={sessionX} sessionReg={sessionRegX} />} />
-        <Route path='*' element={<Home camper={camper}/>} />
-      </Routes>
-      </main>
+        {isAuth ?
+        <Routes>
+          <Route path={makeUrl('/events')} element={<Events camper={currentCamper}/>}/>
+          <Route path={makeUrl('/register')} exact element={<Register/>}/>
+          <Route path={makeUrl('/register/camper')} exact element={<Camper/>}/>
+          <Route path={makeUrl('/register/camper/details')} exact element={<CamperDetails/>}/>
+          <Route path={makeUrl('/register/camper/session')} exact
+                 element={<Session session={sessionX} sessionReg={sessionRegX}/>}/>
+          <Route path='*' element={<Home camper={currentCamper}/>}/>
+        </Routes>
+          :
+        loginBox
+      }</main>
     </div>
   );
 };
