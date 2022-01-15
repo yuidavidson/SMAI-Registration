@@ -5,16 +5,17 @@ import logo from '../assets/logo.jpg';
 import {makeUrl, navMap} from "../nav-utils";
 
 const Navigation = ({currentUser}) => {
-  const location = useLocation();
+  const routerLocation = useLocation();
+  console.log(routerLocation);
   return(
     <nav className="header" aria-label='Main nav'>
       <div className="header-top">
         <img src={logo} alt="Logo"/>
         {currentUser && <span>{currentUser.name} ({currentUser.email})</span>}
-        {['/home', '/events'].map(url =>
-          (location.path === url) ?
-            <span class='link'>{navMap[url].title}</span> :
-            <Link key={url} to={makeUrl(url)}>{navMap[url].title}</Link>
+        {['/home', '/events'].map(url => ({path: makeUrl(url), title: navMap[url].title})).map(p =>
+          (routerLocation.pathname === p.path) ?
+            <span key={p.path} className='a-text-only'>{p.title}</span> :
+            <Link key={p.path} to={p.path}>{p.title}</Link>
         )}
       </div>
       <div className="header-bottom">

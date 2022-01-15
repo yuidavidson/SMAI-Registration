@@ -10,6 +10,39 @@ div.app {
     border: 1px solid black;
 }
 
-nav a {
+nav.header a, nav.header .a-text-only {
+    /*use to be EventWrapper and CamperWrapper*/
+    height: 30px;
+    text-align: center;
+    font-size: 25px;
+    color: #bd394b;
     margin: 0 5px;
+    padding: 1px;
+}
+
+nav.header {
+    display: flex;
+    flex-direction: column;
+    margin: 1px;
+    /*  border: solid 1 px black; */
+    padding: 1px;
+}
+
+nav.header .header-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1px;
+    border-bottom: solid 5px #bd394b;
+    border-radius: 10px;
+    padding: 1px;
+}
+
+nav.header .header-bottom {
+    display: flex;
+    justify-content: center;
+    margin: 1px;
+    /*  border: solid 1 px black; */
+    padding: 1px;
 }
