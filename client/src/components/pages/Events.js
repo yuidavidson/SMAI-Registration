@@ -10,9 +10,12 @@ const Events = () => {
   const [eventList, setEvents] = useState([]);
   const isEventListLoaded = useRef(false);
   useEffect(() => {
+    console.log('events load');
     if (isEventListLoaded.current) {
+      console.log('events was loaded already');
       return;
     }
+    console.log('events loading...');
     api.run('event/getall', null, true)
       .then((response) => {
         let data = response.data.map(item => ({
