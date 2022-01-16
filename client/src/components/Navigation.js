@@ -16,7 +16,7 @@ const Navigation = ({user}) => {
             title: (url === '/me' ? (user ? user.name : 'Anonymous') : navMap[url].title),
             isCurrent: routerLocation.pathname === makeUrl(url)
           })).map(p =>
-              <Link key={p.path} to={p.path} className={p.isCurrent ? 'current':''}>{p.title} ({p.isCurrent ? 1:0})</Link>
+              <Link key={p.path} to={p.path} className={p.isCurrent ? 'current':''}>{p.title}</Link>
           )}</div>
         </div>
       </div>
