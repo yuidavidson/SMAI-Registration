@@ -30,7 +30,6 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuth, setIsAuth] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [currentCamper, setCurrentCamper] = useState(null);
 
   /**
    * @param {Event} e
@@ -72,7 +71,8 @@ const App = () => {
       <main>
         {isAuth ?
         <Routes>
-          <Route path={makeUrl('/events')} element={<Events camper={currentCamper}/>}/>
+          <Route path={makeUrl('/me')} exact element={<Camper />}/>
+          <Route path={makeUrl('/events')} element={<Events />}/>
           <Route path={makeUrl('/register')} exact element={<Register/>}/>
           <Route path={makeUrl('/register/camper')} exact element={<Camper/>}/>
           <Route path={makeUrl('/register/camper/details')} exact element={<CamperDetails/>}/>
