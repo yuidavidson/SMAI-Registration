@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import api from "../../api/api";
 
 import CampModel from "../../models/camp";
@@ -8,14 +8,7 @@ const Events = () => {
    * @param {Array<CampModel>} events
    */
   const [eventList, setEvents] = useState([]);
-  const isEventListLoaded = useRef(false);
   useEffect(() => {
-    console.log('events load');
-    if (isEventListLoaded.current) {
-      console.log('events was loaded already');
-      return;
-    }
-    console.log('events loading...');
     api.run('event/getall', null, true)
       .then((response) => {
         let data = response.data.map(item => ({
@@ -26,7 +19,6 @@ const Events = () => {
             regEndDate: new Date(item.startDate).toLocaleDateString()
         }));
         setEvents(data);
-        isEventListLoaded.current = true;
       })
       .catch((error) => {
         console.log(error);
