@@ -1,4 +1,25 @@
 import React, {useEffect} from 'react';
+
+
+const sessionX = {
+  "name": 'name',
+  "organizer": 'organizer',
+  "campId": 'campId',
+  "startDate": 'startDate',
+  "endDate": 'endDate',
+  "minQuota": 'minQuota',
+  "maxQuota": 'maxQuota',
+  "notes": 'notes',
+  "internalName": 'internalName'
+};
+const sessionRegX = {
+  "registrationId": 'registrationId',
+  "sessionId": 'sessionId',
+  "mealId": 'mealId',
+  "foodPreferenceId": 'foodPreferenceId',
+  "crewId": 'crewId'
+};
+
 /**
  *
  * @param {SessionModel} session
@@ -6,7 +27,7 @@ import React, {useEffect} from 'react';
  * @returns {JSX.Element}
  * @constructor
  */
-const Session = ({session, sessionReg}) => {
+const Session = ({session=sessionX, sessionReg=sessionRegX}) => {
   return <section>
     <h1>Session</h1>
     {session ? <div>{session.name}: {session.startDate} - {session.endDate}</div> : null}
