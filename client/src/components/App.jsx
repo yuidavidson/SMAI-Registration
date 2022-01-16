@@ -10,6 +10,7 @@
 import React, {useState, useEffect} from 'react';
 import {Routes, Route} from "react-router-dom";
 
+import NotFound from './pages/NotFound';
 import Home from './pages/Home';
 import Events from './pages/Events';
 import Register from './pages/Register';
@@ -79,7 +80,7 @@ const App = () => {
           <Route path={makeUrl('/register/camper/details')} exact element={<CamperDetails/>}/>
           <Route path={makeUrl('/register/camper/session')} exact
                  element={<Session session={sessionX} sessionReg={sessionRegX}/>}/>
-          <Route path='*' element={<Home camper={currentCamper}/>}/>
+          <Route path='*' element={<NotFound />}/>
         </Routes>
           :
         loginBox
