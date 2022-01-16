@@ -73,7 +73,7 @@ const App = () => {
         {isAuth ?
         <Routes>
           <Route path={makeUrl('/')} exact element={<Home user={currentUser}/>}/>
-          <Route path={makeUrl('/me')} exact element={<Camper />}/>
+          <Route path={makeUrl('/me')} exact element={<Camper isMe={true} />}/>
           <Route path={makeUrl('/events')} element={<Events />}/>
           <Route path={makeUrl('/register')} exact element={<Register/>}/>
           <Route path={makeUrl('/register/camper')} exact element={<Camper/>}/>
