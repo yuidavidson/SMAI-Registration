@@ -28,8 +28,13 @@ import Navigation from "./Navigation";
 import {makeUrl, navMap} from "../nav-utils";
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
   const [authUser, setAuthUser] = useState(null);
+
+  useEffect(() => {
+    api.setLoadingSetter(setLoading);
+    api.setAuthUserSetter(setAuthUser);
+  }, []);
 
   /**
    * @param {Event} e
@@ -40,11 +45,9 @@ const App = () => {
   };
 
   const checkLoggedIn = () => {
-    setIsLoading(true);
     api.ping()
       .then((response) => {
         setAuthUser(response.user ? {...response.user} : null);
-        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
