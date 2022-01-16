@@ -46,9 +46,6 @@ const App = () => {
 
   const checkLoggedIn = () => {
     api.ping()
-      .then((response) => {
-        setAuthUser(response.user ? {...response.user} : null);
-      })
       .catch((error) => {
         console.log(error);
       });

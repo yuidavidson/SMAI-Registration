@@ -3,7 +3,6 @@ import config from '../config.js';
 
 const smaiApiCache = {};
 const baseUrl = !!config.api.base ? config.api.base : '';
-
 class SmaiApi {
   // setters from React components when an api responses arrives,
 
@@ -15,6 +14,7 @@ class SmaiApi {
   #authUserSetter = () => {};
   //   track last auth user, so we can check if auth user has changed,
   //   so that we don't necessarily trigger updates in react app
+  #currentAuthUser = null;
   #lastAuthUser = null;
 
   setLoadingSetter(setter) {
@@ -62,15 +62,17 @@ class SmaiApi {
         if (useCache) {
           smaiApiCache[cmd + '::' + dataEncoded] = response.data;
         }
+        this.#currentAuthUser = response.data.user ? {...response.data.user} : null;
         return response.data;
       })
-      .catch(function (error) {
+      .catch(error => {
         if (useCache) {
           delete smaiApiCache[cmd + '::' + dataEncoded];
         }
         if (error.response) {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
+          this.#currentAuthUser = error.response.data.user ? {...error.response.data.user} : null;
           return error.response.data;
         } else if (error.request) {
           // The request was made but no response was received
@@ -84,6 +86,14 @@ class SmaiApi {
       })
       .finally(() => {
         this.#loadingSetter(false);
+
+        // if a change occurred to auth user
+        //   either user does not match (empty to not-empty or vice-versa)
+        //   OR user ID's don't match
+        if (this.#currentAuthUser !== this.#lastAuthUser || this.#currentAuthUser.id !== this.#lastAuthUser.id) {
+          this.#authUserSetter(this.#currentAuthUser);
+          this.#lastAuthUser = this.#currentAuthUser;
+        }
       });
   }
 }
