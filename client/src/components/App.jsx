@@ -26,25 +26,6 @@ import '../styles/app.css';
 import Navigation from "./Navigation";
 import {makeUrl, navMap} from "../nav-utils";
 
-const sessionX = {
-  "name": 'name',
-  "organizer": 'organizer',
-  "campId": 'campId',
-  "startDate": 'startDate',
-  "endDate": 'endDate',
-  "minQuota": 'minQuota',
-  "maxQuota": 'maxQuota',
-  "notes": 'notes',
-  "internalName": 'internalName'
-};
-const sessionRegX = {
-  "registrationId": 'registrationId',
-  "sessionId": 'sessionId',
-  "mealId": 'mealId',
-  "foodPreferenceId": 'foodPreferenceId',
-  "crewId": 'crewId'
-};
-
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuth, setIsAuth] = useState(false);
@@ -52,21 +33,20 @@ const App = () => {
   const [currentCamper, setCurrentCamper] = useState(null);
 
   /**
-   * @param {Event|null} opt_e
+   * @param {Event} e
    */
-  const loadCurrentCamper = (opt_e=null) => {
-    if (opt_e) {
-      opt_e.preventDefault();
-    }
+  const onCheckLoggedInClicked = (e) => {
+    e.preventDefault();
+    checkLoggedIn();
+  };
+
+  const checkLoggedIn = () => {
     setIsLoading(true);
-    api.run('camper/current')
+    api.ping()
       .then((response) => {
         setIsAuth(!!response.user);
         if (response.user) {
           setCurrentUser({...response.user});
-        }
-        if (response.data) {
-          setCurrentCamper(new CamperModel(response.data));
         }
         setIsLoading(false);
       })
@@ -74,19 +54,15 @@ const App = () => {
         console.log(error);
       });
   };
-  // initial render of App (with no deps, hence it will only change/have effect ONCE)
-  useEffect(() => {
-    loadCurrentCamper();
-  }, []);
 
   useEffect(() => {
-    console.log('app');
-  });
+    checkLoggedIn();
+  }, []);
 
   const loginBox = <div>
     <strong>You are not logged in</strong>
     <div><a href='/index.php?option=com_users&view=login' target='_blank' className='button'>Log in</a></div>
-    <div><a href='#' onClick={loadCurrentCamper}>check if logged in?</a></div>
+    <div><a href='#' onClick={onCheckLoggedInClicked}>check if logged in?</a></div>
   </div>;
 
   return (
