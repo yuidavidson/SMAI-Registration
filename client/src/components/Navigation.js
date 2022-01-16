@@ -9,19 +9,15 @@ const Navigation = ({user}) => {
   return(
     <nav className="header" aria-label='Main nav'>
       <div className="header-top">
-        <div class=''><img src={logo} alt="Logo"/></div>
-        <div class='flexy-child-grow'>
-          <div className='flexy'>{['/home', '/events'].map(url => ({
+        <div className=''><img src={logo} alt="Logo"/></div>
+        <div className='flexy-child-grow'>
+          <div className='flexy'>{['/me', '/events'].map(url => ({
             path: makeUrl(url),
-            title: navMap[url].title
+            title: (url === '/me' ? (user ? user.name : 'Anonymous') : navMap[url].title),
+            isCurrent: routerLocation.pathname === makeUrl(url)
           })).map(p =>
-            (routerLocation.pathname === p.path) ?
-              <span key={p.path} className='a-text-only'>{p.title}</span> :
-              <Link key={p.path} to={p.path}>{p.title}</Link>
+              <Link key={p.path} to={p.path} className={p.isCurrent ? 'current':''}>{p.title} ({p.isCurrent ? 1:0})</Link>
           )}</div>
-          <div class='centery'>
-            {user && <span>{user.name} ({user.email})</span>}
-          </div>
         </div>
       </div>
       <div className="header-bottom">
