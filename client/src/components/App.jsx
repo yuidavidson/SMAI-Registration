@@ -29,8 +29,7 @@ import {makeUrl, navMap} from "../nav-utils";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [isAuth, setIsAuth] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [authUser, setAuthUser] = useState(null);
 
   /**
    * @param {Event} e
@@ -44,10 +43,7 @@ const App = () => {
     setIsLoading(true);
     api.ping()
       .then((response) => {
-        setIsAuth(!!response.user);
-        if (response.user) {
-          setCurrentUser({...response.user});
-        }
+        setAuthUser(response.user ? {...response.user} : null);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -68,11 +64,11 @@ const App = () => {
   return (
     <div className='app'>
       <LoadingSpinner state={isLoading} />
-      <Navigation user={currentUser} />
+      <Navigation user={authUser} />
       <main>
-        {isAuth ?
+        {authUser ?
         <Routes>
-          <Route path={makeUrl('/')} exact element={<Home user={currentUser}/>}/>
+          <Route path={makeUrl('/')} exact element={<Home user={authUser}/>}/>
           <Route path={makeUrl('/me')} exact element={<Camper isMe={true} />}/>
           <Route path={makeUrl('/events')} element={<Events />}/>
           <Route path={makeUrl('/register')} exact element={<Register/>}/>
