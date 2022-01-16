@@ -89,17 +89,10 @@ const App = () => {
     <div><a href='#' onClick={loadCurrentCamper}>check if logged in?</a></div>
   </div>;
 
-/*
-<nav aria-label='Main nav'>
-  {Object.keys(navMap).map(page =>
-    <Link key={page} to={makeUrl(page)}>{pageTitleMap[page].title}</Link>
-)}
-</nav>
-*/
   return (
     <div className='app'>
       <LoadingSpinner state={isLoading} />
-      <Navigation user={currentUser}></Navigation>
+      <Navigation user={currentUser} />
       <main>
         {isAuth ?
         <Routes>

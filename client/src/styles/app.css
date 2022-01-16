@@ -5,6 +5,22 @@
         min-width: initial;
     }
 }
+.flexy {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.centery {
+    text-align: center;
+}
+
+.flexy-child-grow {
+    flex-grow: 1;
+}
+.flexy-child-nogrow {
+    flex-grow: 0;
+}
 
 div.app {
     border: 1px solid black;
@@ -31,7 +47,7 @@ nav.header {
 nav.header .header-top {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     margin: 1px;
     border-bottom: solid 5px #bd394b;

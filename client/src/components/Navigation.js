@@ -4,18 +4,25 @@ import {Link, useLocation} from "react-router-dom";
 import logo from '../assets/logo.jpg';
 import {makeUrl, navMap} from "../nav-utils";
 
-const Navigation = ({currentUser}) => {
+const Navigation = ({user}) => {
   const routerLocation = useLocation();
   return(
     <nav className="header" aria-label='Main nav'>
       <div className="header-top">
-        <img src={logo} alt="Logo"/>
-        {currentUser && <span>{currentUser.name} ({currentUser.email})</span>}
-        {['/home', '/events'].map(url => ({path: makeUrl(url), title: navMap[url].title})).map(p =>
-          (routerLocation.pathname === p.path) ?
-            <span key={p.path} className='a-text-only'>{p.title}</span> :
-            <Link key={p.path} to={p.path}>{p.title}</Link>
-        )}
+        <div class=''><img src={logo} alt="Logo"/></div>
+        <div class='flexy-child-grow'>
+          <div className='flexy'>{['/home', '/events'].map(url => ({
+            path: makeUrl(url),
+            title: navMap[url].title
+          })).map(p =>
+            (routerLocation.pathname === p.path) ?
+              <span key={p.path} className='a-text-only'>{p.title}</span> :
+              <Link key={p.path} to={p.path}>{p.title}</Link>
+          )}</div>
+          <div class='centery'>
+            {user && <span>{user.name} ({user.email})</span>}
+          </div>
+        </div>
       </div>
       <div className="header-bottom">
        breadcrumbs
