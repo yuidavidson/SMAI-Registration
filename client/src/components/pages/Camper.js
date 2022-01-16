@@ -27,7 +27,7 @@ const Camper = ({user=null}) => {
 
   return <section>
     <h1>Camper</h1>
-    <p>{kamper ? <div>Camper: {kamper.firstName} {kamper.lastName}</div> : null}</p>
+    <div>{kamper ? <div>Camper: {kamper.firstName} {kamper.lastName}</div> : null}</div>
     <h2>Personal Info</h2>
     <p>...</p>
     <h2>Contact</h2>
