@@ -2,7 +2,11 @@ import axios from "axios";
 import config from '../config.js';
 
 const smaiApiCache = {};
+const baseUrl = !!config.api.base ? config.api.base : '';
 class SmaiApi {
+    ping() {
+      return this.run('ping');
+    }
     run(cmd, data=null, useCache=false) {
         if (!cmd.match(/^[a-z0-9\/]+$/)) {
             return Promise.reject('bad command');
@@ -22,7 +26,6 @@ class SmaiApi {
             delete smaiApiCache[cmd+'::'+dataEncoded];
         }
         console.log('api call fresh from SERVER');
-        const baseUrl = !!config.api.base ? config.api.base : '';
         return axios({
             method: 'POST',
             url: `${baseUrl}/index.php?option=com_smapi&api=${cmd}`,
