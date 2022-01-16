@@ -26,7 +26,7 @@ div.app {
     border: 1px solid black;
 }
 
-nav.header a, nav.header .a-text-only {
+nav.header a {
     /*use to be EventWrapper and CamperWrapper*/
     height: 30px;
     text-align: center;
@@ -34,6 +34,14 @@ nav.header a, nav.header .a-text-only {
     color: #bd394b;
     margin: 0 5px;
     padding: 1px;
+}
+nav.header a:hover {
+    color: #bd39ff;
+}
+nav.header a.current {
+    color: #bd704b;
+    text-decoration: none;
+    cursor: default;
 }
 
 nav.header {
