@@ -1,4 +1,21 @@
 export default class SessionRegistrationModel {
+  static config = {
+    "registrationId": {
+        "required": true
+    },
+    "sessionId": {
+        "required": true
+    },
+    "mealId": {
+        "required": true
+    },
+    "foodPreferenceId": {
+        "required": true
+    },
+    "crewId": {
+        "required": true
+    }
+}; 
   /**
    * @param {SessionRegistrationModel} from 
    */

@@ -114,6 +114,296 @@ class camperSectionUtils {
 }
 
 class CamperModel {
+    static config = {
+        "oldId": {
+            "required": null
+        },
+        "partyId": {
+            "required": true,
+            "type": "text",
+            "min": 0,
+            "max": 4
+        },
+        "isPartyHead": {
+            "required": true
+        },
+        "joomlaId": {
+            "required": null
+        },
+        "notes": {
+            "required": null,
+            "type": "text",
+            "multiple": true,
+            "min": 0,
+            "max": 4096
+        },
+        "hasRedFlag": {
+            "required": true
+        },
+        "isActive": {
+            "required": true
+        },
+        "firstYear": {
+            "required": null
+        },
+        "lastYear": {
+            "required": null
+        },
+        "sponsorName": {
+            "required": null,
+            "type": "text",
+            "min": 0,
+            "max": 100
+        },
+        "sponsorId": {
+            "required": null
+        },
+        "stripeCustomerId": {
+            "required": null,
+            "type": "text",
+            "min": 0,
+            "max": 30
+        },
+        "firstName": {
+            "required": true,
+            "type": "text",
+            "min": 0,
+            "max": 50
+        },
+        "lastName": {
+            "required": true,
+            "type": "text",
+            "min": 0,
+            "max": 50
+        },
+        "birthyear": {
+            "required": null
+        },
+        "foodPreference": {
+            "required": null,
+            "type": "text",
+            "dict": {
+                "omni": "Omni-vore",
+                "vege": "Vegetarian",
+                "vega": "Vegam"
+            }
+        },
+        "neighborhood": {
+            "required": null,
+            "type": "text",
+            "dict": {
+                "amer": "American Hill",
+                "balk": "Balkan Camp",
+                "carc": "Car Camp",
+                "coff": "Coffee House",
+                "cowb": "Cowboy Camp",
+                "flam": "Flamenco Camp",
+                "heig": "The Heights",
+                "kitc": "Kitchen",
+                "lake": "Lakeshore",
+                "medi": "Meditation Meadow",
+                "recr": "Rec Row",
+                "sout": "South Pole",
+                "uppe": "Upper Touristan",
+                "othe": "Other",
+                "n\/a": "Don't know yet"
+            }
+        },
+        "address": {
+            "required": null,
+            "type": "text",
+            "min": 5,
+            "max": 100
+        },
+        "city": {
+            "required": null,
+            "type": "text",
+            "min": 2,
+            "max": 50
+        },
+        "region": {
+            "required": null,
+            "type": "text",
+            "min": 0,
+            "max": 20
+        },
+        "postalCode": {
+            "required": null,
+            "type": "text",
+            "min": 4,
+            "max": 20
+        },
+        "country": {
+            "required": null,
+            "type": "text",
+            "min": 0,
+            "max": 50
+        },
+        "phone": {
+            "required": true,
+            "type": "tel",
+            "min": 0,
+            "max": 20
+        },
+        "phoneAlt": {
+            "required": null,
+            "type": "tel",
+            "min": 0,
+            "max": 20
+        },
+        "email": {
+            "required": true,
+            "type": "email",
+            "min": 0,
+            "max": 100
+        },
+        "emailAlt": {
+            "required": null,
+            "type": "email",
+            "min": 0,
+            "max": 100
+        },
+        "vehicle1Model": {
+            "required": null,
+            "type": "text",
+            "min": 0,
+            "max": 50
+        },
+        "vehicle1Plate": {
+            "required": null,
+            "type": "text",
+            "min": 0,
+            "max": 20
+        },
+        "vehicle1State": {
+            "required": null,
+            "type": "text",
+            "min": 0,
+            "max": 10
+        },
+        "vehicle2Model": {
+            "required": null,
+            "type": "text",
+            "min": 0,
+            "max": 50
+        },
+        "vehicle2Plate": {
+            "required": null,
+            "type": "text",
+            "min": 0,
+            "max": 20
+        },
+        "vehicle2State": {
+            "required": null,
+            "type": "text",
+            "min": 0,
+            "max": 10
+        },
+        "emergency1FirstName": {
+            "required": true,
+            "type": "text",
+            "min": 0,
+            "max": 50
+        },
+        "emergency1LastName": {
+            "required": true,
+            "type": "text",
+            "min": 0,
+            "max": 50
+        },
+        "emergency1Relationship": {
+            "required": true,
+            "type": "text",
+            "min": 0,
+            "max": 50
+        },
+        "emergency1Phone": {
+            "required": true,
+            "type": "tel",
+            "min": 0,
+            "max": 20
+        },
+        "emergency1Location": {
+            "required": true,
+            "type": "text",
+            "min": 0,
+            "max": 50
+        },
+        "emergency2FirstName": {
+            "required": true,
+            "type": "text",
+            "min": 0,
+            "max": 50
+        },
+        "emergency2LastName": {
+            "required": true,
+            "type": "text",
+            "min": 0,
+            "max": 50
+        },
+        "emergency2Relationship": {
+            "required": true,
+            "type": "text",
+            "min": 0,
+            "max": 50
+        },
+        "emergency2Phone": {
+            "required": true,
+            "type": "tel",
+            "min": 0,
+            "max": 20
+        },
+        "emergency2Location": {
+            "required": true,
+            "type": "text",
+            "min": 0,
+            "max": 50
+        },
+        "emergencyLastUpdated": {
+            "required": null
+        },
+        "medicalCondition": {
+            "required": true,
+            "type": "text",
+            "multiple": true,
+            "min": 0,
+            "max": 4096
+        },
+        "medicalHasAllergy": {
+            "required": true
+        },
+        "medicalHasAsthma": {
+            "required": true
+        },
+        "medicalPlan": {
+            "required": true,
+            "type": "text",
+            "min": 0,
+            "max": 100
+        },
+        "medicalDoctor": {
+            "required": true,
+            "type": "text",
+            "min": 0,
+            "max": 100
+        },
+        "medicalHospital": {
+            "required": true,
+            "type": "text",
+            "min": 0,
+            "max": 100
+        },
+        "medicalSpecialNeeds": {
+            "required": true,
+            "type": "text",
+            "multiple": true,
+            "min": 0,
+            "max": 4096
+        },
+        "medicalLastUpdated": {
+            "required": null
+        }
+    };
     /**
      *
      * @param {CamperModel} camper

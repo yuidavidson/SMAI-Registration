@@ -1,4 +1,21 @@
 export default class PartyInviteModel {
+  static config = {
+    "partyRegId": {
+        "required": true
+    },
+    "partyId": {
+        "required": true,
+        "type": "text",
+        "min": 0,
+        "max": 4
+    },
+    "camperId": {
+        "required": true
+    },
+    "dateCreated": {
+        "required": true
+    }
+}; 
   /**
    * @param {PartyInviteModel} from 
    */

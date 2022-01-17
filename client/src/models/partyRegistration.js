@@ -1,4 +1,52 @@
 export default class PartyRegistrationModel {
+  static config = {
+    "campId": {
+        "required": true
+    },
+    "partyId": {
+        "required": true,
+        "type": "text",
+        "min": 0,
+        "max": 4
+    },
+    "camperId": {
+        "required": true
+    },
+    "owed": {
+        "required": true
+    },
+    "paid": {
+        "required": true
+    },
+    "customPricesRequests": {
+        "required": null,
+        "type": "text",
+        "multiple": true,
+        "min": 0,
+        "max": 4096
+    },
+    "isPaymentPlanRequested": {
+        "required": true
+    },
+    "status": {
+        "required": true,
+        "type": "text",
+        "dict": {
+            "edit": "editing",
+            "subm": "submitted",
+            "revi": "reviewing",
+            "conf": "confirmed",
+            "canc": "cancelled"
+        }
+    },
+    "notes": {
+        "required": null,
+        "type": "text",
+        "multiple": true,
+        "min": 0,
+        "max": 4096
+    }
+}; 
   /**
    * @param {PartyRegistrationModel} from 
    */

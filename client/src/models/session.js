@@ -1,4 +1,46 @@
 export default class SessionModel {
+  static config = {
+    "name": {
+        "required": true,
+        "type": "text",
+        "min": 0,
+        "max": 100
+    },
+    "organizer": {
+        "required": true,
+        "type": "text",
+        "min": 0,
+        "max": 100
+    },
+    "campId": {
+        "required": true
+    },
+    "startDate": {
+        "required": true
+    },
+    "endDate": {
+        "required": true
+    },
+    "minQuota": {
+        "required": true
+    },
+    "maxQuota": {
+        "required": true
+    },
+    "notes": {
+        "required": null,
+        "type": "text",
+        "multiple": true,
+        "min": 0,
+        "max": 4096
+    },
+    "internalName": {
+        "required": null,
+        "type": "text",
+        "min": 0,
+        "max": 100
+    }
+}; 
   /**
    * @param {SessionModel} from 
    */

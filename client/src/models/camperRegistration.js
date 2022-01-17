@@ -1,4 +1,24 @@
 export default class CamperRegistrationModel {
+  static config = {
+    "partyId": {
+        "required": true,
+        "type": "text",
+        "min": 0,
+        "max": 4
+    },
+    "camperId": {
+        "required": true
+    },
+    "campId": {
+        "required": true
+    },
+    "neighborhood": {
+        "required": true,
+        "type": "text",
+        "min": 0,
+        "max": 4
+    }
+}; 
   /**
    * @param {CamperRegistrationModel} from 
    */
