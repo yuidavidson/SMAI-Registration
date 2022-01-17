@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import api from "../../api/api";
 import CamperSection from "./CamperSection";
-import {camperSectionUtils} from "../../models/camper";
+import CamperModel, {camperSectionUtils} from "../../models/camper";
 
 const Camper = ({isMe=false, camperId=null}) => {
   // use K for kamper, so it is NOT too fearfully close in spelling to the React component Camper
