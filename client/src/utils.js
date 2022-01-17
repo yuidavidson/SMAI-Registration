@@ -16,4 +16,13 @@ const getDateMonth = (timestampOrDate) => {
   return months[((timestampOrDate instanceof Date) ? timestampOrDate : new Date(timestampOrDate *1000)).getMonth()];
 };
 
-export {getDateMonth};
+const deepFreeze = (obj) => {
+  Object.freeze(obj);
+  Object.keys(obj).forEach((oKey) => {
+    if ((obj[oKey] instanceof Object) || (obj[oKey] instanceof Array)) {
+      deepFreeze(obj[oKey]);
+    }
+  });
+};
+
+export {getDateMonth, deepFreeze};
