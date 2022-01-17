@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import CamperModel, {camperSectionUtils, camperSectionModel} from "../../models/camper";
 
 /**
@@ -8,9 +8,21 @@ import CamperModel, {camperSectionUtils, camperSectionModel} from "../../models/
  * @constructor
  */
 const CamperSection = ({config, camper}) => {
+  const [camperPart, setCamperPart] = useState(null);
+
+  useEffect(() => {
+    if (camper) {
+      setCamperPart(Object.fromEntries(config.fields.map(f => [f, camper[f]])));
+    } else {
+      setCamperPart(null);
+    }
+  }, [camper]);
+
   return <section>
     <h1>{config.label}</h1>
-    {camper && config.fields.map(f => <div>{f}: {camper[f]}</div>)}
+    {camperPart && Object.keys(camperPart).map(k =>
+      <div>{k}: {camperPart[k]}</div>
+    )}
   </section>
 };
 
