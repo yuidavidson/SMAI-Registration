@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import api from "../../api/api";
-import CamperModel from "../../models/camper";
+import CamperSection from "./CamperSection";
+import {camperSectionUtils} from "../../models/camper";
 
 const Camper = ({isMe=false, camperId=null}) => {
   // use K for kamper, so it is NOT too fearfully close in spelling to the React component Camper
@@ -30,13 +31,9 @@ const Camper = ({isMe=false, camperId=null}) => {
 
   return <section>
     <h1>Update {isMe ? 'My': `${kamper.firstName} ${kamper.lastName}`} Info</h1>
-    <h2>Personal Info</h2>
-    <p>...</p>
-    <h2>Contact</h2>
-    <p>...</p>
-    <h2>Vehicles</h2>
-    <p>...</p>
-
+    {camperSectionUtils.getAllIds().map(k =>
+      <CamperSection key={k} config={camperSectionUtils.getConfig(k)} camper={kamper}/>
+    )}
   </section>
 };
 

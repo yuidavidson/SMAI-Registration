@@ -8,7 +8,7 @@
 */
 
 import React, {useState, useEffect} from 'react';
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, useNavigate} from "react-router-dom";
 
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
@@ -16,7 +16,7 @@ import Events from './pages/Events';
 import Register from './pages/Register';
 import Camper from './pages/Camper';
 import Session from './pages/Session';
-import CamperDetails from "./pages/CamperDetails";
+import CamperSection from "./pages/CamperSection";
 
 import api from "../api/api";
 import CamperModel from "../models/camper";
@@ -72,8 +72,8 @@ const App = () => {
           <Route path={makeUrl('/me')} exact element={<Camper isMe={true} />}/>
           <Route path={makeUrl('/events')} element={<Events />}/>
           <Route path={makeUrl('/register')} exact element={<Register/>}/>
-          <Route path={makeUrl('/register/camper')} exact element={<Camper/>}/>
-          <Route path={makeUrl('/register/camper/details')} exact element={<CamperDetails/>}/>
+          <Route path={makeUrl('/register/camper')} exact element={<Camper />}/>
+          <Route path={makeUrl('/register/camper/details')} exact element={<CamperSection/>}/>
           <Route path={makeUrl('/register/camper/session')} exact element={<Session />}/>
           <Route path='*' element={<NotFound />}/>
         </Routes>
