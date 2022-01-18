@@ -26,7 +26,8 @@ export default class PartyRegistrationModel {
         "max": 4096
     },
     "isPaymentPlanRequested": {
-        "required": true
+        "required": true,
+        "type": "bool"
     },
     "status": {
         "required": true,
