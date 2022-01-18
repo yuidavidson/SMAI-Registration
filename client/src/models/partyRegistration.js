@@ -52,6 +52,7 @@ export default class PartyRegistrationModel {
    * @param {PartyRegistrationModel} from 
    */
   constructor(from) {
+    this.id = from.id; // default ID field
     this.campId = from.campId;
     this.partyId = from.partyId;
     this.camperId = from.camperId;

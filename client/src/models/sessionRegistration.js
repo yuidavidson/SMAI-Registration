@@ -20,6 +20,7 @@ export default class SessionRegistrationModel {
    * @param {SessionRegistrationModel} from 
    */
   constructor(from) {
+    this.id = from.id; // default ID field
     this.registrationId = from.registrationId;
     this.sessionId = from.sessionId;
     this.mealId = from.mealId;

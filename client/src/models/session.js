@@ -45,6 +45,7 @@ export default class SessionModel {
    * @param {SessionModel} from 
    */
   constructor(from) {
+    this.id = from.id; // default ID field
     this.name = from.name;
     this.organizer = from.organizer;
     this.campId = from.campId;

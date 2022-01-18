@@ -45,6 +45,7 @@ export default class CampModel {
    * @param {CampModel} from 
    */
   constructor(from) {
+    this.id = from.id; // default ID field
     this.name = from.name;
     this.organizer = from.organizer;
     this.startDate = from.startDate;

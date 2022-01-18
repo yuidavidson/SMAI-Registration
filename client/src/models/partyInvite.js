@@ -20,6 +20,7 @@ export default class PartyInviteModel {
    * @param {PartyInviteModel} from 
    */
   constructor(from) {
+    this.id = from.id; // default ID field
     this.partyRegId = from.partyRegId;
     this.partyId = from.partyId;
     this.camperId = from.camperId;
