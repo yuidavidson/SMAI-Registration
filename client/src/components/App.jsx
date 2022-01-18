@@ -25,7 +25,7 @@ import LoadingSpinner from './LoadingSpinner';
 
 import '../styles/app.css';
 import Navigation from "./Navigation";
-import {makeUrl, navMap} from "../nav-utils";
+import {makeUrl, navMap} from "../utils/nav-utils";
 
 const App = () => {
   const [isLoading, setLoading] = useState(true);

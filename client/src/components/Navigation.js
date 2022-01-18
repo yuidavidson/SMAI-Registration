@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Link, useLocation} from "react-router-dom";
 import logo from '../assets/logo.jpg';
-import {makeUrl, navMap} from "../nav-utils";
+import {makeUrl, navMap} from "../utils/nav-utils";
 
 const Navigation = ({user}) => {
   const routerLocation = useLocation();
