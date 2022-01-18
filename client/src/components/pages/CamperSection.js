@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import CamperModel, {camperSectionUtils, camperSectionModel} from "../../models/camper";
+import CamperModel from "../../models/camper";
+import {camperSectionUtils, camperSectionModel} from "../../utils/camper-utils";
 
 /**
  * @param {camperSectionModel} config
