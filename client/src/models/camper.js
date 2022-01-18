@@ -414,9 +414,9 @@ class CamperModel {
 
   /**
    *
-   * @param {CamperModel} camper
+   * @param {CamperModel} from
    */
-  constructor(camper) {
+  constructor(from) {
     this.oldId = from.oldId;
     this.partyId = from.partyId;
     this.isPartyHead = from.isPartyHead;
