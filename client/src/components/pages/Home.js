@@ -1,18 +1,21 @@
 import React, {useEffect} from 'react';
+import {Link} from "react-router-dom";
+import {makeUrl} from "../../utils/nav-utils";
 
 const Home = ({user}) => {
   useEffect(() => {
     console.log('home page');
   }, []);
   return <section>
-    <h1>Home</h1>
-    {user ?
+    {user &&
       <div>
-        <p>Welcome {user.name} ({user.email})!</p>
-        <p>You can update your own details</p>
-        <p>You can see upcoming camps/events (like work parties) and register for them</p>
-      </div> :
-      <p>You are not logged in. Please log in first</p>
+        <h1>Dear {user.name} ({user.email}),</h1>
+        <p>In this part of the website you can:</p>
+        <ul>
+          <li><Link to={makeUrl('/me')}>update your own information</Link></li>
+          <li>see upcoming <Link to={makeUrl('/events')}>camps/work-parties</Link> and register for them</li>
+        </ul>
+      </div>
     }
   </section>
 };
