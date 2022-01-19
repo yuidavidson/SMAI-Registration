@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
+import api from "../api/api";
 
 
 const SpinnerEl = styled.div`
@@ -19,11 +20,16 @@ const SpinnerEl = styled.div`
 `;
 
 const initialState = true;
-const Spinner = ({state, animationLength=500, text='Loading...'}) => {
+const Spinner = ({animationLength=500, text='Loading...'}) => {
+  const [state, setState] = useState(initialState);
   const [isHidden, setHidden] = useState(!initialState);
   const [isSpinning, setSpinning] = useState(initialState);
 
-  const toggleClassName = () => {
+  useEffect(() => {
+    api.setLoadingSetter(setState);
+  }, []);
+
+  useEffect(() => {
     if (state) {
       setHidden(false);
       setSpinning(true);
@@ -33,13 +39,6 @@ const Spinner = ({state, animationLength=500, text='Loading...'}) => {
         setHidden(true);
       }, animationLength);
     }
-  };
-  useEffect(() => {
-
-  }, []);
-  useEffect(() => {
-    console.log('loading on/off', state);
-    toggleClassName();
   }, [state]);
 
   return <SpinnerEl animationLength={animationLength} isSpinning={isSpinning} isHidden={isHidden}>

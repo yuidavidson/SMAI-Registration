@@ -26,11 +26,11 @@ import Navigation from "./Navigation";
 import {makeUrl, navMap} from "../utils/nav-utils";
 
 const App = () => {
-  const [isLoading, setLoading] = useState(true);
+  console.log('app');
+
   const [authUser, setAuthUser] = useState(null);
 
   useEffect(() => {
-    api.setLoadingSetter(setLoading);
     api.setAuthUserSetter(setAuthUser);
   }, []);
 
@@ -61,7 +61,7 @@ const App = () => {
 
   return (
     <div className='app'>
-      <LoadingSpinner state={isLoading} />
+      <LoadingSpinner />
       <Navigation user={authUser} />
       <main>
         {authUser ?
