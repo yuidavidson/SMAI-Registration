@@ -16,10 +16,8 @@ import Events from './pages/Events';
 import Register from './pages/Register';
 import Camper from './pages/Camper';
 import Session from './pages/Session';
-import CamperSection from "./pages/CamperSection";
 
 import api from "../api/api";
-import CamperModel from "../models/camper";
 
 import LoadingSpinner from './LoadingSpinner';
 
@@ -73,7 +71,6 @@ const App = () => {
           <Route path={makeUrl('/events')} element={<Events />}/>
           <Route path={makeUrl('/register')} exact element={<Register/>}/>
           <Route path={makeUrl('/register/camper/:camperId')} exact element={<Camper />}/>
-          <Route path={makeUrl('/register/camper/details')} exact element={<CamperSection/>}/>
           <Route path={makeUrl('/register/camper/session')} exact element={<Session />}/>
           <Route path='*' element={<NotFound />}/>
         </Routes>
