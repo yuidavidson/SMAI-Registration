@@ -38,8 +38,6 @@ const Camper = ({me=null}) => {
           throw new Error((response.errors instanceof Array) ? response.errors.join("; ") : response.errors);
         }
       });
-
-    //return savePromise
   };
 
   useEffect(() => {
@@ -48,7 +46,7 @@ const Camper = ({me=null}) => {
       return;
     }
     loadKamper();
-  }, []);
+  }, [me]);
 
   return <section>
     {kamper ?
