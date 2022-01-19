@@ -90,7 +90,7 @@ class SmaiApi {
         // if a change occurred to auth user
         //   either user does not match (empty to not-empty or vice-versa)
         //   OR user ID's don't match
-        if (this.#currentAuthUser !== this.#lastAuthUser || this.#currentAuthUser.id !== this.#lastAuthUser.id) {
+        if ((this.#currentAuthUser ? this.#currentAuthUser.id : null) !== (this.#lastAuthUser ? this.#lastAuthUser.id : null)) {
           this.#authUserSetter(this.#currentAuthUser);
           this.#lastAuthUser = this.#currentAuthUser;
         }
