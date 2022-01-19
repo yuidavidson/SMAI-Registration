@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 
 import api from "../../api/api";
-import CamperSection from "./CamperSection";
+import CamperSection from "./../CamperSection";
 import CamperModel from "../../models/camper";
 import {camperSectionUtils} from "../../utils/camper-utils";
 
