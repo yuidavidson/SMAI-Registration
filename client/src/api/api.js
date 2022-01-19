@@ -38,16 +38,16 @@ class SmaiApi {
       dataEncoded = Object.keys(data).map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k])).join('&');
     }
 
-    console.log('api call: ' + cmd);
+    //console.log('api call: ' + cmd);
     if (useCache) {
       if (smaiApiCache[cmd + '::' + dataEncoded]) {
-        console.log('api call from cache');
+        //console.log('api call from cache');
         return Promise.resolve(smaiApiCache[cmd + '::' + dataEncoded]);
       }
     } else {
       delete smaiApiCache[cmd + '::' + dataEncoded];
     }
-    console.log('api call fresh from SERVER');
+    //console.log('api call fresh from SERVER');
 
     // only set loading ON after checking cache and other QUICK pre-api code
     // (it doesn't make sense to turn loading on/off for too brief of actions)
