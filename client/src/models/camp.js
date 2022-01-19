@@ -1,5 +1,11 @@
 export default class CampModel {
   static config = {
+    "urlName": {
+        "required": true,
+        "type": "text",
+        "min": 0,
+        "max": 20
+    },
     "name": {
         "required": true,
         "type": "text",
@@ -46,6 +52,7 @@ export default class CampModel {
    */
   constructor(from) {
     this.id = from.id; // default ID field
+    this.urlName = from.urlName;
     this.name = from.name;
     this.organizer = from.organizer;
     this.startDate = from.startDate;
@@ -61,6 +68,7 @@ export default class CampModel {
 }
 /**
 {
+    "urlName": null,
     "name": null,
     "organizer": null,
     "startDate": null,
