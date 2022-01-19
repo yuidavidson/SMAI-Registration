@@ -11,9 +11,9 @@ const Navigation = ({user}) => {
       <div className="header-top">
         <div className=''><img src={logo} alt="Logo"/></div>
         <div className='flexy-child-grow'>
-          <div className='flexy'>{['/', '/me', '/events'].map(url => ({
+          <div className='flexy'>{['/events', '/me', '/'].map(url => ({
             path: makeUrl(url),
-            title: (url === '/me' ? (user ? user.name : 'Anonymous') : navMap[url].title),
+            title: (url === '/me' ? (user ? user.name : navMap[url].title) : navMap[url].title),
             isCurrent: routerLocation.pathname === makeUrl(url)
           })).map(p =>
               <Link key={p.path} to={p.path} className={p.isCurrent ? 'current':''}>{p.title}</Link>

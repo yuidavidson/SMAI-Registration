@@ -2,7 +2,8 @@
 const makeUrl = path => `/app${path}`;
 
 const navMap = {
-  '/': {title: 'Home', bcrumb: ''},
+  '/': {title: 'Help', bcrumb: ''},
+  '/me': {title: 'My Info', bcrumb: ''},
   '/events': {title: 'Events/Camps', bcrumb: 'Events/Camps'},
   '/register': {title: 'Register for Event/Camp', bcrumb: 'Register'},
   '/register/camper': {title: 'Register Camper', bcrumb: 'Camper'},
