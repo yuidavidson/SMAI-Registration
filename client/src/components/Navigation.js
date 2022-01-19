@@ -2,22 +2,22 @@ import React from 'react';
 
 import {Link, useLocation} from "react-router-dom";
 import logo from '../assets/logo.jpg';
-import {makeUrl, navMap} from "../utils/nav-utils";
+import {makeUrl} from "../utils/nav-utils";
 
 const Navigation = ({user}) => {
   const routerLocation = useLocation();
+  const getCurrentClass = urlPath => (routerLocation.pathname === makeUrl(urlPath) ? 'current':'');
+
   return(
     <nav className="header" aria-label='Main nav'>
       <div className="header-top">
         <div className=''><img src={logo} alt="Logo"/></div>
         <div className='flexy-child-grow'>
-          <div className='flexy'>{['/events', '/me', '/'].map(url => ({
-            path: makeUrl(url),
-            title: (url === '/me' ? (user ? user.name : navMap[url].title) : navMap[url].title),
-            isCurrent: routerLocation.pathname === makeUrl(url)
-          })).map(p =>
-              <Link key={p.path} to={p.path} className={p.isCurrent ? 'current':''}>{p.title}</Link>
-          )}</div>
+          <div className='flexy'>
+            <Link to={makeUrl('/events')} className={getCurrentClass('/events')}>Events</Link>
+            <Link to={makeUrl('/me')} className={getCurrentClass('/me')}>{(user ? user.name : 'My Info')}</Link>
+            <Link to={makeUrl('/')} className={getCurrentClass('/')}>Help</Link>
+          </div>
         </div>
       </div>
       <div className="header-bottom">

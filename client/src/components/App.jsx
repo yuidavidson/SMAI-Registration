@@ -23,7 +23,7 @@ import LoadingSpinner from './LoadingSpinner';
 
 import '../styles/app.css';
 import Navigation from "./Navigation";
-import {makeUrl, navMap} from "../utils/nav-utils";
+import {makeUrl} from "../utils/nav-utils";
 
 const App = () => {
   console.log('app');
@@ -81,4 +81,10 @@ const App = () => {
   );
 };
 
+/*
+ /events => /register/mill2020/
+ /register/mill2022/1234/
+
+
+* */
 export default App;
