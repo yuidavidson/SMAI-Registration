@@ -34,8 +34,8 @@ const camperSections = {
       'region',
       'postalCode',
       'country',
-      'phone1',
-      'phone2',
+      'phone',
+      'phoneAlt',
       'email',
     ]
   },
