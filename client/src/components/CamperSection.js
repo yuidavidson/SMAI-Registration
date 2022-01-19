@@ -1,8 +1,8 @@
 import React, {useEffect, useState, useRef} from 'react';
 
-import DataForm from '../DataForm';
-import CamperModel from "../../models/camper";
-import {camperSectionUtils, camperSectionModel} from "../../utils/camper-utils";
+import DataForm from './DataForm';
+import CamperModel from "../models/camper";
+import {camperSectionUtils, camperSectionModel} from "../utils/camper-utils";
 
 /**
  * @param {camperSectionModel} config
