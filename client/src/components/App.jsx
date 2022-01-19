@@ -69,10 +69,10 @@ const App = () => {
         {authUser ?
         <Routes>
           <Route path={makeUrl('/')} exact element={<Home user={authUser}/>}/>
-          <Route path={makeUrl('/me')} exact element={<Camper isMe={true} />}/>
+          <Route path={makeUrl('/me')} exact element={<Camper me={authUser}/>} />
           <Route path={makeUrl('/events')} element={<Events />}/>
           <Route path={makeUrl('/register')} exact element={<Register/>}/>
-          <Route path={makeUrl('/register/camper')} exact element={<Camper />}/>
+          <Route path={makeUrl('/register/camper/:camperId')} exact element={<Camper />}/>
           <Route path={makeUrl('/register/camper/details')} exact element={<CamperSection/>}/>
           <Route path={makeUrl('/register/camper/session')} exact element={<Session />}/>
           <Route path='*' element={<NotFound />}/>
