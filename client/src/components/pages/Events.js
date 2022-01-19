@@ -13,10 +13,10 @@ const Events = () => {
       .then((response) => {
         let data = response.data.map(item => ({
             ...item,
-            startDate: new Date(item.startDate).toLocaleDateString(),
-            endDate: new Date(item.startDate).toLocaleDateString(),
-            regStartDate: new Date(item.startDate).toLocaleDateString(),
-            regEndDate: new Date(item.startDate).toLocaleDateString()
+            startDate: new Date(item.startDate * 1000).toLocaleDateString(),
+            endDate: new Date(item.endDate * 1000).toLocaleDateString(),
+            regStartDate: new Date(item.regStartDate * 1000).toLocaleDateString(),
+            regEndDate: new Date(item.regEndDate * 1000).toLocaleDateString()
         }));
         setEvents(data);
       })
@@ -29,7 +29,10 @@ const Events = () => {
     <h1>Events/Camps</h1>
     {eventList.map(/** @param {CampModel} event */ (event) =>
     <div key={event.name}>
-      {event.name} ({event.startDate} - {event.endDate})
+      <h2>{event.name} </h2>
+      <div>{event.startDate} - {event.endDate}</div>
+      <div>{event.maxQuota} campers max</div>
+      <br/><br/>
     </div>)}
   </section>
 };
