@@ -26,8 +26,6 @@ import Navigation from "./Navigation";
 import {makeUrl} from "../utils/nav-utils";
 
 const App = () => {
-  console.log('app');
-
   const [authUser, setAuthUser] = useState(null);
 
   useEffect(() => {
@@ -69,9 +67,11 @@ const App = () => {
           <Route path={makeUrl('/')} exact element={<Home user={authUser}/>}/>
           <Route path={makeUrl('/me')} exact element={<Camper me={authUser}/>} />
           <Route path={makeUrl('/events')} element={<Events />}/>
-          <Route path={makeUrl('/register')} exact element={<Register/>}/>
-          <Route path={makeUrl('/register/camper/:camperId')} exact element={<Camper />}/>
-          <Route path={makeUrl('/register/camper/session')} exact element={<Session />}/>
+          <Route path={makeUrl('/register/:eventId')} element={<Register/>}/>
+          <Route path={makeUrl('/register/:eventId/me/info')} element={<Camper me={authUser}/>}/>
+          <Route path={makeUrl('/register/:eventId/me/sessions')} exact element={<Session me={authUser} />}/>
+          <Route path={makeUrl('/register/:eventId/:camperId/info')} element={<Camper />}/>
+          <Route path={makeUrl('/register/:eventId/:camperId/sessions')} exact element={<Session />}/>
           <Route path='*' element={<NotFound />}/>
         </Routes>
           :
