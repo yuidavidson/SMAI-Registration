@@ -26,6 +26,10 @@ div.app {
     border: 1px solid black;
 }
 
+div.app h1, div.app h2, div.app h3, div.app h4, div.app h5, div.app h6 {
+    margin: 5px 0;
+}
+
 nav.header a {
     /*use to be EventWrapper and CamperWrapper*/
     height: 30px;
@@ -69,4 +73,12 @@ nav.header .header-bottom {
     margin: 1px;
     /*  border: solid 1 px black; */
     padding: 1px;
+}
+
+.event {
+    margin-left: 10px;
+}
+
+.event .sessions {
+    margin-left: 10px;
 }
