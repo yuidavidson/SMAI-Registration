@@ -12,3 +12,7 @@ package-lock.json
 
 # disregard js config
 /client/src/config.js
+
+
+# no git
+.nogit*
