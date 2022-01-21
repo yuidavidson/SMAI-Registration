@@ -73,15 +73,15 @@ class SmaiApi {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
           this.#currentAuthUser = error.response.data.user ? {...error.response.data.user} : null;
-          return error.response.data;
+          throw new Error(error.response.data.errors);
         } else if (error.request) {
           // The request was made but no response was received
           // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
           // http.ClientRequest in node.js
-          return {errors: error.message};
+          throw new Error(error.message);
         } else {
           // Something happened in setting up the request that triggered an Error
-          return {errors: error.message};
+          throw new Error(error.message);
         }
       })
       .finally(() => {
