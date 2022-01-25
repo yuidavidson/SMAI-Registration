@@ -1,56 +1,23 @@
 export default class RegistrationModel {
-
-    static someStaticFn() {
-    }
-
     /**
      *
-     * @param {RegistrationModel} camper
+     * @param {RegistrationModel} from
      */
-    constructor(reg) {
-        this.model = {
-            "canRegisterParty": true,
-            "isPartyLeader": true,
-            "partyReg": {
-                "campId": "",
-                "partyId": "",
-                "camperId":  "",
-                "owed": "",
-                "paid":  "",
-                "customPricesRequests": "",
-                "isPaymentPlanRequested":  "",
-                "status": "",
-                "notes":  ""
-            },
-            "partyCampers": [
-                {
-                    "partyId":  "",
-                    "camperId": "",
-                    "campId":  "",
-                    "neighborhood": "",
-                    "camperName": ""
-                }
-            ],
-            "pastPartyCampers": [
-                {
-                    "partyId":  "",
-                    "camperId": "",
-                    "campId":  "",
-                    "neighborhood": "",
-                    "camperName": ""
-                }
-            ],
-            "camperReg": {
-                "partyId":  "",
-                "camperId": "",
-                "campId":  "",
-                "neighborhood": "",
-                "camperName": ""
-            }
-        };
+    constructor(from) {
+        this.campId = from.campId; // integer
+        this.partyRegistration = from.partyRegistration; // PartyRegistration|null
+        this.party = from.party; // CamperModel[]
+        this.partyHeadId = from.partyHeadId; // integer,
+        this.camperRegistrations = from.camperRegistrations; // camperRegistration[]
     }
-
-    someFn() {
-    }
-
 }
+
+/**
+ {
+   "campId": 1,
+   "partyRegistration": "PartyRegistration|null",
+   "party": [ "CamperModel" ],
+   "partyHeadId": 1612,
+   "camperRegistrations": [ "camperRegistration" ]
+ }
+ */
