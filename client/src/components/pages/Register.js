@@ -31,6 +31,7 @@ const Register = ({}) => {
   }, []);
 
   const [/** @type {RegistrationModel} registration */ registration, setRegistration] = useState(null);
+  const [isGoing, setGoing] = useState({});
   useEffect(() => {
     if (!event || !event.id) {
       return;
@@ -38,12 +39,16 @@ const Register = ({}) => {
     api.run('registration', {eventId: event.id}, true)
       .then((response) => {
         setRegistration(response.data);
+        setGoing(Object.fromEntries(response.data.party.map(camper => [camper.id, false])));
       })
       .catch((error) => {
         console.log(error);
       })
   }, [event]);
 
+  const onSetGoingClick = (camperId, state) => {
+    setGoing({...isGoing, [camperId]: state});
+  };
   return <section>
     {event && <React.Fragment>
       <h1>Register for {event.name}</h1>
@@ -52,11 +57,21 @@ const Register = ({}) => {
 
       <div>
         <h2>My Party</h2>
-        <div>{registration && registration.party.map(/** @type {CamperModel} camper */ camper =>
-          <div key={camper.id}>
-          <span>{camper.firstName} {camper.lastName}</span> <Link to={makeUrl(`/register/${event.id}/${camper.id}`)}>register</Link>
-          </div>
-        )}</div>
+        <ul>{registration && registration.party.map(/** @type {CamperModel} camper */ camper =>
+          <li key={camper.id}>
+            <div><strong>{camper.firstName} {camper.lastName}: </strong></div>
+            <ul>
+              <li>Is {camper.firstName} going?
+                <button type='button' className={'yes ' + (isGoing[camper.id] && ' selected')} onClick={e => onSetGoingClick(camper.id, true)}>Yes</button><button type='button' className={'no ' + (!isGoing[camper.id] && ' selected')} onClick={e => onSetGoingClick(camper.id, false)}>No</button>
+              </li>
+              {isGoing[camper.id] && <React.Fragment>
+              <li><Link to={makeUrl(`/register/${event.id}/${camper.id}`)}>update info</Link></li>
+              <li><Link to={makeUrl(`/register/${event.id}/${camper.id}`)}>select sessions</Link></li>
+              </React.Fragment>}
+            </ul>
+
+          </li>
+        )}</ul>
       </div>
     </React.Fragment>}
   </section>

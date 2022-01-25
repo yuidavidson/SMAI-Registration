@@ -82,3 +82,24 @@ nav.header .header-bottom {
 .event .sessions {
     margin-left: 10px;
 }
+
+button.yes, button.no {
+    background-color: #cccccc;
+    color: black;
+    border: 1px solid black;
+    cursor: pointer;
+}
+button.yes {
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+}
+button.yes:hover, button.yes.selected {
+    background-color: #01a252;
+}
+button.no {
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+}
+button.no:hover, button.no.selected  {
+    background-color: #f78c6c;
+}
