@@ -11,7 +11,7 @@ const Events = () => {
    */
   const [eventList, setEvents] = useState([]);
   useEffect(() => {
-    api.run('event/getall', null, true)
+    api.run('events', null, true)
       .then((response) => {
         let data = response.data.map(item => new CampModel({
             ...item,

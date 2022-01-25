@@ -10,7 +10,7 @@ const Register = ({}) => {
   const [/** @type {CampModel} event */ event, setEvent] = useState(null);
 
   useEffect(() => {
-    api.run('event/getall', null, true)
+    api.run('events', null, true)
       .then((response) => {
         let eventMatch = null;
         response.data.filter(item => item.urlName === urlParams.eventId).some(item => {
