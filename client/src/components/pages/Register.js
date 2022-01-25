@@ -16,10 +16,11 @@ const Register = ({}) => {
         response.data.filter(item => item.urlName === urlParams.eventId).some(item => {
           eventMatch = new CampModel({
             ...item,
-            startDate: new Date(item.startDate * 1000).toLocaleDateString(),
-            endDate: new Date(item.endDate * 1000).toLocaleDateString(),
-            regStartDate: new Date(item.regStartDate * 1000).toLocaleDateString(),
-            regEndDate: new Date(item.regEndDate * 1000).toLocaleDateString()
+            startDateStr: new Date(item.startDate * 1000).toLocaleDateString(),
+            endDateStr: new Date(item.endDate * 1000).toLocaleDateString(),
+            regStartDateStr: new Date(item.regStartDate * 1000).toLocaleDateString(),
+            regStartDate: new Date(item.regStartDate * 1000),
+            regEndDateStr: new Date(item.regEndDate * 1000).toLocaleDateString()
           });
           return true;
         });
@@ -32,6 +33,7 @@ const Register = ({}) => {
 
   const [/** @type {RegistrationModel} registration */ registration, setRegistration] = useState(null);
   const [isGoing, setGoing] = useState({});
+  const [isInfoComplete, setInfoComplete] = useState({});
   useEffect(() => {
     if (!event || !event.id) {
       return;
@@ -40,6 +42,13 @@ const Register = ({}) => {
       .then((response) => {
         setRegistration(response.data);
         setGoing(Object.fromEntries(response.data.party.map(camper => [camper.id, false])));
+        setInfoComplete(Object.fromEntries(response.data.party.map(camper => {
+          const date = camper.lastReviewedAndConfirmed ? new Date(camper.lastReviewedAndConfirmed * 1000) : null;
+          return [camper.id, {
+            date: date ? date.toLocaleDateString() : '2019',
+            isComplete: date && date.getTime() > event.regStartDate.getTime()
+          }];
+        })));
       })
       .catch((error) => {
         console.log(error);
@@ -52,7 +61,8 @@ const Register = ({}) => {
   return <section>
     {event && <React.Fragment>
       <h1>Register for {event.name}</h1>
-      <div>{event.startDate} - {event.endDate}</div>
+      <div>{event.startDateStr} - {event.endDateStr}</div>
+      <div>registration is open from {event.regStartDateStr} to {event.regEndDateStr}</div>
       <div>{event.maxQuota} campers max</div>
 
       <div>
@@ -65,8 +75,15 @@ const Register = ({}) => {
                 <button type='button' className={'yes ' + (isGoing[camper.id] && ' selected')} onClick={e => onSetGoingClick(camper.id, true)}>Yes</button><button type='button' className={'no ' + (!isGoing[camper.id] && ' selected')} onClick={e => onSetGoingClick(camper.id, false)}>No</button>
               </li>
               {isGoing[camper.id] && <React.Fragment>
-              <li><Link to={makeUrl(`/register/${event.id}/${camper.id}`)}>update info</Link></li>
-              <li><Link to={makeUrl(`/register/${event.id}/${camper.id}`)}>select sessions</Link></li>
+              <li>
+                <Link to={makeUrl(`/register/${event.id}/${camper.id}/info`)}>update info</Link>
+                {(isInfoComplete[camper.id] && !isInfoComplete[camper.id].isComplete) && <span style={{color: 'red'}}>needs review</span>}
+                {isInfoComplete[camper.id] && <span style={{color: 'blue'}}>last reviewed: {isInfoComplete[camper.id].date}</span>}
+
+              </li>
+              <li>
+                <Link to={makeUrl(`/register/${event.id}/${camper.id}/sessions`)}>select sessions</Link>
+              </li>
               </React.Fragment>}
             </ul>
 
