@@ -1,4 +1,5 @@
 export default class RegistrationModel {
+    static config = {};
     /**
      *
      * @param {RegistrationModel} from
