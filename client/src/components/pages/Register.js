@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import api from "../../api/api";
+import {makeUrl} from "../../utils/nav-utils";
 import CampModel from "../../models/camp";
 import RegistrationModel from "../../models/registration";
 
@@ -51,9 +52,11 @@ const Register = ({}) => {
 
       <div>
         <h2>My Party</h2>
-        <div>{registration && registration.party.map(/** @type {CamperModel} camper */ camper => <div>
-          <span>{camper.firstName} {camper.lastName}</span>
-        </div>) }</div>
+        <div>{registration && registration.party.map(/** @type {CamperModel} camper */ camper =>
+          <div key={camper.id}>
+          <span>{camper.firstName} {camper.lastName}</span> <Link to={makeUrl(`/register/${event.id}/${camper.id}`)}>register</Link>
+          </div>
+        )}</div>
       </div>
     </React.Fragment>}
   </section>
