@@ -247,9 +247,6 @@ export default class CamperModel {
         "min": 0,
         "max": 50
     },
-    "emergencyLastUpdated": {
-        "required": null
-    },
     "medicalCondition": {
         "required": true,
         "type": "text",
@@ -290,7 +287,7 @@ export default class CamperModel {
         "min": 0,
         "max": 4096
     },
-    "medicalLastUpdated": {
+    "lastReviewedAndConfirmed": {
         "required": null
     }
 }; 
@@ -341,7 +338,6 @@ export default class CamperModel {
     this.emergency2Relationship = from.emergency2Relationship;
     this.emergency2Phone = from.emergency2Phone;
     this.emergency2Location = from.emergency2Location;
-    this.emergencyLastUpdated = from.emergencyLastUpdated;
     this.medicalCondition = from.medicalCondition;
     this.medicalHasAllergy = from.medicalHasAllergy;
     this.medicalHasAsthma = from.medicalHasAsthma;
@@ -349,7 +345,7 @@ export default class CamperModel {
     this.medicalDoctor = from.medicalDoctor;
     this.medicalHospital = from.medicalHospital;
     this.medicalSpecialNeeds = from.medicalSpecialNeeds;
-    this.medicalLastUpdated = from.medicalLastUpdated;
+    this.lastReviewedAndConfirmed = from.lastReviewedAndConfirmed;
 
   }
 }
@@ -397,7 +393,6 @@ export default class CamperModel {
     "emergency2Relationship": null,
     "emergency2Phone": null,
     "emergency2Location": null,
-    "emergencyLastUpdated": null,
     "medicalCondition": null,
     "medicalHasAllergy": null,
     "medicalHasAsthma": null,
@@ -405,6 +400,6 @@ export default class CamperModel {
     "medicalDoctor": null,
     "medicalHospital": null,
     "medicalSpecialNeeds": null,
-    "medicalLastUpdated": null
+    "lastReviewedAndConfirmed": null
 }
  */
