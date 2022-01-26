@@ -89,6 +89,11 @@ const Register = ({}) => {
 
           </li>
         )}</ul>
+
+        <h3>Want to change your party?</h3>
+        <p>Would you like to add or remove folks from your party?</p>
+        <p>Would you like to join a different party or perhaps start your own?</p>
+        <p><strong>Please talk to or <a href='#contact-form'>write</a> to Josh or a registrar!</strong></p>
       </div>
     </React.Fragment>}
   </section>
