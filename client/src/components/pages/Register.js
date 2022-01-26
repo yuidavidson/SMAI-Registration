@@ -69,15 +69,18 @@ const Register = ({}) => {
         <h2>My Party</h2>
         <ul>{registration && registration.party.map(/** @type {CamperModel} camper */ camper =>
           <li key={camper.id}>
-            <div><strong>{camper.firstName} {camper.lastName}: </strong></div>
+            <div><strong>{camper.firstName} {camper.lastName}</strong>&nbsp;
+              {registration.partyHeadId === camper.id && <span style={{backgrounColor: 'gold'}}>party head</span>}&nbsp;
+              {registration.currentCamperId === camper.id && <span style={{backgrounColor: 'blue'}}>(ME)</span>}
+            </div>
             <ul>
               <li>Is {camper.firstName} going?
                 <button type='button' className={'yes ' + (isGoing[camper.id] && ' selected')} onClick={e => onSetGoingClick(camper.id, true)}>Yes</button><button type='button' className={'no ' + (!isGoing[camper.id] && ' selected')} onClick={e => onSetGoingClick(camper.id, false)}>No</button>
               </li>
               {isGoing[camper.id] && <React.Fragment>
               <li>
-                <Link to={makeUrl(`/register/${event.id}/${camper.id}/info`)}>update info</Link>
-                {(isInfoComplete[camper.id] && !isInfoComplete[camper.id].isComplete) && <span style={{color: 'red'}}>needs review</span>}
+                <Link to={makeUrl(`/register/${event.id}/${camper.id}/info`)}>update info</Link> &nbsp;
+                {(isInfoComplete[camper.id] && !isInfoComplete[camper.id].isComplete) && <span style={{color: 'red'}}>needs review</span>} &nbsp;
                 {isInfoComplete[camper.id] && <span style={{color: 'blue'}}>last reviewed: {isInfoComplete[camper.id].date}</span>}
 
               </li>

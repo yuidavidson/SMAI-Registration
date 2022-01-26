@@ -6,6 +6,7 @@ export default class RegistrationModel {
      */
     constructor(from) {
         this.campId = from.campId; // integer
+        this.currentCamperId = from.currentCamperId; // integer,
         this.partyRegistration = from.partyRegistration; // PartyRegistration|null
         this.party = from.party; // CamperModel[]
         this.partyHeadId = from.partyHeadId; // integer,
@@ -16,6 +17,7 @@ export default class RegistrationModel {
 /**
  {
    "campId": 1,
+   "currentCamperId": 1,
    "partyRegistration": "PartyRegistration|null",
    "party": [ "CamperModel" ],
    "partyHeadId": 1612,
