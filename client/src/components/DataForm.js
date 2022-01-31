@@ -8,7 +8,7 @@ const DataForm = ({fields, data, onSubmit, onChange=null, onCancel=null}) => {
     setChanged(false);
   }, [data]);
 
-  const [isEdit, setEdit] = React.useState(false);
+  const [isEdit, setEdit] = useState(false);
   useEffect(() => {
     if (!isEdit) {
       if (isChanged) {
@@ -29,7 +29,7 @@ const DataForm = ({fields, data, onSubmit, onChange=null, onCancel=null}) => {
     setEdit(edit => !edit); // toggle edit state
   };
 
-  const [isChanged, setChanged] = React.useState(false);
+  const [isChanged, setChanged] = useState(false);
   const onChangeInternal = e => {
     const name = e.target.name;
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
@@ -38,12 +38,21 @@ const DataForm = ({fields, data, onSubmit, onChange=null, onCancel=null}) => {
     onChange && onChange(isChanged);
   };
 
+  const [errors, setErrors] = useState({});
   const onSubmitInternalCb = e => {
     e.preventDefault();
     setEdit(false);
-    onSubmit(formData).then(() => {
+    setErrors({});
+    onSubmit(formData).then(
+      response => {
       setChanged(false);
-    });
+      },
+      error => {
+        if (error.fields) {
+          setErrors({...error.fields});
+        }
+      }
+    );
   };
 
   const formatViewOnlyValue = v => {
@@ -105,7 +114,9 @@ const DataForm = ({fields, data, onSubmit, onChange=null, onCancel=null}) => {
 
             }
           </React.Fragment>
-        }</div>)}
+        }
+          {errors[field.id] && <span className='error'>&nbsp; {errors[field.id]}</span>}
+        </div>)}
         <button type="button" onClick={onEdit} disabled={isEdit}>Edit</button>&nbsp;
         <button type="submit" onClick={onSubmitInternalCb} disabled={!isEdit}>Save</button>&nbsp;
         {isEdit && isChanged && <a href='#' onClick={onEdit}>Reset changes</a>}

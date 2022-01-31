@@ -52,7 +52,15 @@ const CamperSection = ({config, camper, onSave}) => {
       setSaveError(false);
     }).catch((error) => {
       setWasSaved(false);
-      setSaveError((error instanceof Error) ? error.message : error);
+      let errorMsg = '';
+      if (error instanceof Error) {
+        errorMsg = error.message;
+        // MAYBE a future TUDU: check if api error has error.fields (set by the api layer);
+        // currently the client api layer does that
+      } else {
+          errorMsg = String(error);
+      }
+      setSaveError(errorMsg);
     });
     return savePromise; // returns Promise from parent call (likely API call)
   };

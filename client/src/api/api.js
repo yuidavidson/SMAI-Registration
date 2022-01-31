@@ -73,7 +73,14 @@ class SmaiApi {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
           this.#currentAuthUser = error.response.data.user ? {...error.response.data.user} : null;
-          throw new Error(error.response.data.errors);
+          const nextPromiseError = new Error();
+          if (error.response.data.errors instanceof Object) {
+            nextPromiseError.message = 'there are fields containing errors';
+            nextPromiseError.fields = error.response.data.errors;
+          } else {
+            nextPromiseError.message = String(error.response.data.errors);
+          }
+          throw nextPromiseError;
         } else if (error.request) {
           // The request was made but no response was received
           // `error.request` is an instance of XMLHttpRequest in the browser and an instance of

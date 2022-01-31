@@ -103,3 +103,7 @@ button.no {
 button.no:hover, button.no.selected  {
     background-color: #f78c6c;
 }
+
+form .error {
+    color: red;
+}
