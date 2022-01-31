@@ -55,7 +55,11 @@ const DataForm = ({fields, data, onSubmit, onChange=null, onCancel=null}) => {
     );
   };
 
-  const formatViewOnlyValue = v => {
+  const formatViewOnlyValue = (field) => {
+    let v = formData[field.id];
+    if (field.dict) {
+      v = field.dict[v];
+    }
     // double == null: null or undefined
     if (v == null || v === '') {
       return '(none)';
@@ -67,7 +71,7 @@ const DataForm = ({fields, data, onSubmit, onChange=null, onCancel=null}) => {
     <form onSubmit={onSubmitInternalCb}>
       {fields.map(field =>
         <div key={field.id}>{!isEdit ?
-          <span><strong>{field.label}</strong>: {formatViewOnlyValue(formData[field.id])}</span>
+          <span><strong>{field.label}</strong>: {formatViewOnlyValue(field, formData)}</span>
           :
           <React.Fragment>
             <label htmlFor={field.id}><strong>{field.label}</strong>:</label>
