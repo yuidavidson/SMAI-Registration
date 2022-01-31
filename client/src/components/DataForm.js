@@ -41,11 +41,11 @@ const DataForm = ({fields, data, onSubmit, onChange=null, onCancel=null}) => {
   const [errors, setErrors] = useState({});
   const onSubmitInternalCb = e => {
     e.preventDefault();
-    setEdit(false);
     setErrors({});
     onSubmit(formData).then(
       response => {
-      setChanged(false);
+        setChanged(false);
+        setEdit(false);
       },
       error => {
         if (error.fields) {
