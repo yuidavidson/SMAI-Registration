@@ -80,7 +80,7 @@ const DataForm = ({fields, data, onSubmit, onChange=null, onCancel=null}) => {
 
                   <select onChange={onChangeInternal} name={field.id} value={formData[field.id]}>
                     <option>select an option</option>
-                    {Object.keys(field.dict).map(k => <option key={k}>{field.dict[k]}</option>)}
+                    {Object.keys(field.dict).map(k => <option key={k} value={k}>{field.dict[k]}</option>)}
                   </select>
 
                   :
