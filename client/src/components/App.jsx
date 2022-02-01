@@ -31,6 +31,7 @@ const App = () => {
 
   useEffect(() => {
     api.setAuthUserSetter(setAuthUser);
+    api.setLoadingTextSetter(setLoadingText);
   }, []);
 
   /**
@@ -43,7 +44,7 @@ const App = () => {
 
   const checkLoggedIn = (isManual=false) => {
     if (isManual) {
-      setLoadingText('checking...');
+      api.setLoadingText('checking...');
     }
     api.ping()
       .catch((error) => {

@@ -9,6 +9,9 @@ class SmaiApi {
   //  loading: react app might want to update UI when API is loading/not
   #loadingSetter = () => {};
 
+  //  loading text: react app might want to update what text the loader says
+  #loadingTextSetter = () => {};
+
   //  auth user: api response is standard and always contains the current auth user if logged in
   //             hence set the use if use is
   #authUserSetter = () => {};
@@ -19,6 +22,13 @@ class SmaiApi {
 
   setLoadingSetter(setter) {
     this.#loadingSetter = setter;
+  }
+
+  setLoadingTextSetter(setter) {
+    this.#loadingTextSetter = setter;
+  }
+  setLoadingText(text) {
+    this.#loadingTextSetter(text);
   }
 
   setAuthUserSetter(setter) {

@@ -28,6 +28,7 @@ const Camper = ({me=null}) => {
   };
 
   const saveKamper = (data) => {
+    api.setLoadingText('saving camper info...');
     const savePromise = api.run('camper', {action: 'update', id: kamper.id, ...data});
     return savePromise
       .then((response) => {
