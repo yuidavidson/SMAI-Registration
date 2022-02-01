@@ -27,6 +27,7 @@ import {makeUrl} from "../utils/nav-utils";
 
 const App = () => {
   const [authUser, setAuthUser] = useState(null);
+  const [loadingText, setLoadingText] = useState(null);
 
   useEffect(() => {
     api.setAuthUserSetter(setAuthUser);
@@ -37,10 +38,13 @@ const App = () => {
    */
   const onCheckLoggedInClicked = (e) => {
     e.preventDefault();
-    checkLoggedIn();
+    checkLoggedIn(true);
   };
 
-  const checkLoggedIn = () => {
+  const checkLoggedIn = (isManual=false) => {
+    if (isManual) {
+      setLoadingText('checking...');
+    }
     api.ping()
       .catch((error) => {
         console.log(error);
@@ -59,7 +63,7 @@ const App = () => {
 
   return (
     <div className='app'>
-      <LoadingSpinner />
+      <LoadingSpinner text={loadingText} textSetter={setLoadingText}/>
       <Navigation user={authUser} />
       <main>
         {authUser ?

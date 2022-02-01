@@ -18,9 +18,9 @@ const SpinnerEl = styled.div`
   background-color: rgba(255,255,255,${props => props.isSpinning ? .9 : 0});
   transition: background-color ${props => props.animationLength}ms ease-in;
 `;
-
+const defaultText = 'Loading...';
 const initialState = true;
-const Spinner = ({animationLength=500, text='Loading...'}) => {
+const Spinner = ({animationLength=500, text=null, textSetter=null}) => {
   const [state, setState] = useState(initialState);
   const [isHidden, setHidden] = useState(!initialState);
   const [isSpinning, setSpinning] = useState(initialState);
@@ -30,19 +30,22 @@ const Spinner = ({animationLength=500, text='Loading...'}) => {
   }, []);
 
   useEffect(() => {
-    if (state) {
+    if (state) { // state is ON
       setHidden(false);
       setSpinning(true);
-    } else {
+    } else { // state is OFF
       setSpinning(false);
       setTimeout(() => {
         setHidden(true);
+        if (text !== defaultText && textSetter) {
+          textSetter(null); // reset to default text when state loading is OFF again
+        }
       }, animationLength);
     }
   }, [state]);
 
   return <SpinnerEl animationLength={animationLength} isSpinning={isSpinning} isHidden={isHidden}>
-    {text}
+    {text || defaultText}
   </SpinnerEl>
 };
 
